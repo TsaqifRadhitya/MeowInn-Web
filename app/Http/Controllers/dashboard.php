@@ -9,9 +9,9 @@ class dashboard extends Controller
 {
     public function index(){
         $role = Auth::user()->role;
-        if($role === 'admin'){
+        if($role === 'meowinn'){
             return $this->admin();
-        }else if($role === 'user'){
+        }else if($role === 'customer'){
             return $this->user();
         }else{
             return $this->petHouse();
@@ -23,7 +23,7 @@ class dashboard extends Controller
     }
 
     private function admin(){
-        return view('');
+        return view('meowinn.Dashboard.meowinnDashboard');
 
     }
 
