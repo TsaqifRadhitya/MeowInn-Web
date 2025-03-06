@@ -121,9 +121,9 @@
     </aside>
 
     <div
-        class="hidden md:flex fixed z-40 top-0 flex-row justify-between w-full px-10 bg-linear-180 from-[#F69246] to-[#EB6F6F] py-5 shadow-sm font-bold items-center">
+        class="text-xl hidden md:flex fixed z-40 top-0 flex-row justify-between w-full px-10 bg-linear-180 from-[#F69246] to-[#EB6F6F] py-5 shadow-sm font-bold items-center">
         <h1>MeowInn</h1>
-        <div class="flex flex-row gap-x-5 font-semibold">
+        <div class="flex flex-row gap-x-5 font-semibold ">
             <a href="#home">Home</a>
             <a href="#AboutUs">About Us</a>
             <a href="#OurService">Our Service</a>
@@ -132,10 +132,10 @@
         @if (!Auth::check())
             <div class="flex flex-row gap-x-2">
                 <button
-                    class="border-[#835E92] border-2 rounded-xl px-1 py-2 font-semibold min-w-24 shadow-sm text-[#835E92] hover:cursor-pointer"><a
+                    class="border-[#835E92] font-bold hover:bg-linear-210 hover:from-[#C0618C] hover:to-[#835E92] hover:text-white border-2 rounded-xl px-1 py-2 min-w-24 shadow-sm text-[#835E92] hover:cursor-pointer"><a
                         href="/login">Login</a></button>
                 <button
-                    class="bg-linear-240 from-[#C0618C] to-[#835E92] shadow-sm rounded-xl px-1 py-2 font-semibold min-w-24"><a
+                    class="bg-linear-240 from-[#C0618C] to-[#835E92] hover:border-2 hover:border-[#835E92] hover:text-[#835E92] hover:bg-none shadow-sm rounded-xl px-1 py-2 font-semibold min-w-24"><a
                         href="/register">Register</a></button>
             </div>
         @else
