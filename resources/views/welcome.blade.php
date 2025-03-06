@@ -24,19 +24,19 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="w-screen overflow-x-hidden scroll-smooth bg-[#ff8e3c]">
-
-    <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
-        onclick="handleOpen()" id="sidebarButton" type="button"
-        class="inline-flex items-center p-2 ms-3 text-sm rounded-lg md:hidden focus:outline-none text-black py-5 hover:cursor-pointer ">
-        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg">
-            <path clip-rule="evenodd" fill-rule="evenodd"
-                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-            </path>
-        </svg>
-    </button>
-
+<body class="w-screen scroll-smooth">
+    <div class="bg-[#ff8e3c] sticky top-0 md:hidden z-50">
+        <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar"
+            aria-controls="default-sidebar" onclick="handleOpen()" id="sidebarButton" type="button"
+            class="inline-flex items-center p-2 ms-3 text-sm rounded-lg md:hidden focus:outline-none text-black py-5 hover:cursor-pointer ">
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" fill-rule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+                </path>
+            </svg>
+        </button>
+    </div>
     <aside id="default-sidebar" class="fixed top-0 left-0 z-50 w-64 h-screen transition-transform -translate-x-full"
         aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-800">
@@ -121,7 +121,7 @@
     </aside>
 
     <div
-        class="hidden md:flex fixed z-40 top-0 flex-row justify-between w-full px-10 bg-[#ff8e3c] py-5 shadow-sm font-bold">
+        class="hidden md:flex fixed z-40 top-0 flex-row justify-between w-full px-10 bg-linear-180 from-[#F69246] to-[#EB6F6F] py-5 shadow-sm font-bold items-center">
         <h1>MeowInn</h1>
         <div class="flex flex-row gap-x-5 font-semibold">
             <a href="#home">Home</a>
@@ -129,28 +129,38 @@
             <a href="#OurService">Our Service</a>
             <a href="#Contact">Contact</a>
         </div>
+        @if (!Auth::check())
+            <div class="flex flex-row gap-x-2">
+                <button
+                    class="border-[#835E92] border-2 rounded-xl px-1 py-2 font-semibold min-w-24 shadow-sm text-[#835E92] hover:cursor-pointer"><a
+                        href="/login">Login</a></button>
+                <button
+                    class="bg-linear-240 from-[#C0618C] to-[#835E92] shadow-sm rounded-xl px-1 py-2 font-semibold min-w-24"><a
+                        href="/register">Register</a></button>
+            </div>
+        @else
+            <button class="bg-linear-240 from-[#C0618C] to-[#835E92] shadow-sm rounded-xl px-1 py-2 font-semibold min-w-24"><a
+                    href="/dashboard">Dashboard</a></button>
+        @endif
     </div>
-    <div class="w-full min-h-screen relative bg-[#eff0f3]" id="home">
-        <div
-            class="grid w-full px-16 py-8 mx-auto lg:gap-x-20 xl:gap-x-36 lg:py-16 lg:grid-cols-12 absolute left-1/2 top-1/2 -translate-1/2 ">
-            <div class="mr-auto place-self-center lg:col-span-7">
-                <h1
-                    class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-[#0d0d0d]">
-                    Penyedia Layanan Perawatan Kucing</h1>
-                <p class="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white-400 text-[#2a2a2a]">
-                    Memudahkan anda untuk
-                    mencari layanan perawatan kucing yang berlokasi disekitar anda</p>
-                <button class="btn bg-[#d9376e] border-[#d9376e] shadow-none min-w-1/4">
-                    <a href="/dashboard">Lihat lebih lanjut</a>
-                </button>
-            </div>
-            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ asset('asset/Logo.png') }}" alt="mockup"
-                    class="drop-shadow-lg border-4 border-white rounded-full">
-            </div>
+    <div class="w-full min-h-screen relative bg-[#eff0f3] flex flex-col-reverse md:p-30 lg:flex-row items-center justify-between md:px-20"
+        id="home">
+        <div class="m-auto px-10 md:m-0 w-fit lg:col-span-7">
+            <h1
+                class="max-w-2xl mb-4 text-3xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-[#0d0d0d]">
+                Penyedia Layanan Perawatan Kucing</h1>
+            <p class="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white-400 text-[#2a2a2a]">
+                Memudahkan anda untuk
+                mencari layanan perawatan kucing yang berlokasi disekitar anda</p>
+            <button class="btn bg-[#d9376e] border-[#d9376e] shadow-sm min-w-1/4">
+                <a href="/dashboard">Lihat lebih lanjut</a>
+            </button>
         </div>
+        <img src="{{ asset('asset/Logo.png') }}" alt="mockup"
+            class="drop-shadow-lg border-4 border-white rounded-full md:max-h-72 lg:max-h-96 aspect-square hidden md:block">
     </div>
-    <section class="w-full min-h-screen bg-cyan-500 p-5 text-white font-black" id="AboutUs">
+    <section class="w-full min-h-screen bg-linear-210 from-[#F69246] to-[#EB6F6F] p-5 text-white font-black"
+        id="AboutUs">
         <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
             <div class="max-w-screen-md mb-8 lg:mb-16">
                 <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Designed for
@@ -311,14 +321,14 @@
 
 
 
-    <footer class="shadow-sm bg-gray-800 w-full" id="Contact">
+    <footer class="shadow-sm bg-[#835E92] w-full py-2" id="Contact">
         <div class="w-full mx-auto p-4 px-10 md:flex md:items-center md:justify-between">
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400" id="footeryear">© 2023 <a
-                    href="https://flowbite.com/" class="hover:underline">Flowbite™</a>. All Rights Reserved.
+            <span class="text-sm text-white sm:text-center id="footeryear">© 2025 <a href="https://flowbite.com/"
+                    class="hover:underline">MeowInn™</a>. All Rights Reserved.
             </span>
-            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-white dark:text-gray-400 sm:mt-0">
                 <li>
-                    <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                    <a href="#AboutUs" class="hover:underline me-4 md:me-6">About</a>
                 </li>
                 <li>
                     <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>

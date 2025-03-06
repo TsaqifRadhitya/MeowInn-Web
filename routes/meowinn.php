@@ -6,7 +6,7 @@ use App\Http\Middleware\meowinnMidleware;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function(){
-    Route::prefix('admin')->group(function(){
+    Route::prefix('meowinn')->group(function(){
         Route::resource('pethouse',meowinnkelolaPethouse::class)->middleware(meowinnMidleware::class);
 
         Route::resource('Layanan',meowinnkelolaLayanan::class)->middleware(meowinnMidleware::class);
