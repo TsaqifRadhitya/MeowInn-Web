@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class pethousekelolaLayanan extends Controller
 {
-    //
+    public function index()
+    {
+        return view('pages.petHouse.Layanan.petHouseDaftarLayanan');
+    }
 }

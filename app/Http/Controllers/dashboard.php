@@ -19,7 +19,7 @@ class dashboard extends Controller
     }
 
     public function user(){
-        return view('');
+        return view('pages.customer.Dashboard.customerDashboard');
     }
 
     public function meowinn(){
@@ -28,6 +28,6 @@ class dashboard extends Controller
     }
 
     public function petHouse(){
-        return view('');
+        return view('pages.petHouse.Dashboard.petHouseDashboard');
     }
 }

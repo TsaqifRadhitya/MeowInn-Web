@@ -7,5 +7,11 @@ use Illuminate\Http\Request;
 
 class pethouseKelolaPetHouse extends Controller
 {
-    //
+    public function index(){
+
+    }
+
+    public function setting(){
+
+    }
 }
