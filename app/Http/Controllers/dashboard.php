@@ -10,24 +10,24 @@ class dashboard extends Controller
     public function index(){
         $role = Auth::user()->role;
         if($role === 'meowinn'){
-            return $this->admin();
+            return redirect(route('meowinn.dashboard'));
         }else if($role === 'customer'){
             return $this->user();
         }else{
-            return $this->petHouse();
+            return redirect(route('pethouse.dashboard'));
         }
     }
 
-    private function user(){
+    public function user(){
         return view('');
     }
 
-    private function admin(){
-        return view('meowinn.Dashboard.meowinnDashboard');
+    public function meowinn(){
+        return view('pages.meowinn.Dashboard.meowinnDashboard');
 
     }
 
-    private function petHouse(){
+    public function petHouse(){
         return view('');
     }
 }

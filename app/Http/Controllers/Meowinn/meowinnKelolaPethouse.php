@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 class meowinnkelolaPethouse extends Controller
 {
     public function index(){
-        return view('meowinn.PetHouse.meowInnPetHouse');
+        return view('pages.meowinn.PetHouse.meowInnPetHouse');
+    }
+
+    public function penalty(){
+        return view('pages.meowinn.PetHouse.meowinnPetHousePenalty');
     }
 }

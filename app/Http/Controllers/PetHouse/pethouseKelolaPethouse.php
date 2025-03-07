@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\PetHouse;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class pethousekelolaPethouse extends Controller
+class pethouseKelolaPetHouse extends Controller
 {
     //
 }

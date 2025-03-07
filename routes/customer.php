@@ -6,10 +6,24 @@ use App\Http\Controllers\Customer\customerReportsPenitipan;
 use App\Http\Middleware\customerMidleware;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function(){
-    Route::resource('penitipan',customerPenitipan::class)->middleware(customerMidleware::class);
+Route::middleware('auth')->group(function () {
 
-    Route::resource('penitipan/reports',customerReportsPenitipan::class)->middleware(customerMidleware::class);
+    Route::prefix('penitipan')->group(function () {
 
-    Route::resource('reports',customerReports::class)->middleware(customerMidleware::class);
+        Route::prefix('daftarpenitipan')->group(function(){
+
+            Route::get('/',[customerPenitipan::class,'index'])->name('customer.penitipan.daftarpenitipan.index');
+
+        });
+
+        Route::prefix('reports')->group(function(){
+
+            Route::get('/',[customerReports::class,'index'])->name('customer.penitipan.reports.index');
+
+        });
+    });
+
+
+    // Route::resource('reports', customerReports::class)->middleware(customerMidleware::class);
+
 });

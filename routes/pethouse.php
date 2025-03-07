@@ -1,16 +1,28 @@
 <?php
+
+use App\Http\Controllers\dashboard;
 use App\Http\Controllers\PetHouse\pethousekelolaLayanan;
-use App\Http\Controllers\PetHouse\pethousekelolaPethouse;
+use App\Http\Controllers\PetHouse\pethouseKelolaPetHouse;
 use App\Http\Controllers\PetHouse\pethouseReport;
 use App\Http\Middleware\pethouseMidleware;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function(){
-    Route::prefix("pethouse")->group(function(){
-        Route::resource('pethouse',pethousekelolaPethouse::class)->middleware(pethouseMidleware::class);
+Route::middleware(['auth', pethouseMidleware::class])->group(function () {
+    Route::prefix("pethouse")->group(function () {
 
-        Route::resource('Layanan',pethousekelolaLayanan::class)->middleware(pethouseMidleware::class);
+        Route::get('/dashboard',[dashboard::class,'pethouse'])->name('pethouse.dashboard');
 
-        Route::resource('reports',pethouseReport::class)->middleware(pethouseMidleware::class);
+        // Route::prefix('layanan')->group(function () {
+
+        //     Route::resource('/daftarlayanan', pethousekelolaLayanan::class);
+        // });
+
+
+        // Route::resource('reports', pethouseReport::class);
+
+        // Route::prefix('managepethouse')->group(function () {
+
+        //     Route::resource('/profile', pethouseKelolaPetHouse::class);
+        // });
     });
 });
