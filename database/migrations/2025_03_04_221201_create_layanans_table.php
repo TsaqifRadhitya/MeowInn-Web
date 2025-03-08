@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('layanans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('nama_layanan');
+            $table->string('nama_layanan')->unique();
             $table->boolean('persetujuan');
+            $table->boolean('isdeleted')->default(false);
         });
     }
 

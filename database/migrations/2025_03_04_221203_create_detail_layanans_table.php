@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('harga');
             $table->enum('status_pengajuan',['Menunggu Persetujuan','Disetujui']);
+            $table->boolean('isdeleted')->default(false);
             $table->foreignId('fk_layanan')->constrained('layanans','id')->delete('cascade');
             $table->foreignId('fk_pet_house')->constrained('pet_houses','id')->delete('cascade');
         });

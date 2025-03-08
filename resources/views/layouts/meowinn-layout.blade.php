@@ -1,33 +1,38 @@
 @props(['header', 'activeMenu'])
 @vite(['resources/css/app.css', 'resources/js/app.js'])
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    const handleOpen = () => {
-        $('#default-sidebar').removeClass('-translate-x-full');
-    }
 
-    const handleClose = () => {
-        $('#default-sidebar').addClass('-translate-x-full');
-    }
-
-    const handleOpenAndClose = (selectorDropDown, iconDropDown, buttonDropDown) => {
-        console.log(buttonDropDown)
-        const state = $(selectorDropDown).hasClass('hidden')
-        if (state) {
-            $(selectorDropDown).removeClass('hidden');
-            $(iconDropDown).removeClass('rotate-90');
-            $(buttonDropDown).addClass('rounded-tl-box');
-            $(buttonDropDown).removeClass('rounded-l-full');
-
-        } else {
-            $(selectorDropDown).addClass('hidden');
-            $(iconDropDown).addClass('rotate-90');
-            $(buttonDropDown).addClass('rounded-l-full');
-            $(buttonDropDown).removeClass('rounded-tl-box');
+<head>
+    <title>{{ env('APP_NAME') }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        const handleOpen = () => {
+            $('#default-sidebar').removeClass('-translate-x-full');
         }
-    }
-</script>
 
+        const handleClose = () => {
+            $('#default-sidebar').addClass('-translate-x-full');
+        }
+
+        const handleOpenAndClose = (selectorDropDown, iconDropDown, buttonDropDown) => {
+            console.log(buttonDropDown)
+            const state = $(selectorDropDown).hasClass('hidden')
+            if (state) {
+                $(selectorDropDown).removeClass('hidden');
+                $(iconDropDown).removeClass('rotate-90');
+                $(buttonDropDown).addClass('rounded-tl-box');
+                $(buttonDropDown).removeClass('rounded-l-full');
+
+            } else {
+                $(selectorDropDown).addClass('hidden');
+                $(iconDropDown).addClass('rotate-90');
+                $(buttonDropDown).addClass('rounded-l-full');
+                $(buttonDropDown).removeClass('rounded-tl-box');
+            }
+        }
+    </script>
+</head>
 <div class="min-h-screen">
     <aside id="default-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
@@ -51,7 +56,8 @@
                             <path
                                 d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
                         </svg>
-                        <span class="{{ $activeMenu == 'Dashboard' ? '' : 'text-white group-hover:text-black' }} flex-1 ms-3 whitespace-nowrap font-semibold">Dashboard</span>
+                        <span
+                            class="{{ $activeMenu == 'Dashboard' ? '' : 'text-white group-hover:text-black' }} flex-1 ms-3 whitespace-nowrap font-semibold">Dashboard</span>
                     </a>
                 </li>
                 <li>
@@ -66,7 +72,8 @@
                             <path
                                 d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
                         </svg>
-                        <span class="font-semibold flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Pet House</span>
+                        <span class="font-semibold flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Pet
+                            House</span>
                         <svg id="icon-dropdown-Pet-House"
                             class="w-3 h-3 {{ $activeMenu == 'Pet House' ? null : 'rotate-90' }}" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
@@ -130,7 +137,8 @@
                             <path
                                 d="M6.143 0H1.857A1.857 1.857 0 0 0 0 1.857v4.286C0 7.169.831 8 1.857 8h4.286A1.857 1.857 0 0 0 8 6.143V1.857A1.857 1.857 0 0 0 6.143 0Zm10 0h-4.286A1.857 1.857 0 0 0 10 1.857v4.286C10 7.169 10.831 8 11.857 8h4.286A1.857 1.857 0 0 0 18 6.143V1.857A1.857 1.857 0 0 0 16.143 0Zm-10 10H1.857A1.857 1.857 0 0 0 0 11.857v4.286C0 17.169.831 18 1.857 18h4.286A1.857 1.857 0 0 0 8 16.143v-4.286A1.857 1.857 0 0 0 6.143 10Zm10 0h-4.286A1.857 1.857 0 0 0 10 11.857v4.286c0 1.026.831 1.857 1.857 1.857h4.286A1.857 1.857 0 0 0 18 16.143v-4.286A1.857 1.857 0 0 0 16.143 10Z" />
                         </svg>
-                        <span class="{{ $activeMenu == 'Reports' ? '' : 'text-white group-hover:text-black' }} flex-1 ms-3 whitespace-nowrap">Reports</span>
+                        <span
+                            class="{{ $activeMenu == 'Reports' ? '' : 'text-white group-hover:text-black' }} flex-1 ms-3 whitespace-nowrap">Reports</span>
                     </a>
                 </li>
                 <li>
@@ -189,7 +197,7 @@
             </button>
         </div>
         <div class="relative">
-            <div class="sticky top-0 bg-[#F69246] sm:lm-64 p-4 hidden sm:block shadow-sm">
+            <div class="sticky top-0 z-40 bg-[#F69246] sm:lm-64 p-4 hidden sm:block shadow-sm">
                 <h1 class="text-white font">{{ $header }}</h1>
             </div>
             <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-56px)]']) }}>

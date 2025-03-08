@@ -20,6 +20,7 @@ return new class extends Migration
             $table->boolean('status_penjemputan');
             $table->float('radius_penjemputan')->nullable();
             $table->string('alamat');
+            $table->integer('penalty')->default(0);
             $table->decimal('lat', 10, 8);
             $table->decimal('lng', 11, 8);
         });
