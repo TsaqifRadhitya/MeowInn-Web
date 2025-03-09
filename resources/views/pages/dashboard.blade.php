@@ -1,7 +1,5 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-
-</script>
+<script></script>
 
 <x-app-layout>
     <x-slot name="header">
@@ -18,12 +16,12 @@
                 </div>
                 <div class="ml-5 flex flex-row gap-x-10 mb-5">
                     @foreach ([1, 2, 3, 4] as $angka)
-                        <button class="bg-green-300 rounded-full px-5 shadow-sm" onclick="plert({{ $angka }})">{{ $angka }}</button>
+                        <button class="bg-green-300 rounded-full px-5 shadow-sm"
+                            onclick="plert({{ $angka }})">{{ $angka }}</button>
                     @endforeach
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
-<script>
-</script>
+<script></script>

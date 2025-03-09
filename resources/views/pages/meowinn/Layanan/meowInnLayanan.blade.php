@@ -8,6 +8,11 @@
 
 <x-meowinn-layout header="Daftar Layanan" class="px-5 pt-5" id="content" activeMenu="Layanan"
     class="flex flex-col pt-5 px-5 space-y-5">
+    @if (Session::has('error'))
+        <div class="bg-red-300 p-5 rounded-xl border-2 border-red-400 drop-shadow-sm">
+            <p class="text-xl font-semibold">{{ Session::get('error') }}</p>
+        </div>
+    @endif
     @if (Session::has('message'))
         <div class="bg-green-300 p-5 rounded-xl border-2 border-green-400 drop-shadow-sm">
             <p class="text-xl font-semibold">{{ Session::get('message') }}</p>

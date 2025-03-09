@@ -1,3 +1,2 @@
-<div>
-    <!-- Breathing in, I calm body and mind. Breathing out, I smile. - Thich Nhat Hanh -->
-</div>
+<x-pethouse-layout header="Daftar Riwayat Penitipan" class="px-5 pt-5" id="content" activeMenu="Penitipan">
+</x-pethouse-layout>

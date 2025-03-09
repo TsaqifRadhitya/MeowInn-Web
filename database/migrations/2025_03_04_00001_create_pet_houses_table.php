@@ -16,13 +16,15 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('deskripsi');
-            $table->boolean('status_pet_house')->default(false);
-            $table->boolean('status_penjemputan');
             $table->float('radius_penjemputan')->nullable();
             $table->string('alamat');
             $table->integer('penalty')->default(0);
             $table->decimal('lat', 10, 8);
             $table->decimal('lng', 11, 8);
+            $table->boolean('status_buka_pet_house')->default(true);
+            $table->boolean('status_penjemputan');
+            $table->boolean('status_verifikasi')->default(false);
+            $table->foreignId('fk_user')->constrained('users','id')->onDelete('cascade');
         });
     }
 

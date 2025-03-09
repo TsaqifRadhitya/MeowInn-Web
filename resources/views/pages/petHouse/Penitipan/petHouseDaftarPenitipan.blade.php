@@ -1,3 +1,2 @@
-<div>
-    <!-- I begin to speak only when I am certain what I will say is not better left unsaid. - Cato the Younger -->
-</div>
+<x-pethouse-layout header="Daftar Penitipan Berlangsung" class="px-5 pt-5" id="content" activeMenu="Penitipan">
+</x-pethouse-layout>

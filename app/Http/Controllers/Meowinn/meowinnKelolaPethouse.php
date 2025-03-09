@@ -16,4 +16,9 @@ class meowinnkelolaPethouse extends Controller
         // dd($daftarPenalty);
         return view('pages.meowinn.PetHouse.meowinnPetHousePenalty',compact('daftarPenalty'));
     }
+
+    public function pengajuan(){
+        $daftarPengajuan = PetHouse::where('status_verifikasi','=','Menunggu Persetujuan')->get();
+        return view('pages.meowinn.PetHouse.meowinnPengajuanPethouse',compact('daftarPengajuan'));
+    }
 }

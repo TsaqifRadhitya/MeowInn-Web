@@ -14,8 +14,12 @@ Route::middleware(['auth', meowinnMidleware::class])->group(function () {
 
         Route::prefix('daftarpethouse')->group(function () {
             Route::get('/', [meowinnkelolaPethouse::class, 'index'])->name('meowinn.pethouse.daftarpethouse.index');
-
         });
+
+        Route::prefix('pengajuanpethouse')->group(function () {
+            Route::get('/',[meowinnkelolaPethouse::class,'pengajuan'])->name('meowinn.pethouse.pengajuanpethouse.index');
+        });
+
         Route::prefix('penalty')->group(function () {
             Route::get('/', [meowinnkelolaPethouse::class, 'penalty'])->name('meowinn.pethouse.penalty.index');
         });

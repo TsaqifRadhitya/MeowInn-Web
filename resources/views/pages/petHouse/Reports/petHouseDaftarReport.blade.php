@@ -1,3 +1,2 @@
-<div>
-    <!-- It is not the man who has too little, but the man who craves more, that is poor. - Seneca -->
-</div>
+<x-pethouse-layout header="Daftar Reports" class="px-5 pt-5" id="content" activeMenu="Reports">
+</x-pethouse-layout>

@@ -121,25 +121,25 @@
     </aside>
 
     <div
-        class="text-xl hidden md:flex fixed z-40 top-0 flex-row justify-between w-full px-10 bg-linear-180 from-[#F69246] to-[#EB6F6F] py-5 shadow-sm font-bold items-center">
+        class="text-white text-xl hidden md:flex fixed z-40 top-0 flex-row justify-between w-full px-10 bg-linear-180 from-[#F69246] to-[#EB6F6F] py-3 shadow-sm font-semibold items-center">
         <h1>MeowInn</h1>
-        <div class="flex flex-row gap-x-5 font-semibold ">
-            <a href="#home">Home</a>
-            <a href="#AboutUs">About Us</a>
-            <a href="#OurService">Our Service</a>
-            <a href="#Contact">Contact</a>
+        <div class="text-lg flex flex-row gap-x-5 font-medium items-center">
+            <a href="#home" class="hover:text-gray-400">Home</a>
+            <a href="#AboutUs" class="hover:text-gray-400">About Us</a>
+            <a href="#OurService" class="hover:text-gray-400">Our Service</a>
+            <a href="#Contact" class="hover:text-gray-400">Contact</a>
         </div>
         @if (!Auth::check())
             <div class="flex flex-row gap-x-2">
                 <button
-                    class="border-[#835E92] font-bold hover:bg-linear-210 hover:from-[#C0618C] hover:to-[#835E92] hover:text-white border-2 rounded-xl px-1 py-2 min-w-24 shadow-sm text-[#835E92] hover:cursor-pointer"><a
-                        href="/login">Login</a></button>
+                    class="btn border-[#835E92] font-bold hover:bg-linear-210 hover:from-[#C0618C] hover:to-[#835E92] hover:border-0 hover:text-white border-2 rounded-xl px-1 py-2 min-w-24 shadow-sm text-[#835E92] hover:cursor-pointer"><a
+                        href="{{ route('login') }}">Login</a></button>
                 <button
-                    class="bg-linear-240 from-[#C0618C] to-[#835E92] hover:border-2 hover:border-[#835E92] hover:text-[#835E92] hover:bg-none shadow-sm rounded-xl px-1 py-2 font-semibold min-w-24"><a
-                        href="/register">Register</a></button>
+                    class="text-white btn border-none hover:font-bold hover:bg-white bg-linear-240 from-[#C0618C] to-[#835E92] hover:border-2 hover:border-[#835E92] hover:text-[#835E92] hover:bg-none shadow-sm rounded-xl px-1 py-2 font-semibold min-w-24"><a
+                        href="{{ route('register.option') }}">Register</a></button>
             </div>
         @else
-            <button class="bg-linear-240 from-[#C0618C] to-[#835E92] shadow-sm rounded-xl px-1 py-2 font-semibold min-w-24"><a
+            <button class="btn  text-white border-none hover:text-[#835E92] hover:bg-white hover:bg-none hover:border-2 hover:font-bold hover:border-[#835E92] bg-linear-240 from-[#C0618C] to-[#835E92] shadow-sm rounded-xl px-1 py-2 font-semibold min-w-24"><a
                     href="/dashboard">Dashboard</a></button>
         @endif
     </div>
@@ -151,7 +151,7 @@
                 Penyedia Layanan Perawatan Kucing</h1>
             <p class="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white-400 text-[#2a2a2a]">
                 Memudahkan anda untuk
-                mencari layanan perawatan kucing yang berlokasi disekitar anda</p>
+                mencari layanan perawatan kucing disekitar anda</p>
             <button class="btn bg-[#d9376e] border-[#d9376e] shadow-sm min-w-1/4">
                 <a href="/dashboard">Lihat lebih lanjut</a>
             </button>

@@ -1,3 +1,2 @@
-<div>
-    <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
-</div>
+<x-pethouse-layout header="dashboard" class="px-5 pt-5" id="content" activeMenu="Dashboard">
+</x-pethouse-layout>
