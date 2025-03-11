@@ -1,11 +1,3 @@
-@isset($errors->persetujuan)
-    @dd($errors->persetujuan)
-@endisset
-
-@isset($errors->nama_layanan)
-    @dd($errors->nama_layanan)
-@endisset
-
 <x-meowinn-layout header="Daftar Layanan" class="px-5 pt-5" id="content" activeMenu="Layanan"
     class="flex flex-col pt-5 px-5 space-y-5">
     @if (Session::has('error'))
@@ -94,9 +86,9 @@
                 </div>
 
                 <!-- Modal Form -->
-                <form id="modalForm" action="{{ route('meowinn.layanan.daftarlayanan.create') }}" method="POST">
+                <form id="modalFormEdit" action="{{ route('meowinn.layanan.daftarlayanan.create') }}" method="POST">
                     @csrf
-
+                    @method('Patch')
                     <div class="flex flex-col gap-y-3">
                         <!-- Nama Layanan -->
                         <label for="nama_layanan" class="text-sm font-medium text-gray-700">Nama Layanan</label>
@@ -125,8 +117,10 @@
         }
 
         const handleEdit = (data) => {
-            console.log(data.nama_layanan)
-            $('#nama_layanan_edit').val(data.namaLayanan);
+            console.log(data)
+            $('#nama_layanan_edit').val(data.nama_layanan);
+            $("#persetujuan_edit").prop("checked", data.persetujuan ? true : false);
+            $('#modalFormEdit').attr('action', `daftarlayanan/${data.id}/edit`);
             $('#modalDialogEdit').show();
         }
 
@@ -173,7 +167,7 @@
                     success: async function(response) {
                         await swal.fire({
                             icon: 'success',
-                            title: `Berhasil Menghapus Layanan ${data.namaLayanan}`
+                            title: `Berhasil Menghapus Layanan ${data.nama_layanan}`
                         })
                         location.reload()
                     }

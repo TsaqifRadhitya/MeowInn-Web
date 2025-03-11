@@ -203,7 +203,7 @@
         </div>
         <div class="relative">
             <div class="sticky top-0 z-40 bg-[#F69246] sm:lm-64 p-4 hidden sm:block shadow-sm">
-                <h1 class="text-white font">{{ $header }}</h1>
+                <h1 class="text-white font-semibold text-xl">{{ $header }}</h1>
             </div>
             <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-56px)]']) }}>
                 {{ $slot }}

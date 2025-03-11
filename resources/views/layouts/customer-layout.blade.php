@@ -100,7 +100,7 @@
     <div class="min-h-screen relative">
         <div
             class="bg-amber-500 p-5 sticky top-0 text-white font-semibold flex-row justify-between z-50 hidden md:flex">
-            <h1>MeowInn</h1>
+            <h1 onclick="location.href = '/'" class="hover:cursor-pointer">MeowInn</h1>
             <div class="flex flex-row gap-x-3 items-center">
                 <img src="https://pixabay.com/illustrations/icon-user-male-avatar-business-5359553/" class=""
                     alt="profile">

@@ -5,36 +5,24 @@
         class="flex flex-col px-3 md:px-5 pt-3 md:pt-5 items-center w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto left-1/2 md:-translate-y-1/3 lg:-translate-y-2/3 drop-shadow-2xl rounded-3xl bg-cyan-400 z-40">
         <p class="text-xl md:text-2xl lg:text-3xl font-semibold text-center z-40">Booking Penitipan Kucing</p>
         <div
-            class="flex flex-col md:flex-row justify-between w-full items-center mt-16 md:mt-24 lg:mt-48 z-50 px-2 md:px-4">
+            class="pb-10 flex flex-col md:flex-row justify-between w-full items-center mt-16 md:mt-24 lg:mt-48 z-50 px-2 md:px-4">
             <form action="/" method="POST" class="w-full p-2 md:p-5 space-y-3 md:space-y-5" id="search">
                 <div class="flex flex-col md:flex-row gap-3 md:gap-x-5">
                     <select name="province" id="province"
-                        class="bg-white rounded-lg px-3 py-2 md:px-5 w-full md:w-auto mb-2 md:mb-0">
-                        <option value="Provinces">Provinces</option>
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                        class="bg-white rounded-lg px-3 py-2 md:px-5 min-w-1/5 md:w-auto mb-2 md:mb-0">
                     </select>
                     <select name="city" id="city"
-                        class="bg-white rounded-lg px-3 py-2 md:px-5 w-full md:w-auto mb-2 md:mb-0">
-                        <option value="City">City</option>
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                        class=" bg-white rounded-lg px-3 py-2 md:px-5 min-w-1/5 md:w-auto mb-2 md:mb-0">
                     </select>
                     <input type="text" class="w-full bg-white rounded-md px-3 py-2 md:px-5" placeholder="Alamat">
                 </div>
             </form>
+
             <button class="btn btn-info min-h-10 md:min-h-12 mt-2 md:mt-0">GPS</button>
         </div>
-
-
         <button onclick="$('#search').submit()"
             class="z-50 btn w-4/5 md:w-auto md:min-w-48 lg:min-w-64 mt-auto h-12 md:h-16 -bottom-6 md:-bottom-8 absolute bg-blue-400 border-0 rounded-xl text-lg md:text-xl lg:text-2xl font-medium text-white hover:bg-blue-300">Search</button>
-        <iframe class="z-10 absolute top-0 w-full h-full rounded-3xl"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15798.016804316707!2d113.70377959999999!3d-8.15184705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd69596b96e9e11%3A0x97c9b37cc2093b0e!2sMakna%20Self%20Photo%20Studio%20Jember%20dan%20Photobooth%20Jember!5e0!3m2!1sen!2sid!4v1741616236530!5m2!1sen!2sid"
+        <iframe class="z-10 absolute top-0 w-full h-full rounded-3xl" src="https://www.google.com/maps/embed"
             loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
     </div>
@@ -46,25 +34,36 @@
             <!-- Main scrollable container -->
             <div class="flex flex-row overflow-x-auto gap-x-5 pb-4">
                 <!-- Individual cards with snap points -->
-                <div class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg">
+                <div
+                    class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg shadow-sm">
                     <!-- Card content here -->
                 </div>
-                <div class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg">
+                <div
+                    class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg shadow-sm">
                     <!-- Card content here -->
                 </div>
-                <div class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg">
+                <div
+                    class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg shadow-sm">
                     <!-- Card content here -->
                 </div>
-                <div class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg">
+                <div
+                    class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg shadow-sm">
                     <!-- Card content here -->
                 </div>
-                <div class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg">
+                <div
+                    class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg shadow-sm">
                     <!-- Card content here -->
                 </div>
-                <div class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg">
+                <div
+                    class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg shadow-sm">
                     <!-- Card content here -->
                 </div>
-                <div class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg">
+                <div
+                    class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg shadow-sm">
+                    <!-- Card content here -->
+                </div>
+                <div
+                    class="w-72 md:w-80 lg:w-96 h-72 md:h-80 lg:h-96 bg-red-400 flex-shrink-0 snap-center rounded-lg shadow-sm">
                     <!-- Card content here -->
                 </div>
             </div>
@@ -78,7 +77,7 @@
     </div>
 
 
-    <footer class="w-full mt-10">
+    <footer class="w-full mt-10 bg-purple-400">
         <div class="mx-auto w-full p-4 py-6 lg:py-8">
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
@@ -140,8 +139,8 @@
                         <span class="sr-only">Facebook page</span>
                     </a>
                     <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5">
-                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 21 16">
+                        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                            viewBox="0 0 21 16">
                             <path
                                 d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z" />
                         </svg>

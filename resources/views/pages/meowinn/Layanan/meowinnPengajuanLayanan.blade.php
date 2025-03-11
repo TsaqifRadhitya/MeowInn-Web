@@ -9,19 +9,35 @@
             </tr>
         </thead>
         <tbody>
+            <tr class="bg-[#F4F6F5]">
+                <td class="textarea-md font-semibold pl-7">{{ 1 }}</td>
+                <td class="textarea-md font-semibold">{{ 'MeowInn' }}</td>
+                <td class="textarea-md font-semibold">
+                    {{ 'Vaksin' }}
+                </td>
+                <td>
+                    <div class="text-md flex flex-row space-x-5 justify-center">
+                        <button class="w-fit btn btn-error min-w-24"
+                            onclick="handleDelete({{ 1 }})">Tolak</button><button
+                            class="w-fit btn btn-info min-w-24"
+                            onclick="handleApprove({{ 1 }})">Setuju</button>
+                    </div>
+                </td>
+            </tr>
+            </tr>
             @for ($index = 0; $index < count($daftarPengajuanLayanan); $index++)
                 <tr class="{{ $index % 2 == 0 ? 'bg-' : 'bg-[#F4F6F5]' }}">
                     <td class="textarea-md font-semibold pl-7">{{ $index + 1 }}</td>
-                    <td class="textarea-md font-semibold">{{ $daftarPenalty[$index]->name }}</td>
+                    <td class="textarea-md font-semibold">{{ $daftarPenalty[$index]->pethouse()->get()->name }}</td>
                     <td class="textarea-md font-semibold">
-                        {{ $daftarPengajuanLayanan[$index]->penalty }}
+                        {{ $daftarPengajuanLayanan[$index]->layanan()->get()->nama_layanan }}
                     </td>
                     <td>
                         <div class="text-md flex flex-row space-x-5 justify-center">
                             <button class="w-fit btn btn-error min-w-24"
-                                onclick="handleDelete({{ $daftarPengajuanLayanan[$index] }})">Delete</button><button
+                                onclick="handleDelete({{ $daftarPengajuanLayanan[$index]->id }})">Tolak</button><button
                                 class="w-fit btn btn-info min-w-24"
-                                onclick="handleEdit({{ $daftarPengajuanLayanan[$index] }})">Edit</button>
+                                onclick="handleApprove({{ $daftarPengajuanLayanan[$index]->id }})">Setuju</button>
                         </div>
                     </td>
                 </tr>
@@ -29,4 +45,64 @@
             @endfor
         </tbody>
     </table>
+    <script>
+        const Popup = async () => {
+            return await swal.fire({
+                icon: 'warning',
+                title: 'Apakah Anda Yakin ?',
+                confirmButtonText: 'Konfirmasi',
+                cancelButtonText: 'Batalkan',
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                showConfirmButton: true,
+                showCancelButton: true,
+                reverseButtons: true
+            })
+        }
+
+        const alertSucces = async (header) => await swal.fire({
+            icon: "success",
+            title: header,
+        })
+
+        const handleDelete = async (id) => {
+            const resultPopup = await Popup()
+            if (resultPopup.isConfirmed) {
+                console.log(id)
+                $.ajax({
+                    type: "DELETE",
+                    url: `pengajuanlayanan/${id}/delete`,
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr(
+                            'content') // Sertakan CSRF token di dalam data
+                    },
+                    success: async function(response) {
+                        await alertSucces("Berhasil Menolak Pengajuan Layanan")
+                        location.reload()
+                    }
+                })
+            }
+        };
+
+
+
+        const handleApprove = async (id) => {
+            const resultPopup = await Popup()
+            if (resultPopup.isConfirmed) {
+                console.log(id)
+                $.ajax({
+                    type: "PATCH",
+                    url: `pengajuanlayanan/${id}/edit`,
+                    data: {
+                        _token: $('meta[name="csrf-token"]').attr(
+                            'content') // Sertakan CSRF token di dalam data
+                    },
+                    success: async function(response) {
+                        await alertSucces("Berhasil Menyetujui Pengajua Layanan")
+                        location.reload()
+                    }
+                })
+            }
+        };
+    </script>
 </x-meowinn-layout>

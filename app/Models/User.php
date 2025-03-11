@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,5 +46,17 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function petHouses(){
+        return $this->hasOne(PetHouse::class,'fk_user');
+    }
+
+    public function reports(){
+        return $this->hasMany(Report::class,'fk_user');
+    }
+
+    public function penitipans(){
+        return $this->hasMany(Penitipan::class,'fk_user');
     }
 }

@@ -18,12 +18,13 @@ return new class extends Migration
             $table->string('deskripsi');
             $table->float('radius_penjemputan')->nullable();
             $table->string('alamat');
-            $table->integer('penalty')->default(0);
+            $table->string('kabupaten');
             $table->decimal('lat', 10, 8);
             $table->decimal('lng', 11, 8);
+            $table->integer('penalty')->default(0);
             $table->boolean('status_buka_pet_house')->default(true);
             $table->boolean('status_penjemputan');
-            $table->boolean('status_verifikasi')->default(false);
+            $table->enum('status_verifikasi',['menunggu persetujuan','ditolak','disetujui']);
             $table->foreignId('fk_user')->constrained('users','id')->onDelete('cascade');
         });
     }

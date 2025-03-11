@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', meowinnMidleware::class])->group(function () {
     Route::prefix('meowinn')->group(function () {
 
+        Route::get('/preview/{id}',[meowinnkelolaPethouse::class,'viewDetail'])->name('meowinn.pethouse.preview');
+
         Route::get('dashboard', [dashboard::class, 'meowinn'])->name('meowinn.dashboard');
 
         Route::prefix('daftarpethouse')->group(function () {
@@ -18,10 +20,14 @@ Route::middleware(['auth', meowinnMidleware::class])->group(function () {
 
         Route::prefix('pengajuanpethouse')->group(function () {
             Route::get('/',[meowinnkelolaPethouse::class,'pengajuan'])->name('meowinn.pethouse.pengajuanpethouse.index');
+            Route::delete('/{id}/delete', [meowinnkelolaPethouse::class, 'tolak'])->name('meowinn.pethouse.pengajuanlayanan.delete');
+            Route::patch('/{id}/edit', [meowinnkelolaPethouse::class, 'approve'])->name('meowinn.pethouse.pengajuanlayanan.update');
         });
 
         Route::prefix('penalty')->group(function () {
             Route::get('/', [meowinnkelolaPethouse::class, 'penalty'])->name('meowinn.pethouse.penalty.index');
+            Route::post('/{id}/create', [meowinnkelolaPethouse::class, 'penaltyCreate'])->name('meowinn.pethouse.penalty.create');
+            Route::delete('/{id}/delete', [meowinnkelolaPethouse::class, 'penaltyRemove'])->name('meowinn.pethouse.penalty.delete');
         });
 
         Route::prefix('daftarlayanan')->group(function () {
@@ -33,6 +39,8 @@ Route::middleware(['auth', meowinnMidleware::class])->group(function () {
 
         Route::prefix('pengajuanlayanan')->group(function () {
             Route::get('/', [meowinnkelolaLayanan::class, 'pengajuanLayanan'])->name('meowinn.layanan.pengajuanlayanan.index');
+            Route::delete('/{id}/delete', [meowinnkelolaLayanan::class, 'tolakPengajuan'])->name('meowinn.layanan.pengajuanlayanan.delete');
+            Route::patch('/{id}/edit', [meowinnkelolaLayanan::class, 'terimaPengajuan'])->name('meowinn.layanan.pengajuanlayanan.update');
         });
 
         Route::get('reports', [meowinnreport::class, 'index'])->name('meowinn.reports.index');
