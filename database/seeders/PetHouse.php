@@ -2,18 +2,20 @@
 
 namespace Database\Seeders;
 
+use App\Models\PetHouse as ModelsPetHouse;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class userSeeder extends Seeder
+class PetHouse extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::factory(10)->create();
-        // User::create(['name' => 'John', 'email' => 'test@gmail.com','password' => 'test', 'role' => 'meowinn'],);
+        User::whereRole('pethouse')->get()->each(function($user){
+            ModelsPetHouse::factory(1)->create(['fk_user' => $user->id]);
+        });
     }
 }

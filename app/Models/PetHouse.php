@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PetHouse extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['name','deskripsi','status_buka_pet_house','status_verifikasi','status_penjemputan','radius_penjemputan','alamat','lat','lng','kabupaten'];
 
     public function user(){

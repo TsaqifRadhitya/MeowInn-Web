@@ -4,13 +4,20 @@ namespace App\Http\Controllers\Meowinn;
 
 use App\Http\Controllers\Controller;
 use App\Models\PetHouse;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class meowinnkelolaPethouse extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.meowinn.PetHouse.meowInnPetHouse');
+        $search = $request->input('search');
+        if($search != null){
+            // dd($search);
+            $daftarPethouse = PetHouse::where('name','like',$search)->get();
+        }else{
+            $daftarPethouse = PetHouse::all();
+        }
+        return view('pages.meowinn.PetHouse.meowInnPetHouse',compact('daftarPethouse'));
     }
 
     public function penalty()
@@ -28,7 +35,7 @@ class meowinnkelolaPethouse extends Controller
 
     public function viewDetail($id)
     {
-        PetHouse::find($id, '*');
+        $profilePethouse =  PetHouse::whereId($id)->first();
         return view('pages.meowinn.PetHouse.meowinnPethousePreview');
     }
 
