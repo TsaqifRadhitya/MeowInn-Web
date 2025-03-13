@@ -13,9 +13,9 @@ class meowinnkelolaPethouse extends Controller
         $search = $request->input('search');
         if($search != null){
             // dd($search);
-            $daftarPethouse = PetHouse::where('name','like',$search)->get();
+            $daftarPethouse = PetHouse::where('name','like',$search)->paginate(3);
         }else{
-            $daftarPethouse = PetHouse::all();
+            $daftarPethouse = PetHouse::paginate(3);
         }
         return view('pages.meowinn.PetHouse.meowInnPetHouse',compact('daftarPethouse'));
     }
@@ -29,14 +29,14 @@ class meowinnkelolaPethouse extends Controller
 
     public function pengajuan()
     {
-        $daftarPengajuan = PetHouse::where('status_verifikasi', '=', 'menunggu persetujuan')->get();
+        $daftarPengajuan = PetHouse::where('status_verifikasi', '=', 'menunggu persetujuan')->paginate(15);
         return view('pages.meowinn.PetHouse.meowinnPengajuanPethouse', compact('daftarPengajuan'));
     }
 
     public function viewDetail($id)
     {
         $profilePethouse =  PetHouse::whereId($id)->first();
-        return view('pages.meowinn.PetHouse.meowinnPethousePreview');
+        return view('pages.meowinn.PetHouse.meowinnPethousePreview',compact('profilePethouse'));
     }
 
     public function tolak($id)

@@ -3,29 +3,17 @@
         <thead>
             <tr class="bg-[#34314E] text-white h-12">
                 <td class="pl-5">No</td>
+                <td>Tanggal Pengajuan</td>
                 <td>Nama Pethouse</td>
                 <th class="bg-[#34314E]"></th>
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-[#F4F6F5] h-16">
-                <td class="textarea-md font-semibold pl-7">{{ 1 }}</td>
-                <td class="textarea-md font-semibold">{{ 'MeowInn' }}</td>
-                <td>
-                    <div class="text-md flex flex-row space-x-5 justify-center">
-                        <button class="w-fit btn btn-info min-w-24"
-                            onclick="document.location.href = '/meowinn/preview/{{ 1 }}'">View
-                            Detail</button>
-                        <button class="w-fit btn btn-error min-w-24"
-                            onclick="handleTolak({{ 1 }})">Tolak</button>
-                        <button class="w-fit btn btn-success min-w-24"
-                            onclick="handleApprove({{ 1 }})">Appove</button>
-                    </div>
-                </td>
-            </tr>
             @for ($index = 0; $index < count($daftarPengajuan); $index++)
                 <tr class="{{ $index % 2 == 0 ? 'bg-' : 'bg-[#F4F6F5]' }}">
-                    <td class="textarea-md font-semibold pl-7">{{ $index + 1 }}</td>
+                    <td class="textarea-md font-semibold pl-7">
+                        {{ ($daftarPengajuan->currentPage() - 1) * $daftarPengajuan->perPage() + $index + 1 }}</td>
+                    <td class="textarea-md font-semibold">{{ $daftarPengajuan[$index]->updated_at }}</td>
                     <td class="textarea-md font-semibold">{{ $daftarPengajuan[$index]->name }}</td>
                     <td>
                         <div class="text-md flex flex-row space-x-5 justify-center">
@@ -42,6 +30,9 @@
             @endfor
         </tbody>
     </table>
+    <div class="absolute bottom-5 left-1/2 -translate-x-1/2">
+        {{ $daftarPengajuan->links('vendor.pagination.tailwind') }}
+    </div>
     <script>
         const Popup = async () => {
             return await swal.fire({

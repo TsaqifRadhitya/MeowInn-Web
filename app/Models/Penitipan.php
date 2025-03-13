@@ -22,4 +22,8 @@ class Penitipan extends Model
     {
         return $this->hasMany(Hewan::class, 'fk_penitipan');
     }
+
+    public function pethouse(){
+        return $this->belongsTo(PetHouse::class,'fk_pet_house');
+    }
 }

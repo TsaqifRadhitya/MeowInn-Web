@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->enum('jenis_reports',['Admin','Pet House']);
-            $table->string('isi');
+            $table->text('isi');
             $table->foreignId('fk_user')->constrained('users','id')->delete('cascade');
             $table->foreignId('tujuan')->nullable()->constrained('pet_houses','id')->delete('cascade');
         });

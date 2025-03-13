@@ -16,9 +16,10 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('durasi');
             $table->integer('total');
-            $table->enum('status_pembayaran',['Menunggu Pembayaran','Sudah dibayar']);
-            $table->enum('status_penitipan',['Menunggu Penjemputan','Dalam Penitipan','Selesai']);
-            $table->foreignId('fk_user')->constrained('users','id')->delete('cascade');
+            $table->enum('status_pembayaran', ['Menunggu Pembayaran', 'Sudah dibayar']);
+            $table->enum('status_penitipan', ['Menunggu Penjemputan', 'Dalam Penitipan', 'Selesai']);
+            $table->foreignId('fk_user')->constrained('users', 'id')->delete('cascade');
+            $table->foreignId('fk_pet_house')->constrained('pet_houses', 'id')->delete('cascade');
         });
     }
 

@@ -38,7 +38,6 @@
                             </div>
                         </td>
                     </tr>
-                    </tr>
                 @endfor
             </tbody>
         </table>

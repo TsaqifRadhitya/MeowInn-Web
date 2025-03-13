@@ -8,18 +8,10 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-[#F4F6F5] h-14">
-                <td class="textarea-md font-semibold pl-7">{{ 1 }}</td>
-                <td class="textarea-md font-semibold">{{ 'MeowInn' }}</td>
-                <td class="textarea-md font-semibold">
-                    {{ 'Vaksin' }}
-                </td>
-            </tr>
-            </tr>
             @for ($index = 0; $index < count($reports); $index++)
                 <tr class="{{ $index % 2 == 0 ? 'bg-' : 'bg-[#F4F6F5]' }} h-14">
                     <td class="textarea-md font-semibold pl-7">{{ $index + 1 }}</td>
-                    <td class="textarea-md font-semibold">{{ $reports[$index]->users()->name }}</td>
+                    <td class="textarea-md font-semibold">{{ $reports[$index]->user()->first()->name }}</td>
                     <td class="textarea-md font-semibold">
                         {{ $reports[$index]->isi }}
                     </td>
@@ -27,4 +19,7 @@
             @endfor
         </tbody>
     </table>
+    <div class="my-5 md:my-0 w-fit mx-auto md:absolute md:bottom-5 md:left-1/2 md:-translate-x-1/2">
+        {{ $reports->links() }}
+    </div>
 </x-meowinn-layout>

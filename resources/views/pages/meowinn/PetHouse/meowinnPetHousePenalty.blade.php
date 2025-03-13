@@ -9,29 +9,17 @@
             </tr>
         </thead>
         <tbody>
-            <td class="textarea-md font-semibold pl-7">{{ 1 }}</td>
-            <td class="textarea-md font-semibold">{{ 'MeowInn' }}</td>
-            <td class="textarea-md font-semibold">
-                {{ 5 }} hari
-            </td>
-            <td>
-                <div class="text-md flex flex-row space-x-5 justify-center">
-                    <button class="w-fit btn btn-error min-w-24"
-                        onclick="handleDelete({{ 1 }})">Remove</button>
-                </div>
-            </td>
-            </tr>
             @for ($index = 0; $index < count($daftarPenalty); $index++)
                 <tr class="{{ $index % 2 == 0 ? 'bg-' : 'bg-[#F4F6F5]' }}">
                     <td class="textarea-md font-semibold pl-7">{{ $index + 1 }}</td>
                     <td class="textarea-md font-semibold">{{ $daftarPenalty[$index]->name }}</td>
                     <td class="textarea-md font-semibold">
-                        {{ $daftarPenalty[$index]->penalty }}
+                        {{ $daftarPenalty[$index]->penalty }} hari
                     </td>
                     <td>
                         <div class="text-md flex flex-row space-x-5 justify-center">
                             <button class="w-fit btn btn-error min-w-24"
-                                onclick="handleDelete({{ $daftarPenalty[$index] }})">Remove</button>
+                                onclick="handleDelete({{ $daftarPenalty[$index]->id }})">Remove</button>
                         </div>
                     </td>
                 </tr>

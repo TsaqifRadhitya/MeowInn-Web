@@ -53,7 +53,7 @@
                                 <path
                                     d="M12.5 0c-.157 0-.311.01-.565.027A1 1 0 0 0 11 1.02V10h8.975a1 1 0 0 0 1-.935c.013-.188.028-.374.028-.565A8.51 8.51 0 0 0 12.5 0Z" />
                             </svg>
-                            <span class="ms-3">Dashboard</span>
+                            <span class="ms-3 ">Dashboard</span>
                         </a>
                         <button class="btn bg-transparent shadow-none border-0" onclick="handleClose()"> <svg
                                 class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"

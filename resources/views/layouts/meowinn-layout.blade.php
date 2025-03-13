@@ -189,7 +189,7 @@
         </div>
     </aside>
     <div class="sm:ml-64 min-h-screen relative">
-        <div class="sticky top-0 bg-linear-90 from-[#F69246] to-[#EB6F6F] shadow-sm p-3 sm:hidden">
+        <div class="sticky top-0 bg-linear-90 from-[#F69246] to-[#EB6F6F] shadow-sm p-3 sm:hidden z-30">
             <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar"
                 aria-controls="default-sidebar" onclick="handleOpen()" type="button"
                 class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:cursor-pointer dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -205,7 +205,7 @@
             <div class="sticky top-0 z-40 bg-[#F69246] sm:lm-64 p-4 hidden sm:block shadow-sm">
                 <h1 class="text-white font-semibold text-xl">{{ $header }}</h1>
             </div>
-            <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-56px)]']) }}>
+            <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-60px)]']) }}>
                 {{ $slot }}
             </div>
         </div>
