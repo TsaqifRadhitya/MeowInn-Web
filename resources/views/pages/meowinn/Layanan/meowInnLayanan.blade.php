@@ -51,9 +51,7 @@
                 </div>
 
                 <!-- Modal Form -->
-                <form id="modalForm" action="{{ route('meowinn.layanan.daftarlayanan.create') }}" method="POST">
-                    @csrf
-
+                <form id="modalForm">
                     <div class="flex flex-col gap-y-3">
                         <!-- Nama Layanan -->
                         <label for="nama_layanan" class="text-sm font-medium text-gray-700">Nama Layanan</label>
@@ -75,103 +73,110 @@
                 </form>
             </div>
         </dialog>
-        <dialog id="modalDialogEdit" class="w-screen h-screen bg-black/40 fixed top-0 left-0 z-40">
-            <div class="rounded-lg w-1/3 p-6 shadow-lg bg-white absolute left-1/2 top-1/2 -translate-1/2 z-50">
-                <!-- Modal Header -->
-                <div class="flex justify-between items-center mb-4">
-                    <h2 id="modalTitle" class="text-xl font-semibold">Edit Layanan</h2>
-                    <button id="closeModalButton" class="text-gray-500 hover:text-gray-800"
-                        onclick="handleCloseModal()">&times;</button>
-                </div>
-
-                <!-- Modal Form -->
-                <form id="modalFormEdit" action="{{ route('meowinn.layanan.daftarlayanan.create') }}" method="POST">
-                    @csrf
-                    @method('Patch')
-                    <div class="flex flex-col gap-y-3">
-                        <!-- Nama Layanan -->
-                        <label for="nama_layanan" class="text-sm font-medium text-gray-700">Nama Layanan</label>
-                        <input type="text" id="nama_layanan_edit" name="nama_layanan"
-                            class="swal2-input p-3 border border-gray-300 rounded-md" placeholder="Nama Layanan"
-                            required>
-
-                        <!-- Checkbox Persetujuan -->
-                        <div class="flex items-center space-x-2">
-                            <input type="checkbox" id="persetujuan_edit" name="persetujuan" class="mr-2" />
-                            <label for="persetujuan" class="text-sm">Butuh Persetujuan</label>
-                        </div>
-
-                        <!-- Button untuk Submit -->
-                        <button type="submit"
-                            class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Simpan
-                            Layanan</button>
-                    </div>
-                </form>
-            </div>
-        </dialog>
     </div>
     <script>
-        const handleTambah = () => {
-            $('#modalDialog').show();
-        }
-
-        const handleEdit = (data) => {
-            console.log(data)
-            $('#nama_layanan_edit').val(data.nama_layanan);
-            $("#persetujuan_edit").prop("checked", data.persetujuan ? true : false);
-            $('#modalFormEdit').attr('action', `daftarlayanan/${data.id}/edit`);
-            $('#modalDialogEdit').show();
-        }
-
-        const handleCloseModal = () => {
-            $('#modalDialog').hide();
-
-            $('#modalDialogEdit').hide();
-
-            $(':input', '#modalDialogEdit')
-                .not(':button, :submit, :reset, :hidden')
-                .val('')
-                .prop('checked', false)
-                .prop('selected', false);
-
-            $(':input', '#modalDialog')
-                .not(':button, :submit, :reset, :hidden')
-                .val('')
-                .prop('checked', false)
-                .prop('selected', false);
-        }
-
-        const handleDelete = async (data, csrf) => {
-            const resultPopup = await swal.fire({
-                icon: 'warning',
-                title: 'Apakah Anda Yakin ?',
-                text: data.namaLayanan,
-                confirmButtonText: 'Konfirmasi',
-                cancelButtonText: 'Batalkan',
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                showConfirmButton: true,
+        const handleDelete = async (data) => {
+            const responseDialog = await Swal.fire({
+                title: `Hapus Layanan ${data.nama_layanan}?`,
+                icon: "warning",
                 showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Ya, Hapus",
+                cancelButtonText: "Batal",
                 reverseButtons: true
-            })
-
-            if (resultPopup.isConfirmed) {
+            });
+            if (responseDialog.isConfirmed) {
                 $.ajax({
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr(
-                            'content') // Sertakan CSRF token di dalam data
-                    },
                     type: "DELETE",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     url: `daftarlayanan/${data.id}/delete`,
-                    success: async function(response) {
-                        await swal.fire({
+                    success: function(response) {
+                        swal.fire({
                             icon: 'success',
-                            title: `Berhasil Menghapus Layanan ${data.nama_layanan}`
-                        })
-                        location.reload()
+                            title: 'Berhapus Menghapus Layanan'
+                        }).then(() => location.reload())
                     }
                 });
             }
+        }
+        const handleTambah = () => {
+            $('#modalDialog').show();
+            $('#modalForm').submit(function(e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'daftarlayanan/create',
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        console.log(response)
+                        swal.fire({
+                            icon: 'success',
+                            title: response.message
+                        }).then(() => {
+                            handleCloseModal()
+                            location.reload();
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error)
+                        swal.fire({
+                            icon: 'error',
+                            title: error.responseJSON.message
+                        }).then(() => handleCloseModal());
+                    }
+                });
+            });
+        }
+        const handleEdit = (data) => {
+            console.log(data)
+            $('#nama_layanan').val(data.nama_layanan);
+            $('#persetujuan').prop('checked', data.persetujuan ? true : false);
+            $('#modalForm').submit(function(e) {
+                e.preventDefault();
+                let id = $(this).attr('data-id');
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    type: 'PATCH',
+                    url: `daftarlayanan/${data.id}/edit`,
+                    data: formData,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        swal.fire({
+                            icon: 'success',
+                            title: 'Layanan berhasil diperbarui!'
+                        }).then(() => {
+                            handleCloseModal()
+                            location.reload();
+                        });
+                    },
+                    error: function(error) {
+                        swal.fire({
+                            icon: 'error',
+                            title: 'Gagal memperbarui layanan!'
+                        }).then(() => handleCloseModal());
+                    }
+                });
+            });
+            $('#modalDialog').show();
+        }
+        const handleCloseModal = () => {
+            $(':input', '#modalForm')
+                .not(':button, :submit, :reset, :hidden')
+                .val('')
+                .prop('checked', false)
+                .prop('selected', false);
+            $('#modalDialog').hide();
         }
     </script>
 </x-meowinn-layout>

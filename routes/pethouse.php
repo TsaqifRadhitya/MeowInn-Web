@@ -1,3 +1,4 @@
+
 <?php
 
 use App\Http\Controllers\dashboard;
@@ -38,7 +39,7 @@ Route::middleware(['auth', pethouseMidleware::class])->group(function () {
             Route::get('/preview', [pethouseKelolaPetHouse::class,'index'])->name('pethouse.managepethouse.preview.index');
 
             Route::get('/setting', [pethouseKelolaPetHouse::class,'setting'])->name('pethouse.managepethouse.setting.index');
-
+            Route::post('/setting/create',[pethouseKelolaPetHouse::class,'settingCreate'])->name('pethouse.managepethouse.setting.create');
         });
     });
 });

@@ -9,22 +9,6 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-[#F4F6F5]">
-                <td class="textarea-md font-semibold pl-7">{{ 1 }}</td>
-                <td class="textarea-md font-semibold">{{ 'MeowInn' }}</td>
-                <td class="textarea-md font-semibold">
-                    {{ 'Vaksin' }}
-                </td>
-                <td>
-                    <div class="text-md flex flex-row space-x-5 justify-center">
-                        <button class="w-fit btn btn-error min-w-24"
-                            onclick="handleDelete({{ 1 }})">Tolak</button><button
-                            class="w-fit btn btn-info min-w-24"
-                            onclick="handleApprove({{ 1 }})">Setuju</button>
-                    </div>
-                </td>
-            </tr>
-            </tr>
             @for ($index = 0; $index < count($daftarPengajuanLayanan); $index++)
                 <tr class="{{ $index % 2 == 0 ? 'bg-' : 'bg-[#F4F6F5]' }}">
                     <td class="textarea-md font-semibold pl-7">{{ $index + 1 }}</td>

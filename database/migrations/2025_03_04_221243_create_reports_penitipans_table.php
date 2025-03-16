@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reports_penitipans', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('url');
+            $table->jsonb('url');
             $table->string('description');
             $table->foreignId('fk_penitipan')->constrained('penitipans','id')->delete('cascade');
             $table->foreignId('fk_pet_house')->constrained('pet_houses','id')->delete('cascade');

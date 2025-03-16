@@ -32,33 +32,30 @@ class meowinnkelolaLayanan extends Controller
     public function edit(Request $request, $id)
     {
         $request->validate(['nama_layanan' => ['required', 'string']]);
-        // dd($validate);
         Layanan::whereId($id)->update([
             'nama_layanan' => $request->input('nama_layanan'),
             'persetujuan' =>  $request->input('persetujuan') == 'on' ? true : false
         ]);
 
-        return back()->with('message', 'Berhasil Mengubah Layanan' . $request->input('nama_layanan'));
+        return response("Berhasil Mengubah Layanan $request->input('nama_layanan')", 200);
     }
 
     public function create(Request $request)
     {
-        // dd($request->input());
         $request->validate(['nama_layanan' => ['required', 'string']]);
-        // dd($validate);
         try {
             Layanan::create([
                 'nama_layanan' => $request->input('nama_layanan'),
                 'persetujuan' =>  $request->input('persetujuan') == 'on' ? true : false
             ]);
-            return back()->with('message', 'Berhasil Menambahkan Layanan');
+            return response(['message' => 'Berhasil Menambahkan Layanan'], 200);
         } catch (Throwable $e) {
             $resultUpdateIfExist = Layanan::whereRaw('BINARY nama_layanan = ?', [$request->input('nama_layanan')])
                 ->where('persetujuan', '=', $request->input('persetujuan') == 'on' ? true : false)->where('isdeleted', '=', true)->update(['isdeleted' => false]);
             if ($resultUpdateIfExist) {
-                return back()->with('message', 'Berhasil Menambahkan Layanan');
+                return response(['message' => 'Berhasil Menambahkan Layanan'], 200);
             } else {
-                return back()->with('error', 'Layanan Sudah Tersedia');
+                return response(['message' => 'Layanan Sudah Tersedia'], 400);
             }
         }
     }
@@ -72,6 +69,6 @@ class meowinnkelolaLayanan extends Controller
     public function terimaPengajuan($id)
     {
         detailLayanan::whereId($id)->update(['status_pengajuan' => 'Disetujui']);
-        return response('Berhasil Menyetujui Pengajuan Layanan', 200);
+        return response(['message' => 'Berhasil Menyetujui Pengajuan Layanan'], 200);
     }
 }

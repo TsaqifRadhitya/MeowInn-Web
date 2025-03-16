@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,7 +10,14 @@ class PetHouse extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'deskripsi', 'status_buka_pet_house', 'status_verifikasi', 'status_penjemputan', 'radius_penjemputan', 'alamat', 'lat', 'lng', 'kabupaten'];
+    protected $fillable = ['name', 'deskripsi','url', 'status_buka_pet_house', 'status_verifikasi', 'status_penjemputan', 'radius_penjemputan', 'alamat', 'lat', 'lng', 'kabupaten'];
+
+    protected function url () : Attribute{
+        return Attribute::make(
+            get: fn($value) => json_decode($value,true),
+            set: fn($value) => json_encode($value)
+        );
+    }
 
     public function user()
     {

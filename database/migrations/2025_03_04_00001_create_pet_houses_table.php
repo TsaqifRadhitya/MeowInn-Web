@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('deskripsi');
+            $table->text('deskripsi');
+            $table->json('url');
             $table->float('radius_penjemputan')->nullable();
             $table->string('alamat');
             $table->string('kabupaten');
