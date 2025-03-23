@@ -4,7 +4,7 @@
             <tr class="bg-[#34314E] text-white h-12">
                 <td class="pl-5">No</td>
                 <td>Nama Pengiriman</td>
-                <td>Isi Report</td>
+                <td>Report Message</td>
             </tr>
         </thead>
         <tbody>

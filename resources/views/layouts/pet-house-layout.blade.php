@@ -5,6 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         const handleOpen = () => {
@@ -118,7 +119,8 @@
                         class="{{ $activeMenu == 'Penitipan' ? 'bg-white shadow-sm' : 'hidden' }} py-2 space-y-2">
                         <li>
                             <a href="{{ route('pethouse.penitipan.daftarpenitipan.index') }}"
-                                class="{{ $activeMenu == 'Penitipan' ? '' : 'text-white hover:text-black' }} flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Sedang Berlangsung</a>
+                                class="{{ $activeMenu == 'Penitipan' ? '' : 'text-white hover:text-black' }} flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Sedang
+                                Berlangsung</a>
                         </li>
                         <li>
                             <a href="{{ route('pethouse.penitipan.riwayatpenitipan.index') }}"

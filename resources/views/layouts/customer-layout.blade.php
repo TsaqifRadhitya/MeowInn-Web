@@ -3,6 +3,7 @@
 <head>
     <title>MeowInn</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <script>
         const handleOpen = () => {
             $('#default-sidebar').removeClass('-translate-x-full');
