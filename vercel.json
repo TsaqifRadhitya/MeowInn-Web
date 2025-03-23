@@ -12,6 +12,10 @@
             "dest": "/public/build/assets/$1"
         },
         {
+            "src": "/assets/(.*)",
+            "dest": "/public/$1"
+        },
+        {
             "src": "/(.*)",
             "dest": "/api/index.php"
         }
