@@ -11,13 +11,12 @@ class meowinnkelolaPethouse extends Controller
     public function index(Request $request)
     {
         $search = $request->input('search');
-        if($search != null){
-            // dd($search);
-            $daftarPethouse = PetHouse::where('name','like',$search)->paginate(3);
-        }else{
-            $daftarPethouse = PetHouse::paginate(3);
+        if ($search != null) {
+            $daftarPethouse = PetHouse::where('name', 'like', $search)->where('status_verifikasi', 'disetujui')->paginate(3);
+        } else {
+            $daftarPethouse = PetHouse::where('status_verifikasi', 'disetujui')->paginate(3);
         }
-        return view('pages.meowinn.PetHouse.meowInnPetHouse',compact('daftarPethouse'));
+        return view('pages.meowinn.PetHouse.meowInnPetHouse', compact('daftarPethouse'));
     }
 
     public function penalty()
@@ -36,7 +35,7 @@ class meowinnkelolaPethouse extends Controller
     public function viewDetail($id)
     {
         $profilePethouse =  PetHouse::whereId($id)->first();
-        return view('pages.meowinn.PetHouse.meowinnPethousePreview',compact('profilePethouse'));
+        return view('pages.meowinn.PetHouse.meowinnPethousePreview', compact('profilePethouse'));
     }
 
     public function tolak($id)
@@ -51,12 +50,12 @@ class meowinnkelolaPethouse extends Controller
         return response('Berhasil Menyetujui Pengajuan Pet House');
     }
 
-    public function penaltyCreate($id,Request $request) {
+    public function penaltyCreate($id, Request $request)
+    {
         $duration = $request->input('penalty');
-        if($duration){
+        if ($duration) {
             PetHouse::whereId($id)->update(['penalty' => $duration]);
-        }else{
-
+        } else {
         }
     }
 
