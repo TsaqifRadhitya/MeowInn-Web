@@ -16,7 +16,7 @@ Route::middleware(['auth', customerMidleware::class])->group(function () {
 
             Route::get('/', [customerPenitipan::class, 'index'])->name('customer.penitipan.daftarpenitipan.index');
 
-            Route::get('{id}/detail', [customerPenitipan::class, 'detailPenitipan'])->name('customer.penitipan.daftarpenitipan.index');
+            Route::get('{id}/detail', [customerPenitipan::class, 'detailPenitipan'])->name('customer.penitipan.daftarpenitipan.show');
 
             Route::get('riwayat', [customerPenitipan::class, 'riwayatPenitipan'])->name('customer.penitipan.daftarpenitipan.riwayat');
         });
