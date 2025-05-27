@@ -41,13 +41,14 @@
     <aside id="default-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-br from-[#F69246] to-[#EC7070] shadow-lg">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-gradient-to-bl from-[#F69246] to-[#EC7070] shadow-lg">
             <ul class="font-medium space-y-3">
                 <li class="flex flex-row items-center justify-between mb-6">
                     <span class="text-2xl sm:hidden text-white font-bold">MeowInn</span>
                     <div onclick="document.location.href = '/'"
                         class="hidden hover:cursor-pointer sm:flex bg-white drop-shadow-xl w-full rounded-xl py-4 sm:flex-row items-center justify-center px-4 transition-all hover:scale-[1.02]">
-                        <img src="{{ asset('asset/icon.png') }}" class="max-h-10 aspect-square" alt="icon">
+                        <img src="{{ asset('asset/icon.png') }}" class="max-h-10 object-center object-cover"
+                            alt="icon">
                         <h1 class="text-center text-[#f69246] font-bold text-2xl ml-2">MeowInn</h1>
                     </div>
                     <button onclick="handleClose()"
