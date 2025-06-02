@@ -14,8 +14,6 @@ class Report extends Seeder
      */
     public function run(): void
     {
-        User::whereRole('customer')->get()->each(function($e){
-            ModelsReport::factory(5)->create(['fk_user' => $e->id]);
-        });
+        ModelsReport::factory(5)->create();
     }
 }

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->enum('jenis_reports',['Admin','Pet House']);
+            $table->ulid('id')->primary();
+            $table->enum('jenis_reports', ['Admin', 'Pet House']);
             $table->text('isi');
-            $table->foreignId('fk_user')->constrained('users','id')->delete('cascade');
-            $table->foreignId('tujuan')->nullable()->constrained('pet_houses','id')->delete('cascade');
+            $table->foreignUlid('penitipanId')->nullable()->constrained('penitipans', 'id')->delete('cascade');
+            $table->foreignUlid('pethouseId')->nullable()->constrained('pet_houses', 'id')->delete('cascade');
+            $table->timestamps();
         });
     }
 

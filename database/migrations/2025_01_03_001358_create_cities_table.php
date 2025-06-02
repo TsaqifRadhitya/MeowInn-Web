@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hewans', function (Blueprint $table) {
-            $table->ulid('id')->primary();
-            $table->string('name');
-            $table->string('foto');
-            $table->text('description');
-            $table->foreignUlid('penitipanId')->constrained('penitipans', 'id')->delete('cascade');
+        Schema::create('cities', function (Blueprint $table) {
+            $table->id();
+            $table->string('cityName');
             $table->timestamps();
+            $table->foreignId('proviceId')->constrained('provinces')->onDelete('cascade');
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('hewans');
+        Schema::dropIfExists('cities');
     }
 };

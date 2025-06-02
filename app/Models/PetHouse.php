@@ -3,44 +3,42 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PetHouse extends Model
 {
     use HasFactory;
+    use HasUlids;
 
-    protected $fillable = ['name', 'deskripsi','url', 'status_buka_pet_house', 'status_verifikasi', 'status_penjemputan', 'radius_penjemputan', 'alamat', 'lat', 'lng', 'kabupaten'];
+    protected $fillable = ['name', 'petCareCost', 'description', 'locationPhotos', 'penalty', 'isOpen', 'verificationStatus', 'pickUpService', 'range', 'userId'];
 
-    protected function url () : Attribute{
+    protected function locationPhotos(): Attribute
+    {
         return Attribute::make(
-            get: fn($value) => json_decode($value,true),
+            get: fn($value) => json_decode($value, true),
             set: fn($value) => json_encode($value)
         );
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'fk_user');
+        return $this->belongsTo(User::class, 'userId');
     }
 
     public function reports()
     {
-        return $this->hasMany(Report::class, 'tujuan');
-    }
-
-    public function reportsPenitipan()
-    {
-        return $this->hasMany(reportsPenitipan::class, 'fk_pethouse');
+        return $this->hasMany(Report::class, 'pethouseId');
     }
 
     public function pethouseLayanans()
     {
-        return $this->hasMany(detailLayanan::class, 'fk_pet_house');
+        return $this->hasMany(detailLayanan::class, 'petHouseId');
     }
 
     public function penitipans()
     {
-        return $this->hasMany(Penitipan::class, 'fk_pet_house');
+        return $this->hasMany(Penitipan::class, 'petHouseId');
     }
 }

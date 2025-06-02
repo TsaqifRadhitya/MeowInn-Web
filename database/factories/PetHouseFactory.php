@@ -18,13 +18,9 @@ class PetHouseFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'deskripsi' => fake()->paragraph(),
-            'url' => ["https://bucketmeowinn.s3.ap-southeast-1.amazonaws.com/Image/WhatsApp+Image+2025-02-22+at+16.05.27_3e03ae56.jpg", "https://bucketmeowinn.s3.ap-southeast-1.amazonaws.com/Image/WhatsApp+Image+2025-02-22+at+16.05.27_3e03ae56.jpg"],
-            'status_penjemputan' => false,
-            'alamat' => fake()->address(),
-            'lat' => fake()->latitude(),
-            'lng' => fake()->longitude(),
-            'kabupaten' => fake()->city()
+            'description' => fake()->paragraph(),
+            'locationPhotos' => ["https://bucketmeowinn.s3.ap-southeast-1.amazonaws.com/Image/WhatsApp+Image+2025-02-22+at+16.05.27_3e03ae56.jpg", "https://bucketmeowinn.s3.ap-southeast-1.amazonaws.com/Image/WhatsApp+Image+2025-02-22+at+16.05.27_3e03ae56.jpg"],
+            'petCareCost' => (int)fake()->numerify('####')
         ];
     }
 }

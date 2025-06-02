@@ -12,13 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detail_layanans', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
             $table->timestamps();
-            $table->integer('harga');
-            $table->enum('status_pengajuan',['ditolak','Menunggu Persetujuan','Disetujui']);
-            $table->boolean('isdeleted')->default(false);
-            $table->foreignId('fk_layanan')->constrained('layanans','id')->delete('cascade');
-            $table->foreignId('fk_pet_house')->constrained('pet_houses','id')->delete('cascade');
+            $table->integer('price');
+            $table->text('description')->nullable();
+            $table->json('photos')->nullable();
+            $table->boolean('status')->default(false);
+            $table->foreignUlid('layananId')->constrained('layanans', 'id')->delete('cascade');
+            $table->foreignUlid('petHouseId')->constrained('pet_houses', 'id')->delete('cascade');
         });
     }
 

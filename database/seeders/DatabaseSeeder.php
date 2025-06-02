@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create(['name' => 'Tsaqif', 'role' => 'customer', 'email' => 'tsaqif@gmail.com', 'password' => 'Tsaqif10!']);
-        User::factory(100)->create();
+        // User::create(['name' => 'Tsaqif', 'role' => 'customer', 'email' => 'tsaqif@gmail.com', 'password' => 'Tsaqif10!']);
+        User::factory(10)->create();
         $this->call(PetHouse::class);
         // $this->call(LayananSeeder::class);
         $this->call(Report::class);

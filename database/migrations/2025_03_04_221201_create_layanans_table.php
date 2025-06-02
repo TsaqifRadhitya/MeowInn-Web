@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('layanans', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-            $table->string('nama_layanan')->unique();
-            $table->boolean('persetujuan');
+            $table->ulid('id')->primary();
+            $table->string('name')->unique();
+            $table->boolean('photos');
+            $table->text('description');
             $table->boolean('isdeleted')->default(false);
+            $table->timestamps();
         });
     }
 

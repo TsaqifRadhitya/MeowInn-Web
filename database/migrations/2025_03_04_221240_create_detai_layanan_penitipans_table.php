@@ -12,12 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('detai_layanan_penitipans', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
+            $table->integer('price');
+            $table->foreignUlid('detailLayananId')->constrained('detail_layanans', 'id')->delete('cascade');
+            $table->foreignUlid('hewanId')->constrained('hewans', 'id')->delete('cascade');
             $table->timestamps();
-            $table->integer('jumlah');
-            $table->integer('subtotak');
-            $table->foreignId('fk_detail_layanan')->constrained('detail_layanans','id')->delete('cascade');
-            $table->foreignId('fk_hewan')->constrained('hewans','id')->delete('cascade');
         });
     }
 

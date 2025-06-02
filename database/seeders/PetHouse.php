@@ -15,7 +15,7 @@ class PetHouse extends Seeder
     public function run(): void
     {
         User::whereRole('pethouse')->get()->each(function($user){
-            ModelsPetHouse::factory(1)->create(['fk_user' => $user->id]);
+            ModelsPetHouse::factory(1)->create(['userId' => $user->id]);
         });
     }
 }

@@ -12,21 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pet_houses', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->ulid('id')->primary();
             $table->string('name');
-            $table->text('deskripsi');
-            $table->json('url');
-            $table->float('radius_penjemputan')->nullable();
-            $table->string('alamat');
-            $table->string('kabupaten');
-            $table->decimal('lat', 10, 8);
-            $table->decimal('lng', 11, 8);
+            $table->text('description');
+            $table->integer('petCareCost');
+            $table->json('locationPhotos');
             $table->integer('penalty')->default(0);
-            $table->boolean('status_buka_pet_house')->default(true);
-            $table->boolean('status_penjemputan');
-            $table->enum('status_verifikasi',['menunggu persetujuan','ditolak','disetujui']);
-            $table->foreignId('fk_user')->constrained('users','id')->onDelete('cascade');
+            $table->boolean('isOpen')->default(true);
+            $table->enum('verificationStatus', ['menunggu persetujuan', 'ditolak', 'disetujui']);
+            $table->boolean('pickUpService')->default(false);
+            $table->enum('range', ['village', 'district', 'city'])->nullable();
+            $table->foreignUlid('userId')->constrained('users', 'id')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

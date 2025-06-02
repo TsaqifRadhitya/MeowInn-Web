@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('penitipans', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary();
+            $table->enum('status', ['menunggu pembayaran', 'gagal', 'menunggu penjemputan', 'menunggu diantar ke pethouse', 'sedang dititipkan', 'selesai'])->default('menunggu pembayaran');
+            $table->integer('duration');
+            $table->integer('petCareCosts');
+            $table->text('address');
+            $table->foreignId('villageId')->constrained('villages');
+            $table->boolean('isCash')->default(false);
+            $table->boolean('isPickUp')->default(false);
             $table->timestamps();
-            $table->integer('durasi');
-            $table->integer('total');
-            $table->enum('status_pembayaran', ['Menunggu Pembayaran', 'Sudah dibayar']);
-            $table->enum('status_penitipan', ['Menunggu Penjemputan', 'Dalam Penitipan', 'Selesai']);
-            $table->foreignId('fk_user')->constrained('users', 'id')->delete('cascade');
-            $table->foreignId('fk_pet_house')->constrained('pet_houses', 'id')->delete('cascade');
+            $table->foreignUlid('userId')->constrained('users', 'id')->delete('cascade');
+            $table->foreignUlid('petHouseId')->constrained('pet_houses', 'id')->delete('cascade');
         });
     }
 

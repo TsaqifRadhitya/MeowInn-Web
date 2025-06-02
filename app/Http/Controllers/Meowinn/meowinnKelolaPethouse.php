@@ -22,7 +22,6 @@ class meowinnkelolaPethouse extends Controller
     public function penalty()
     {
         $daftarPenalty = PetHouse::where('penalty', '>', 0)->get();
-        // dd($daftarPenalty);
         return view('pages.meowinn.PetHouse.meowinnPetHousePenalty', compact('daftarPenalty'));
     }
 
@@ -34,34 +33,41 @@ class meowinnkelolaPethouse extends Controller
 
     public function viewDetail($id)
     {
-        $profilePethouse =  PetHouse::whereId($id)->first();
-        return view('pages.meowinn.PetHouse.meowinnPethousePreview', compact('profilePethouse'));
+        $profilePethouse =  PetHouse::find($id);
+        if ($profilePethouse) {
+            return view('pages.meowinn.PetHouse.meowinnPethousePreview', compact('profilePethouse'));
+        }
+        abort(404);
     }
 
     public function tolak($id)
     {
         $result =  PetHouse::whereId($id)->update(['status_verifikasi' => 'ditolak']);
-        return response('Berhasil Penolak Pengajuan Pet House');
+        return  back()->with('success', 'Berhasil menolak pengajuan pethouse');
     }
 
     public function approve($id)
     {
         $result =  PetHouse::whereId($id)->update(['status_verifikasi' => 'disetujui']);
-        return response('Berhasil Menyetujui Pengajuan Pet House');
+        return back()->with('success', 'Berhasil menyetujui pengajuan pethouse');
     }
 
     public function penaltyCreate($id, Request $request)
     {
+        $profilePethouse =  PetHouse::find($id);
+
         $duration = $request->input('penalty');
-        if ($duration) {
-            PetHouse::whereId($id)->update(['penalty' => $duration]);
+        if ($duration && $profilePethouse) {
+            $profilePethouse->increment('penalty', $duration);
+            return back()->with('success', 'Berhasl memberikan penalty');
         } else {
+            abort(404);
         }
     }
 
     public function penaltyRemove($id)
     {
         $result =  PetHouse::whereId($id)->update(['penalty' => 0]);
-        return response('Berhasil Melepas Penalty');
+        return back()->with('success', 'Berhasil Menghapus Penalty');
     }
 }

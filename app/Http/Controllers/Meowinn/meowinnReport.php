@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class meowinnreport extends Controller
 {
     public function index(){
-        $reports = Report::where('jenis_reports','=','Admin')->paginate(12);
+        $reports = Report::all()->paginate(12);
         return view('pages.meowinn.Reports.meowInnReports',compact('reports'));
     }
 }

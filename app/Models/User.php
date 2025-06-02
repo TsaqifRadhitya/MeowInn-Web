@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasUlids;
 
     /**
      * The attributes that are mass assignable.
@@ -21,7 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role'
+        'role',
+        'address',
+        'villageId'
     ];
 
     /**
@@ -47,15 +51,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function petHouses(){
-        return $this->hasOne(PetHouse::class,'fk_user');
+    public function petHouses()
+    {
+        return $this->hasOne(PetHouse::class, 'fk_user');
     }
 
-    public function reports(){
-        return $this->hasMany(Report::class,'fk_user');
+    public function reports()
+    {
+        return $this->hasMany(Report::class, 'fk_user');
     }
 
-    public function penitipans(){
-        return $this->hasMany(Penitipan::class,'fk_user');
+    public function penitipans()
+    {
+        return $this->hasMany(Penitipan::class, 'fk_user');
     }
 }

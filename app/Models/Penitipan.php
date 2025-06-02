@@ -6,24 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penitipan extends Model
 {
-    protected $fillable = ['durasi', 'total', 'status_pembayaran', 'status_penitipan', 'fk_user'];
-
-    public function reports_penitipan()
-    {
-        $this->hasMany(ReportsPenitipan::class, 'fk_penitipan');
-    }
+    protected $fillable = ['durasi', 'total', 'status_pembayaran', 'status_penitipan', 'userId'];
 
     public function users()
     {
-        return $this->belongsTo(User::class, 'fk_user');
+        return $this->belongsTo(User::class, 'userId');
     }
 
     public function hewans()
     {
-        return $this->hasMany(Hewan::class, 'fk_penitipan');
+        return $this->hasMany(Hewan::class, 'penitipanId');
     }
 
     public function pethouse(){
-        return $this->belongsTo(PetHouse::class,'fk_pet_house');
+        return $this->belongsTo(PetHouse::class,'petHouseId');
     }
 }
