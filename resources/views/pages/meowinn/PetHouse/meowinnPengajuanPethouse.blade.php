@@ -17,9 +17,10 @@
                     <td class="textarea-md font-semibold">{{ $daftarPengajuan[$index]->name }}</td>
                     <td>
                         <div class="text-md flex flex-row space-x-5 justify-center">
-                            <button class="w-fit btn btn-info min-w-24"
-                                onclick="document.location.href = '/meowinn/preview/{{ $daftarPengajuan[$index]->id }}'">View
-                                Detail</button>
+                            <a href="{{ route('meowinn.pethouse.show', ['id' => $daftarPengajuan[$index]->id]) }}"
+                                class="w-fit btn btn-info min-w-24">
+                                View Detail
+                            </a>
                             <button class="w-fit btn btn-error min-w-24"
                                 onclick="handleTolak({{ $daftarPengajuan[$index]->id }})">Tolak</button>
                             <button class="w-fit btn btn-success min-w-24"

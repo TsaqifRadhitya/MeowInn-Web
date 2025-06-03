@@ -17,58 +17,79 @@ class meowinnkelolaLayanan extends Controller
         return view('pages.meowinn.Layanan.meowInnLayanan', compact('daftarLayanan'));
     }
 
-    public function pengajuanLayanan()
+    public function destroy($id)
     {
-        $daftarPengajuanLayanan = detailLayanan::where('status_pengajuan', '=', 'Menunggu Persetujuan')->get();
-        return view('pages.meowinn.Layanan.meowinnPengajuanLayanan', compact('daftarPengajuanLayanan'));
+        $layanan = Layanan::find($id);
+        if ($layanan) {
+            $layanan->update(['isdeleted' => true]);
+            return back()->with('success', 'Berhasil menghapus layanan');
+        }
+        abort(404);
     }
 
-    public function delete($id)
+    public function show($id)
     {
-        Layanan::whereId($id)->update(['isdeleted' => true]);
-        return response(null, 200);
+        $layanan = Layanan::find($id);
+        return view('',compact('layanan'));
     }
 
-    public function edit(Request $request, $id)
+    public function create($id)
     {
-        $request->validate(['nama_layanan' => ['required', 'string']]);
-        Layanan::whereId($id)->update([
-            'nama_layanan' => $request->input('nama_layanan'),
-            'persetujuan' =>  $request->input('persetujuan') == 'on' ? true : false
+        return view();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'unique:layanans,name,' . $id . ',id'],
+            'description' => [
+                'required',
+                'string'
+            ],
+            'photos' => ['nullable', 'array'],
+            'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
+
+        $photoPaths = [];
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('layanans', 'public');
+                $photoPaths[] = $path;
+            }
+        }
+
+        $validated['photos'] = json_encode($photoPaths);
+        Layanan::whereId($id)->update($validated);
 
         return response("Berhasil Mengubah Layanan $request->input('nama_layanan')", 200);
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
-        $request->validate(['nama_layanan' => ['required', 'string']]);
-        try {
-            Layanan::create([
-                'nama_layanan' => $request->input('nama_layanan'),
-                'persetujuan' =>  $request->input('persetujuan') == 'on' ? true : false
-            ]);
-            return response(['message' => 'Berhasil Menambahkan Layanan'], 200);
-        } catch (Throwable $e) {
-            $resultUpdateIfExist = Layanan::whereRaw('BINARY nama_layanan = ?', [$request->input('nama_layanan')])
-                ->where('persetujuan', '=', $request->input('persetujuan') == 'on' ? true : false)->where('isdeleted', '=', true)->update(['isdeleted' => false]);
-            if ($resultUpdateIfExist) {
-                return response(['message' => 'Berhasil Menambahkan Layanan'], 200);
-            } else {
-                return response(['message' => 'Layanan Sudah Tersedia'], 400);
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'unique:layanans,name'],
+            'description' => [
+                'required',
+                'string'
+            ],
+            'photos' => ['required', 'array'],
+            'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
+        ]);
+
+        $photoPaths = [];
+
+        if ($request->hasFile('photos')) {
+            foreach ($request->file('photos') as $photo) {
+                $path = $photo->store('layanans', 'public');
+                $photoPaths[] = $path;
             }
         }
-    }
 
-    public function tolakPengajuan($id)
-    {
-        detailLayanan::whereId($id)->update(['status_pengajuan' => 'ditolak']);
-        return response('Berhasil Menolak Pengajuan Layanan', 200);
-    }
+        $validated['photos'] = json_encode($photoPaths);
 
-    public function terimaPengajuan($id)
-    {
-        detailLayanan::whereId($id)->update(['status_pengajuan' => 'Disetujui']);
-        return response(['message' => 'Berhasil Menyetujui Pengajuan Layanan'], 200);
+        $dataLayanan = Layanan::create($validated);
+
+        return redirect()->route('meowinn.layanan.daftarlayanan.show', ['id' => $dataLayanan->id])->with('Berhasil menambahkan layanan');
     }
 }

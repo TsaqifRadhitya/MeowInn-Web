@@ -1,7 +1,7 @@
 <x-meowinn-layout header="Pet House" class="m-5 p-5 rounded-xl shadow-md flex flex-col space-y-5 relative" id="content"
     activeMenu="Pet House">
     <div class="shadow-sm rounded-full">
-        <form class="w-full mx-auto" action="{{ route('meowinn.pethouse.daftarpethouse.index') }}" method="GET">
+        <form class="w-full mx-auto" action="{{ route('meowinn.pethouse.index') }}" method="GET">
             <div class="relative w-full">
                 <input type="search" id="search-dropdown" name="search" value="{{ old('search') }}"
                     class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"

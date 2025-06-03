@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('layanans', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('name')->unique();
-            $table->boolean('photos');
+            $table->json('photos');
             $table->text('description');
             $table->boolean('isdeleted')->default(false);
             $table->timestamps();

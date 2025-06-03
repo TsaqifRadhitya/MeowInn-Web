@@ -12,9 +12,9 @@ class meowinnkelolaPethouse extends Controller
     {
         $search = $request->input('search');
         if ($search != null) {
-            $daftarPethouse = PetHouse::where('name', 'like', $search)->where('status_verifikasi', 'disetujui')->paginate(3);
+            $daftarPethouse = PetHouse::where('name', 'like', $search)->where('verificationStatus', 'disetujui')->paginate(3);
         } else {
-            $daftarPethouse = PetHouse::where('status_verifikasi', 'disetujui')->paginate(3);
+            $daftarPethouse = PetHouse::where('verificationStatus', 'disetujui')->paginate(3);
         }
         return view('pages.meowinn.PetHouse.meowInnPetHouse', compact('daftarPethouse'));
     }
@@ -27,11 +27,11 @@ class meowinnkelolaPethouse extends Controller
 
     public function pengajuan()
     {
-        $daftarPengajuan = PetHouse::where('status_verifikasi', '=', 'menunggu persetujuan')->paginate(15);
+        $daftarPengajuan = PetHouse::where('verificationStatus', '=', 'menunggu persetujuan')->paginate(15);
         return view('pages.meowinn.PetHouse.meowinnPengajuanPethouse', compact('daftarPengajuan'));
     }
 
-    public function viewDetail($id)
+    public function show(Request $request,$id)
     {
         $profilePethouse =  PetHouse::find($id);
         if ($profilePethouse) {
@@ -42,13 +42,13 @@ class meowinnkelolaPethouse extends Controller
 
     public function tolak($id)
     {
-        $result =  PetHouse::whereId($id)->update(['status_verifikasi' => 'ditolak']);
+        $result =  PetHouse::whereId($id)->update(['verificationStatus' => 'ditolak']);
         return  back()->with('success', 'Berhasil menolak pengajuan pethouse');
     }
 
     public function approve($id)
     {
-        $result =  PetHouse::whereId($id)->update(['status_verifikasi' => 'disetujui']);
+        $result =  PetHouse::whereId($id)->update(['verificationStatus' => 'disetujui']);
         return back()->with('success', 'Berhasil menyetujui pengajuan pethouse');
     }
 

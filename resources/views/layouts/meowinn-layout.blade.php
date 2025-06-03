@@ -35,7 +35,6 @@
     </script>
 </head>
 <div class="min-h-screen bg-gray-50">
-    <!-- Mobile overlay -->
     <div id="overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden" onclick="handleClose()"></div>
 
     <aside id="default-sidebar"
@@ -103,7 +102,7 @@
                     <ul id="dropdown-Pet-House"
                         class="{{ $activeMenu == 'Pet House' ? 'bg-opacity-10' : 'hidden' }} py-2 space-y-1 ml-4 pl-4 border-l-2 border-white border-opacity-20">
                         <li>
-                            <a href="{{ route('meowinn.pethouse.daftarpethouse.index') }}"
+                            <a href="{{ route('meowinn.pethouse.index') }}"
                                 class="flex items-center w-full p-2 text-white hover:text-[#F69246] transition-all duration-200 rounded-lg pl-3 group hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-1.5 h-1.5 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -111,7 +110,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('meowinn.pethouse.penalty.index') }}"
+                            <a href="{{ route('meowinn.penalty.index') }}"
                                 class="flex items-center w-full p-2 text-white hover:text-[#F69246] transition-all duration-200 rounded-lg pl-3 group hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-1.5 h-1.5 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -119,7 +118,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('meowinn.pethouse.pengajuanpethouse.index') }}"
+                            <a href="{{ route('meowinn.pengajuanpethouse.index') }}"
                                 class="flex items-center w-full p-2 text-white hover:text-[#F69246] transition-all duration-200 rounded-lg pl-3 group hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-1.5 h-1.5 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -129,49 +128,23 @@
                     </ul>
                 </li>
 
-                <!-- Layanan -->
                 <li class="group">
-                    <button type="button"
-                        onclick="handleOpenAndClose('#dropdown-Layanan','#icon-dropdown-Layanan','#button-dropdown-Layanan')"
-                        id="button-dropdown-Layanan"
-                        class="flex items-center w-full p-3 rounded-lg transition-all duration-200
-                               {{ $activeMenu == 'Layanan'
-                                   ? 'bg-white shadow-md text-[#F69246] rounded-tl-box'
-                                   : 'text-white hover:bg-white hover:bg-opacity-20 hover:shadow-sm rounded-l-full hover:text-[#F69246] cursor-pointer' }}">
-                        <svg class="shrink-0 w-6 h-6 transition duration-200 {{ $activeMenu == 'Layanan' ? 'text-[#F69246]' : 'text-white hover:text-[#F69246]' }}"
+                    <a href="{{ route('meowinn.layanan.index') }}"
+                        class="flex items-center p-3 rounded-lg transition-all duration-200
+                              {{ $activeMenu == 'Layanan'
+                                  ? 'bg-white shadow-md text-[#F69246]'
+                                  : 'text-white hover:bg-white hover:bg-opacity-20 hover:shadow-sm group-hover:text-[#F69246]' }}">
+                        <svg class="shrink-0 w-6 h-6 transition duration-200 {{ $activeMenu == 'Layanan' ? 'text-[#F69246]' : 'text-white group-hover:text-[#F69246]' }}"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 21">
                             <path
                                 d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />
                         </svg>
-                        <span
-                            class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap font-semibold">Layanan</span>
-                        <svg id="icon-dropdown-Layanan"
-                            class="w-4 h-4 transition-transform duration-200 {{ $activeMenu == 'Layanan' ? null : 'rotate-90' }}"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 4 4 4-4" />
-                        </svg>
-                    </button>
-                    <ul id="dropdown-Layanan"
-                        class="{{ $activeMenu == 'Layanan' ? '' : 'hidden' }} py-2 space-y-1 ml-4 pl-4 border-l-2 border-white border-opacity-20">
-                        <li>
-                            <a href="{{ route('meowinn.layanan.daftarlayanan.index') }}"
-                                class="flex items-center w-full p-2 text-white hover:text-[#F69246] transition-all duration-200 rounded-lg pl-3 group hover:bg-white hover:bg-opacity-10">
-                                <span
-                                    class="w-1.5 h-1.5 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                Daftar Layanan
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('meowinn.layanan.pengajuanlayanan.index') }}"
-                                class="flex items-center w-full p-2 text-white hover:text-[#F69246] transition-all duration-200 rounded-lg pl-3 group hover:bg-white hover:bg-opacity-10">
-                                <span
-                                    class="w-1.5 h-1.5 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                Pengajuan Layanan
-                            </a>
-                        </li>
-                    </ul>
+                        <span class="flex-1 ms-3 whitespace-nowrap font-semibold">Layanan</span>
+                        @if ($activeMenu == 'Layanan')
+                            <span class="w-2 h-2 bg-[#F69246] rounded-full"></span>
+                        @endif
+                    </a>
                 </li>
 
                 <!-- Reports -->
@@ -297,8 +270,8 @@
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit"
-                                    class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                                    Sign out
+                                    class="block cursor-pointer w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    Log out
                                 </button>
                             </form>
                         </div>
@@ -308,7 +281,7 @@
         </div>
 
         <!-- Main content -->
-        <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-60px)]']) }}>
+        <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-100px)]']) }}>
             {{ $slot }}
         </div>
     </div>

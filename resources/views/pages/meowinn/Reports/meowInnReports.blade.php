@@ -11,7 +11,7 @@
             @for ($index = 0; $index < count($reports); $index++)
                 <tr class="{{ $index % 2 == 0 ? 'bg-' : 'bg-[#F4F6F5]' }} h-14">
                     <td class="textarea-md font-semibold pl-7">{{ $index + 1 }}</td>
-                    <td class="textarea-md font-semibold">{{ $reports[$index]->user()->first()->name }}</td>
+                    {{-- <td class="textarea-md font-semibold">{{ $reports[$index]}}</td> --}}
                     <td class="textarea-md font-semibold">
                         {{ $reports[$index]->isi }}
                     </td>

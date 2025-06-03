@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     use HasFactory, HasUlids;
-    protected $fillable = ['jenis_reports', 'isi', 'userId', 'pethouseId'];
+    protected $fillable = ['jenis_reports', 'isi', 'penitipanId', 'pethouseId'];
 
     public function petHouse()
     {
         return $this->belongsTo(PetHouse::class, 'pethouseId');
     }
 
-    public function user()
+    public function penitipan()
     {
-        return $this->belongsTo(User::class, 'userId');
+        return $this->belongsTo(Penitipan::class, 'penitipanId');
     }
 }

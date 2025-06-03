@@ -11,7 +11,7 @@
     <!-- Jumlah Layanan -->
     <p class="text-gray-600 mb-4">
         <span class="font-semibold">Jumlah Layanan:</span>
-        {{ $profilePethouse->pethouseLayanans()->whereStatusPengajuan('disetujui')->count() }} Layanan
+        {{ $profilePethouse->pethouseLayanans->count() }} Layanan
     </p>
 
     <!-- Jumlah Transaksi -->
@@ -25,7 +25,7 @@
     </p>
 
     <div class="flex flex-row w-full h-fit md:gap-x-5 overflow-x-hidden hover:overflow-x-scroll py-5">
-        @foreach ($profilePethouse->url as $url)
+        @foreach ($profilePethouse->locationPhotos as $url)
             @if (str_contains($url, 'Image'))
                 <div id="slide1" class="carousel-item h-fit relative w-full md:w-1/3 p-5 rounded-2xl shadow-md">
                     <img src= {{ $url }}

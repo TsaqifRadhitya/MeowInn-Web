@@ -53,16 +53,16 @@ class User extends Authenticatable
 
     public function petHouses()
     {
-        return $this->hasOne(PetHouse::class, 'fk_user');
+        return $this->hasOne(PetHouse::class, 'userId');
     }
 
     public function reports()
     {
-        return $this->hasMany(Report::class, 'fk_user');
+        return $this->hasMany(Report::class, 'userId');
     }
 
     public function penitipans()
     {
-        return $this->hasMany(Penitipan::class, 'fk_user');
+        return $this->hasMany(Penitipan::class, 'userId');
     }
 }
