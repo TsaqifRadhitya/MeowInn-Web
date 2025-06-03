@@ -12,14 +12,6 @@ class Layanan extends Model
     use HasUlids;
     protected $fillable = ['name', 'photos', 'description', 'isdeleted'];
 
-    protected function photos(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => json_decode($value, true),
-            set: fn($value) => json_encode($value)
-        );
-    }
-
     public function Pethouselayanans()
     {
         return $this->hasMany(detailLayanan::class, 'layananId');

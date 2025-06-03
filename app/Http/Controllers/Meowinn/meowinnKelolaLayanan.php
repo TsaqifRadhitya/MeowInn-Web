@@ -13,8 +13,8 @@ class meowinnkelolaLayanan extends Controller
 {
     public function index()
     {
-        $daftarLayanan = Layanan::where('isdeleted', '=', 0)->orderBy('id', 'asc')->get();
-        return view('pages.meowinn.Layanan.meowInnLayanan', compact('daftarLayanan'));
+        $layanans = Layanan::where('isdeleted', '=', 0)->orderBy('id', 'asc')->get();
+        return view('pages.meowinn.Layanan.meowInnLayanan', compact('layanans'));
     }
 
     public function destroy($id)
@@ -30,12 +30,21 @@ class meowinnkelolaLayanan extends Controller
     public function show($id)
     {
         $layanan = Layanan::find($id);
-        return view('',compact('layanan'));
+        if ($layanan) {
+            return view('pages.meowinn.Layanan.meowinnLayananShow', compact('layanan'));
+        }
+        abort(404);
     }
 
-    public function create($id)
+    public function edit($id)
     {
-        return view();
+        $layanan = Layanan::find($id);
+        return view('pages.meowinn.Layanan.meowinnLayananEdit', compact('layanan'));
+    }
+
+    public function create()
+    {
+        return view('pages.meowinn.Layanan.meowinnLayananCreate');
     }
 
     public function update(Request $request, $id)
@@ -57,12 +66,12 @@ class meowinnkelolaLayanan extends Controller
                 $path = $photo->store('layanans', 'public');
                 $photoPaths[] = $path;
             }
+            $validated['photos'] = json_encode($photoPaths);
         }
 
-        $validated['photos'] = json_encode($photoPaths);
         Layanan::whereId($id)->update($validated);
 
-        return response("Berhasil Mengubah Layanan $request->input('nama_layanan')", 200);
+        return redirect()->route('meowinn.layanan.show', ['id' => $id])->with('success', 'Berhasil Mengubah Layanan');
     }
 
     public function store(Request $request)
@@ -90,6 +99,6 @@ class meowinnkelolaLayanan extends Controller
 
         $dataLayanan = Layanan::create($validated);
 
-        return redirect()->route('meowinn.layanan.daftarlayanan.show', ['id' => $dataLayanan->id])->with('Berhasil menambahkan layanan');
+        return redirect()->route('meowinn.layanan.show', ['id' => $dataLayanan->id])->with('Berhasil menambahkan layanan');
     }
 }
