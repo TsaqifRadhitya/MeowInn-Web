@@ -5,6 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
@@ -60,8 +61,8 @@
                         class="flex items-center p-3 rounded-lg transition-all duration-200
                               {{ $activeMenu == 'Dashboard'
                                   ? 'bg-white shadow-md text-[#F69246]'
-                                  : 'text-white hover:bg-white hover:bg-opacity-20 hover:shadow-sm' }}">
-                        <svg class="shrink-0 w-6 h-6 transition duration-200 {{ $activeMenu == 'Dashboard' ? 'text-[#F69246]' : 'text-white' }}"
+                                  : 'text-white hover:bg-white hover:bg-opacity-20 hover:shadow-sm group-hover:text-[#F69246]' }}">
+                        <svg class="shrink-0 w-6 h-6 transition duration-200 {{ $activeMenu == 'Dashboard' ? 'text-[#F69246]' : 'text-white group-hover:text-[#F69246]' }}"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 18 18">
                             <path
@@ -168,7 +169,7 @@
                 </li>
 
                 <!-- Profile -->
-                <li class="group mt-8">
+                <li class="group mt-8 lg:hidden">
                     <button type="button"
                         onclick="handleOpenAndClose('#dropdown-Profile','#icon-dropdown-Profile','#button-dropdown-Profile')"
                         id="button-dropdown-Profile"

@@ -25,15 +25,17 @@
                                 d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
                             </path>
                         </svg>
-                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Klik untuk upload</span> atau
-                            drag & drop</p>
-                        <p class="text-xs text-gray-500">Format PNG, JPG, JPEG (Maks. 5MB)</p>
+                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Klik untuk upload</p>
+                        <p class="text-xs text-gray-500">Format PNG, JPG, JPEG (Maks. 2MB)</p>
                     </div>
                     <input id="photos" name="photos[]" type="file" multiple accept="image/*" class="hidden"
                         onchange="previewImages(event)">
                 </label>
             </div>
             @error('photos')
+                <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
+            @enderror
+            @error('photos.*')
                 <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
             @enderror
         </div>

@@ -1,5 +1,5 @@
 <x-meowinn-layout header="Detail Layanan" id="content" activeMenu="Layanan" class="px-5 pt-5">
-    <div class="max-w-6xl mx-auto space-y-6">
+    <div class="mx-auto space-y-6">
 
         <!-- Tombol Kembali -->
         <div>
@@ -22,7 +22,8 @@
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             @foreach (json_decode($layanan->photos) as $photo)
-                                <img src="{{ asset('storage/' . $photo) }}" class="swiper-slide object-cover object-top" alt="">
+                                <img src="{{ asset('storage/' . $photo) }}" class="swiper-slide object-cover object-top"
+                                    alt="">
                             @endforeach
                         </div>
                         <div class="swiper-pagination"></div>
@@ -54,7 +55,7 @@
                     </div>
                 </div>
 
-                <p class="text-gray-700">{{ $layanan->description }}</p>
+                <p class="text-gray-700 break-words break-all">{!! nl2br($layanan->description) !!}</p>
 
                 <div class="flex justify-between grid-cols-1 md:grid-cols-2 gap-6 mt-6">
                     <div>

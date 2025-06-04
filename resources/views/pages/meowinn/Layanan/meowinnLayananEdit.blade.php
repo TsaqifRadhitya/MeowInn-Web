@@ -40,7 +40,7 @@
                         </svg>
                         <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Klik untuk upload</span> atau
                             drag & drop</p>
-                        <p class="text-xs text-gray-500">Format PNG, JPG, JPEG (Maks. 5MB)</p>
+                        <p class="text-xs text-gray-500">Format PNG, JPG, JPEG (Maks. 2MB)</p>
                     </div>
                     <input id="photos" name="photos[]" type="file" multiple accept="image/*" class="hidden"
                         onchange="previewImages(event)">

@@ -21,8 +21,8 @@ Route::middleware(['auth', meowinnMidleware::class])->group(function () {
         Route::prefix('pengajuan')->group(function () {
             Route::get('/', [meowinnkelolaPethouse::class, 'pengajuan'])->name('meowinn.pengajuanpethouse.index');
             Route::get('{id}', [meowinnkelolaPethouse::class, 'show'])->name('meowinn.pengajuanpethouse.show');
-            Route::delete('/{id}/delete', [meowinnkelolaPethouse::class, 'tolak'])->name('meowinn.pengajuanlayanan.delete');
-            Route::patch('/{id}/edit', [meowinnkelolaPethouse::class, 'approve'])->name('meowinn.pengajuanlayanan.update');
+            Route::delete('/{id}', [meowinnkelolaPethouse::class, 'tolak'])->name('meowinn.pengajuanlayanan.delete');
+            Route::patch('/{id}', [meowinnkelolaPethouse::class, 'approve'])->name('meowinn.pengajuanlayanan.update');
         });
 
         Route::prefix('penalty')->group(function () {

@@ -13,14 +13,14 @@ class meowinnkelolaLayanan extends Controller
 {
     public function index()
     {
-        $layanans = Layanan::where('isdeleted', '=', 0)->orderBy('id', 'asc')->get();
+        $layanans = Layanan::where('isdeleted', '=', 0)->orderBy('created_at', 'desc')->paginate(2);
         return view('pages.meowinn.Layanan.meowInnLayanan', compact('layanans'));
     }
 
     public function destroy($id)
     {
         $layanan = Layanan::find($id);
-        if ($layanan) {
+    if ($layanan) {
             $layanan->update(['isdeleted' => true]);
             return back()->with('success', 'Berhasil menghapus layanan');
         }
@@ -68,6 +68,7 @@ class meowinnkelolaLayanan extends Controller
             }
             $validated['photos'] = json_encode($photoPaths);
         }
+
 
         Layanan::whereId($id)->update($validated);
 
