@@ -1,3 +1,3 @@
-<div>
-    <!-- Let all your things have their places; let each part of your business have its time. - Benjamin Franklin -->
-</div>
+<x-pethouse-layout header="Layanan" class="px-5 pt-5" id="content" activeMenu="Pet House">
+
+</x-pethouse-layout>

@@ -11,4 +11,25 @@ class pethousekelolaLayanan extends Controller
     {
         return view('pages.petHouse.Layanan.petHouseDaftarLayanan');
     }
+
+    public function destroy($id)
+    {
+
+    }
+
+    public function show($id)
+    {
+
+    }
+
+    public function edit()
+    {
+
+    }
+
+    public function update(Request $request)
+    {
+
+    }
+
 }

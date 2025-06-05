@@ -6,22 +6,21 @@ use App\Http\Controllers\Controller;
 
 class pethousekelolaPenitipan extends Controller
 {
-    public function daftarPenitipan()
+    public function index()
     {
         return view('pages.petHouse.Penitipan.petHouseDaftarPenitipan');
     }
-
-    public function daftarReports($id)
+    public function show($id)
     {
-        return view('pages.petHouse.Penitipan.petHouseDaftarReportPenitipan');
+
+    }
+    public function update($id)
+    {
+
     }
 
-    public function detailReports($id)
+    public function riwayat()
     {
-        return view('pages.petHouse.Penitipan.petHouseDetailReportPenitipan');
-    }
-
-    public function riwayatPenitipan(){
         return view('pages.petHouse.Penitipan.petHouseRiwayatPenitipan');
     }
 }

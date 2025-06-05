@@ -5,7 +5,6 @@ namespace App\Http\Controllers\PetHouse;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Visibility;
 
 class pethouseKelolaPetHouse extends Controller
 {
@@ -14,12 +13,12 @@ class pethouseKelolaPetHouse extends Controller
         return view('pages.petHouse.petHouseSetting.petHousePreview');
     }
 
-    public function setting()
+    public function edit()
     {
         return view('pages.petHouse.petHouseSetting.petHouseSetting');
     }
 
-    public function settingCreate(Request $request)
+    public function update(Request $request)
     {
 
         $file = $request->file('foto');
@@ -28,8 +27,8 @@ class pethouseKelolaPetHouse extends Controller
         $fileName = time() . '_' . $file->getClientOriginalName();
 
         // Simpan ke S3
-        $path =  $file->storeAs('Image',$file->getClientOriginalName());
-        Storage::setVisibility($path,'public');
+        $path = $file->storeAs('Image', $file->getClientOriginalName());
+        Storage::setVisibility($path, 'public');
         dd(Storage::url($path));
         // dd($path);
         // Ambil URL file dari S3

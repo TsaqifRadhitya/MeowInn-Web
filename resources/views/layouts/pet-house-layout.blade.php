@@ -106,7 +106,7 @@
                     <ul id="dropdown-Pet-House"
                         class="{{ $activeMenu == 'Pet House' ? 'block' : 'hidden' }} py-2 space-y-1 ml-4 pl-4 border-l-2 border-white border-opacity-20">
                         <li>
-                            <a href="{{ route('pethouse.managepethouse.preview.index') }}"
+                            <a href="{{ route('pethouse.index') }}"
                                 class="flex items-center p-2 text-white hover:text-[#F69246] rounded-lg transition-all hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-2 h-2 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -114,11 +114,19 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('pethouse.managepethouse.setting.index') }}"
+                            <a href="{{ route('pethouse.setting.edit') }}"
                                 class="flex items-center p-2 text-white hover:text-[#F69246] rounded-lg transition-all hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-2 h-2 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                                 Setting
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('pethouse.layanan.index') }}"
+                                class="flex items-center p-2 text-white hover:text-[#F69246] rounded-lg transition-all hover:bg-white hover:bg-opacity-10">
+                                <span
+                                    class="w-2 h-2 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                Layanan
                             </a>
                         </li>
                     </ul>
@@ -150,7 +158,7 @@
                     <ul id="dropdown-Layanan"
                         class="{{ $activeMenu == 'Penitipan' ? 'block' : 'hidden' }} py-2 space-y-1 ml-4 pl-4 border-l-2 border-white border-opacity-20">
                         <li>
-                            <a href="{{ route('pethouse.penitipan.daftarpenitipan.index') }}"
+                            <a href="{{ route('pethouse.penitipan.index') }}"
                                 class="flex items-center p-2 text-white hover:text-[#F69246] rounded-lg transition-all hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-2 h-2 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -158,7 +166,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('pethouse.penitipan.riwayatpenitipan.index') }}"
+                            <a href="{{ route('pethouse.penitipan.riwayat') }}"
                                 class="flex items-center p-2 text-white hover:text-[#F69246] rounded-lg transition-all hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-2 h-2 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>

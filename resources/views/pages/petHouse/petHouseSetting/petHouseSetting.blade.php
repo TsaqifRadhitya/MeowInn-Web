@@ -1,5 +1,5 @@
 <x-pethouse-layout header="Pet House Setting" class="px-5 pt-5" id="content" activeMenu="Pet House">
-    <form action="{{ route('pethouse.managepethouse.setting.create') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('pethouse.setting.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="file" name="foto" id="">
         <button class="">Submit</button>

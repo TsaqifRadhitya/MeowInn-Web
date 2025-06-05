@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', meowinnMidleware::class])->group(function () {
     Route::prefix('meowinn')->group(function () {
 
-        Route::get('/preview/{id}', [meowinnkelolaPethouse::class, 'show'])->name('meowinn.pethouse.show');
 
-        Route::get('dashboard', [dashboard::class, 'meowinn'])->name('meowinn.dashboard');
+        Route::get('/', [dashboard::class, 'meowinn'])->name('meowinn.dashboard');
 
         Route::prefix('pethouse')->group(function () {
             Route::get('/', [meowinnkelolaPethouse::class, 'index'])->name('meowinn.pethouse.index');
+            Route::get('/preview/{id}', [meowinnkelolaPethouse::class, 'show'])->name('meowinn.pethouse.show');
         });
 
         Route::prefix('pengajuan')->group(function () {
