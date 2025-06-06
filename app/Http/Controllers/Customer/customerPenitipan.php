@@ -13,11 +13,9 @@ class customerPenitipan extends Controller
         return view('pages.customer.Penitipan.customerDaftarPenitipan');
     }
 
-    public function create(){
-        return view('pages.customer.Penitipan.customerPenitipanCreate');
-    }
-    public function update(){
-        return view('pages.customer.Penitipan.customerPenitipanCreate');
+    public function riwayat($id)
+    {
+        return view('pages.customer.Penitipan.customerDaftarRiwayatPenitipan');
     }
 
     public function show($id)
@@ -25,8 +23,23 @@ class customerPenitipan extends Controller
         return view('pages.customer.Penitipan.customerDetailPenitipan');
     }
 
-    public function riwayat($id)
+    public function create()
     {
-        return view('pages.customer.Penitipan.customerDaftarRiwayatPenitipan');
+        return view('pages.customer.Penitipan.customerPenitipanCreate');
+    }
+
+    public function store($id)
+    {
+
+    }
+
+    public function update($id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+
     }
 }
