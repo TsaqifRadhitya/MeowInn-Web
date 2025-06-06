@@ -1,4 +1,4 @@
-<x-MeowinnLayout header="Edit Layanan" id="content" activeMenu="Layanan" class="flex flex-col pt-5 px-5 space-y-5">
+<x-meowinn-layout header="Edit Layanan" id="content" activeMenu="Layanan" class="flex flex-col pt-5 px-5 space-y-5">
     <form action="{{ route('meowinn.layanan.update', $layanan->id) }}" method="POST" enctype="multipart/form-data"
         class="space-y-6 w-full mt-auto mx-auto bg-white p-8 rounded-xl shadow-sm">
         @csrf
@@ -126,4 +126,4 @@
             document.getElementById('photos').files = dt.files;
         }
     </script>
-</x-MeowinnLayout>
+</x-meowinn-layout>

@@ -1,4 +1,4 @@
-<x-MeowinnLayout header="Reports" class="px-5 pt-5 pb-20" id="content" activeMenu="Reports">
+<x-meowinn-layout header="Reports" class="px-5 pt-5 pb-20" id="content" activeMenu="Reports">
     <div class="bg-white rounded-xl shadow-sm p-6">
         <!-- Header and Filter -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
@@ -98,4 +98,4 @@
             {{ $reports->links() }}
         </div>
     </div>
-</x-MeowinnLayout>
+</x-meowinn-layout>
