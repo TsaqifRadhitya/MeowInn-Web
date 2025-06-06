@@ -21,6 +21,6 @@ class PetHouseLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.pet-house-layout');
+        return view('layouts.PetHouseLayout');
     }
 }

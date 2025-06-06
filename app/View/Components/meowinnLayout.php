@@ -21,6 +21,6 @@ class MeowinnLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.meowinn-layout');
+        return view('layouts.MeowinnLayout');
     }
 }

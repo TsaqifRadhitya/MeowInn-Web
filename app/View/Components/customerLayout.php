@@ -21,6 +21,6 @@ class CustomerLayout extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.customer-layout');
+        return view('layouts.CustomerLayout');
     }
 }
