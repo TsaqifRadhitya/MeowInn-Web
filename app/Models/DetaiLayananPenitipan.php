@@ -8,7 +8,7 @@ class DetaiLayananPenitipan extends Model
 {
     protected $fillable = ['jumlah', 'subtotal', 'fk_detail_layanan', 'fk_hewan'];
 
-    public function Layanans(){
+    public function Layanan(){
         $this->belongsTo(detailLayanan::class,'detailLayananId');
     }
 

@@ -25,6 +25,6 @@ class meowinnreport extends Controller
         } else {
             $reports = Report::orderBy('created_at', 'desc')->paginate(perPage: 3);
         }
-        return view('pages.meowinn.Reports.meowInnReports', compact('reports'));
+        return view('pages.meowinn.Reports.Index', compact('reports'));
     }
 }

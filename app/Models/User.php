@@ -65,4 +65,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Penitipan::class, 'userId');
     }
+
+    public function village(){
+        return $this->belongsTo(villages::class,'villageId');
+    }
 }

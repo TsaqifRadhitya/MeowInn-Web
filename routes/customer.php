@@ -19,17 +19,20 @@ Route::middleware(['auth', customerMidleware::class])->group(function () {
 
         Route::get('/', [customerPenitipan::class, 'index'])->name('customer.penitipan.index');
 
+        Route::get('riwayat', [customerPenitipan::class, 'riwayat'])->name('customer.penitipan.riwayat');
+
         Route::get('{id}/create', [customerPenitipan::class, 'create'])->name('customer.penitipan.create');
+
+        Route::post('/', [customerPenitipan::class, 'store'])->name('customer.penitipan.store');
 
         Route::get('{id}', [customerPenitipan::class, 'show'])->name('customer.penitipan.show');
 
         Route::patch('{id}', [customerPenitipan::class, 'update'])->name('customer.penitipan.update');
 
-        Route::post('{id}', [customerPenitipan::class, 'store'])->name('customer.penitipan.store');
-
         Route::delete('{id}', [customerPenitipan::class, 'destroy'])->name('customer.penitipan.destory');
 
-        Route::get('riwayat', [customerPenitipan::class, 'riwayat'])->name('customer.penitipan.riwayat');
+        Route::post('{id}', [customerPenitipan::class, 'report'])->name('customer.penitipan.report');
+
     });
 
     Route::prefix('reports')->group(function () {

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penitipan extends Model
 {
-    protected $fillable = ['durasi', 'total', 'status_pembayaran', 'status_penitipan', 'userId'];
+    protected $fillable = ['status', 'duration', 'petCareCosts', 'address', 'villageId', 'isCash', 'isPickUp', 'userId', 'petHouseId'];
 
     public function users()
     {
@@ -18,7 +18,13 @@ class Penitipan extends Model
         return $this->hasMany(Hewan::class, 'penitipanId');
     }
 
-    public function pethouse(){
-        return $this->belongsTo(PetHouse::class,'petHouseId');
+    public function pethouse()
+    {
+        return $this->belongsTo(PetHouse::class, 'petHouseId');
+    }
+
+    public function laporans()
+    {
+        return $this->hasMany(laporanPenitipan::class, 'penitipanId');
     }
 }

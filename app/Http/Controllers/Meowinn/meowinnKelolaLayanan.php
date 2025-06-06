@@ -14,7 +14,7 @@ class meowinnkelolaLayanan extends Controller
     public function index()
     {
         $layanans = Layanan::where('isdeleted', '=', 0)->orderBy('created_at', 'desc')->paginate(2);
-        return view('pages.meowinn.Layanan.meowInnLayanan', compact('layanans'));
+        return view('pages.meowinn.Layanan.Index', compact('layanans'));
     }
 
     public function destroy($id)
@@ -31,7 +31,7 @@ class meowinnkelolaLayanan extends Controller
     {
         $layanan = Layanan::find($id);
         if ($layanan) {
-            return view('pages.meowinn.Layanan.meowinnLayananShow', compact('layanan'));
+            return view('pages.meowinn.Layanan.Show', compact('layanan'));
         }
         abort(404);
     }
@@ -39,12 +39,12 @@ class meowinnkelolaLayanan extends Controller
     public function edit($id)
     {
         $layanan = Layanan::find($id);
-        return view('pages.meowinn.Layanan.meowinnLayananEdit', compact('layanan'));
+        return view('pages.meowinn.Layanan.Edit', compact('layanan'));
     }
 
     public function create()
     {
-        return view('pages.meowinn.Layanan.meowinnLayananCreate');
+        return view('pages.meowinn.Layanan.Create');
     }
 
     public function update(Request $request, $id)
@@ -59,12 +59,9 @@ class meowinnkelolaLayanan extends Controller
             'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
 
-        $photoPaths = [];
-
         if ($request->hasFile('photos')) {
             $validated['photos'] = json_encode($this->cloudinaryBatchUpload($request->file('photos'), 'layanan'));
         }
-
 
         Layanan::whereId($id)->update($validated);
 

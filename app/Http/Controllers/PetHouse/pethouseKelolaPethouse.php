@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers\PetHouse;
 
-use App\Http\Controllers\Controller;
+use App\Models\PetHouse;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class pethouseKelolaPetHouse extends Controller
 {
     public function index()
     {
-        return view('pages.petHouse.petHouseSetting.petHousePreview');
+        $petHouse = PetHouse::with(['user.village.district.city.province', 'pethouseLayanans.layanan'])->where('userId', Auth::user()->id)->first();
+        return view('pages.petHouse.petHouseSetting.Index', compact('petHouse'));
     }
 
     public function edit()
     {
-        return view('pages.petHouse.petHouseSetting.petHouseSetting');
+        $petHouse = PetHouse::with(['user.village.district.city.province'])->where('userId', Auth::user()->id)->first();
+        return view('pages.petHouse.petHouseSetting.Edit', compact('petHouse'));
     }
 
     public function update(Request $request)

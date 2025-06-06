@@ -19,15 +19,15 @@ class dashboard extends Controller
     }
 
     public function user(){
-        return view('pages.customer.Dashboard.customerDashboard');
+        return view('pages.customer.Dashboard.Index');
     }
 
     public function meowinn(){
-        return view('pages.meowinn.Dashboard.meowinnDashboard');
+        return view('pages.meowinn.Dashboard.Index');
 
     }
 
     public function petHouse(){
-        return view('pages.petHouse.Dashboard.petHouseDashboard');
+        return view('pages.petHouse.Dashboard.Index');
     }
 }
