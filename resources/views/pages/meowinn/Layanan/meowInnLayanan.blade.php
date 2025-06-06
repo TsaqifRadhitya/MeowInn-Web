@@ -1,4 +1,4 @@
-<x-meowinn-layout header="Daftar Layanan" id="content" activeMenu="Layanan" class="px-5 pt-5">
+<x-MeowinnLayout header="Daftar Layanan" id="content" activeMenu="Layanan" class="px-5 pt-5">
     <!-- Success Message -->
     @if (Session::has('message'))
         <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-lg shadow-sm">
@@ -150,4 +150,4 @@
             });
         }
     </script>
-</x-meowinn-layout>
+</x-MeowinnLayout>

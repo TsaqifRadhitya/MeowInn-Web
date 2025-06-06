@@ -1,4 +1,4 @@
-<x-meowinn-layout header="Pet House Preview" class="m-5 p-5 rounded-2xl shadow-sm" id="content" activeMenu="Pet House">
+<x-MeowinnLayout header="Pet House Preview" class="m-5 p-5 rounded-2xl shadow-sm" id="content" activeMenu="Pet House">
     <!-- Profile Section -->
     <div class="mb-8">
         <!-- Header with Name and Rating -->
@@ -253,4 +253,4 @@
             align-items: center;
         }
     </style>
-</x-meowinn-layout>
+</x-MeowinnLayout>

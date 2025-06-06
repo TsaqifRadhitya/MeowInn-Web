@@ -1,4 +1,4 @@
-<x-meowinn-layout header="Detail Layanan" id="content" activeMenu="Layanan" class="px-5 pt-5">
+<x-MeowinnLayout header="Detail Layanan" id="content" activeMenu="Layanan" class="px-5 pt-5">
     <div class="mx-auto space-y-6">
 
         <!-- Tombol Kembali -->
@@ -130,4 +130,4 @@
             object-fit: cover;
         }
     </style>
-</x-meowinn-layout>
+</x-MeowinnLayout>

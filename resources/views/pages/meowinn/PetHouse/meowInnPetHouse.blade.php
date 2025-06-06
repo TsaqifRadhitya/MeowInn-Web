@@ -1,4 +1,4 @@
-<x-meowinn-layout header="Pet House" class="m-5" id="content" activeMenu="Pet House">
+<x-MeowinnLayout header="Pet House" class="m-5" id="content" activeMenu="Pet House">
     <div class="bg-white rounded-xl shadow-md p-6">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
             <div>
@@ -85,4 +85,4 @@
             {{ $daftarPethouse->links() }}
         </div>
     </div>
-</x-meowinn-layout>
+</x-MeowinnLayout>
