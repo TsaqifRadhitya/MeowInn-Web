@@ -24,7 +24,7 @@ class pethousePenitipanReport extends Controller
     {
 
     }
-    public function delete($penitipanId, $reportId)
+    public function destroy($penitipanId, $reportId)
     {
         $deletedAmount = laporanPenitipan::where('id', $reportId)->where('penitipanId', $penitipanId)->delete();
 

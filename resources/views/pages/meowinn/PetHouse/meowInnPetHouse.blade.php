@@ -63,7 +63,7 @@
                             </div>
 
                             <div class="mt-4 flex justify-end">
-                                <a href="/meowinn/preview/{{ $petHouse->id }}"
+                                <a href="{{ route('meowinn.pethouse.show', ['id' => $petHouse->id]) }}"
                                     class="btn btn-primary px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">

@@ -5,6 +5,7 @@ use App\Http\Controllers\PetHouse\pethousekelolaLayanan;
 use App\Http\Controllers\PetHouse\pethousekelolaPenitipan;
 use App\Http\Controllers\PetHouse\pethouseKelolaPetHouse;
 use App\Http\Controllers\PetHouse\pethouseReport;
+use App\Http\Controllers\pethousePenitipanReport;
 use App\Http\Middleware\pethouseMidleware;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +22,11 @@ Route::middleware(['auth', pethouseMidleware::class])->group(function () {
         });
 
         Route::prefix('laporan')->group(function () {
-            Route::get('{id}', );
-            Route::post('{id}', );
-            Route::get('{penitipanId}/{reportId}', );
-            Route::patch('{penitipanId}/{reportId}', );
-            Route::delete('{penitipanId}/{reportId}', );
+            Route::get('{id}', [pethousePenitipanReport::class, 'create'])->name('pethose.reports.create');
+            Route::post('{id}', [pethousePenitipanReport::class, 'store'])->name('pethose.reports.store');
+            Route::get('{penitipanId}/{reportId}', [pethousePenitipanReport::class, 'edit'])->name('pethose.reports.edit');
+            Route::patch('{penitipanId}/{reportId}', [pethousePenitipanReport::class, 'update'])->name('pethose.reports.update');
+            Route::delete('{penitipanId}/{reportId}', [pethousePenitipanReport::class, 'destroy'])->name('pethose.reports.destory');
         });
 
         Route::prefix('managepethouse')->group(function () {

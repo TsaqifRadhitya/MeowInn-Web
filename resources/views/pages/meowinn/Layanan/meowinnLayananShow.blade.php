@@ -22,7 +22,7 @@
                     <div class="swiper mySwiper">
                         <div class="swiper-wrapper">
                             @foreach (json_decode($layanan->photos) as $photo)
-                                <img src="{{ asset('storage/' . $photo) }}" class="swiper-slide object-cover object-top"
+                                <img src="{{ $photo }}" class="swiper-slide object-cover object-top"
                                     alt="">
                             @endforeach
                         </div>

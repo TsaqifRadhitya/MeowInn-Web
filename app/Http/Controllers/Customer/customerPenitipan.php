@@ -16,24 +16,16 @@ class customerPenitipan extends Controller
     public function create(){
         return view('pages.customer.Penitipan.customerPenitipanCreate');
     }
-
-    public function daftarReports($id)
-    {
-        return view('pages.customer.Penitipan.customerDaftarReportsPenitipan');
+    public function update(){
+        return view('pages.customer.Penitipan.customerPenitipanCreate');
     }
 
-
-    public function detailReports($id)
-    {
-        return view('pages.customer.Penitipan.customerDetailReportsPenitipan');
-    }
-
-    public function detailPenitipan($id)
+    public function show($id)
     {
         return view('pages.customer.Penitipan.customerDetailPenitipan');
     }
 
-    public function riwayatPenitipan($id)
+    public function riwayat($id)
     {
         return view('pages.customer.Penitipan.customerDaftarRiwayatPenitipan');
     }

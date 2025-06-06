@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Meowinn;
 
-use App\Http\Controllers\Controller;
-use App\Models\detailLayanan;
+use Storage;
 use App\Models\Layanan;
-use Exception;
+use App\cloudinaryTrait;
 use Illuminate\Http\Request;
-use Throwable;
+use App\Http\Controllers\Controller;
 
 class meowinnkelolaLayanan extends Controller
 {
+    use cloudinaryTrait;
     public function index()
     {
         $layanans = Layanan::where('isdeleted', '=', 0)->orderBy('created_at', 'desc')->paginate(2);
@@ -20,7 +20,7 @@ class meowinnkelolaLayanan extends Controller
     public function destroy($id)
     {
         $layanan = Layanan::find($id);
-    if ($layanan) {
+        if ($layanan) {
             $layanan->update(['isdeleted' => true]);
             return back()->with('success', 'Berhasil menghapus layanan');
         }
@@ -62,11 +62,7 @@ class meowinnkelolaLayanan extends Controller
         $photoPaths = [];
 
         if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $path = $photo->store('layanans', 'public');
-                $photoPaths[] = $path;
-            }
-            $validated['photos'] = json_encode($photoPaths);
+            $validated['photos'] = json_encode($this->cloudinaryBatchUpload($request->file('photos'), 'layanan'));
         }
 
 
@@ -87,16 +83,9 @@ class meowinnkelolaLayanan extends Controller
             'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
         ]);
 
-        $photoPaths = [];
-
         if ($request->hasFile('photos')) {
-            foreach ($request->file('photos') as $photo) {
-                $path = $photo->store('layanans', 'public');
-                $photoPaths[] = $path;
-            }
+            $validated['photos'] = json_encode($this->cloudinaryBatchUpload($request->file('photos'), 'layanan'));
         }
-
-        $validated['photos'] = json_encode($photoPaths);
 
         $dataLayanan = Layanan::create($validated);
 
