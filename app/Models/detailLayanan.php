@@ -10,7 +10,7 @@ class detailLayanan extends Model
 {
 
     use HasUlids;
-    protected $fillable = ['price', 'description', 'photos', 'status', 'LayananId'];
+    protected $fillable = ['price', 'description', 'photos', 'status', 'LayananId', 'petHouseId'];
 
     protected function photos(): Attribute
     {

@@ -4,7 +4,7 @@ namespace App;
 
 use Storage;
 
-trait cloudinaryTrait
+trait HasCloudinary
 {
     public function cloudinarySingleUpload($file, string $path)
     {

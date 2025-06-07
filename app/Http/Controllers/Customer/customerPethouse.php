@@ -11,7 +11,7 @@ class customerPethouse extends Controller
 
     public function index()
     {
-        $petHouses = PetHouse::whereRelation('user.village.district.city.cityName', '=', Auth::user()->village->district->city->cityName)->paginate(4);
+        $petHouses = PetHouse::whereRelation('user.village.district.city', 'cityName', '=', Auth::user()->village->district->city->cityName)->paginate(4);
         return view('pages.customer.Pethouse.Index', compact('petHouses'));
     }
 
@@ -28,7 +28,7 @@ class customerPethouse extends Controller
             ['isi' => ['required', 'max:500', 'min:1']]
         );
 
-        $petHouse = PetHouse::find($id);
+        $petHouse = PetHouse::with(['user.village.district.city','pethouseLayanans'])->find($id);
 
         if ($petHouse) {
             PetHouse::create(

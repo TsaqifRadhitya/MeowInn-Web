@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\cloudinaryTrait;
+use App\HasCloudinary;
 use Illuminate\Http\Request;
 use App\Models\laporanPenitipan;
 
 class pethousePenitipanReport extends Controller
 {
-    use cloudinaryTrait;
+    use HasCloudinary;
     public function create($id)
     {
         // return view(, compact("id"));

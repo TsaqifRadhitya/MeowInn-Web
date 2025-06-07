@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Meowinn;
 
-use Storage;
+use App\HasCloudinary;
 use App\Models\Layanan;
-use App\cloudinaryTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class meowinnkelolaLayanan extends Controller
 {
-    use cloudinaryTrait;
+    use HasCloudinary;
     public function index()
     {
         $layanans = Layanan::where('isdeleted', '=', 0)->orderBy('created_at', 'desc')->paginate(2);

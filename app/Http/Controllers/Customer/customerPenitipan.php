@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Customer;
 
+use App\HasCloudinary;
 use App\Models\DetaiLayananPenitipan;
 use App\Models\Penitipan;
 use App\Models\PetHouse;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Controller;
 
 class customerPenitipan extends Controller
 {
+    use HasCloudinary;
     public function index()
     {
         $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('userId', Auth::user()->id)->whereNotIn('status', ['selesai', 'gagal'])->paginate(4);

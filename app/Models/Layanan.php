@@ -12,7 +12,7 @@ class Layanan extends Model
     use HasUlids;
     protected $fillable = ['name', 'photos', 'description', 'isdeleted'];
 
-    public function Pethouselayanans()
+    public function pethouselayanans()
     {
         return $this->hasMany(detailLayanan::class, 'layananId');
     }
