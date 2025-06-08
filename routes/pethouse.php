@@ -10,6 +10,7 @@ use App\Http\Controllers\PetHouse\pethousekelolaPenitipan;
 use App\Http\Controllers\PetHouse\pethousePenitipanReport;
 
 Route::middleware(['auth', pethouseMidleware::class])->group(function () {
+
     Route::prefix("pethouse")->group(function () {
 
         Route::prefix('profile')->group(function () {
