@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\dashboard;
+use App\Http\Controllers\midtransController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,7 @@ Route::get('/', function () {
     return view('pages.welcome');
 })->name('welcome.index');
 
+Route::post('midtrans/callback',[midtransController::class,'update'])->name('');
 
 Route::get('/dashboard', [dashboard::class, 'index'])->middleware('auth')->name('dashboard');
 
