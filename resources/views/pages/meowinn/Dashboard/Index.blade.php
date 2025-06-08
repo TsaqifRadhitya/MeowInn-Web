@@ -1,3 +1,3 @@
-<x-meowinn-layout header="Dashboard" class="px-5 pt-5" id="content" activeMenu="Dashboard">
+<x-meowinn-layout header="Dashboard" class="p-10" id="content" activeMenu="Dashboard">
 
 </x-meowinn-layout>

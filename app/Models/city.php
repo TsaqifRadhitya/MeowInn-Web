@@ -8,9 +8,10 @@ class city extends Model
 {
     public $incrementing = false;
 
-    protected $fillable = ['cityName', 'proviceId'];
+    protected $fillable = ['cityName', 'proviceId', 'id'];
 
-    public function province(){
-        return $this->belongsTo(Province::class,'proviceId');
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'proviceId');
     }
 }
