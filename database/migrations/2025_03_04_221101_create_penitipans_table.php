@@ -16,6 +16,7 @@ return new class extends Migration
             $table->enum('status', ['menunggu pembayaran', 'gagal', 'menunggu penjemputan', 'menunggu diantar ke pethouse', 'sedang dititipkan', 'selesai'])->default('menunggu pembayaran');
             $table->integer('duration');
             $table->integer('petCareCosts');
+            $table->string('snapToken')->nullable();
             $table->text('address');
             $table->foreignId('villageId')->constrained('villages');
             $table->boolean('isCash')->default(false);

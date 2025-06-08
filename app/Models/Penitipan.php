@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penitipan extends Model
 {
-    protected $fillable = ['status', 'duration', 'petCareCosts', 'address', 'villageId', 'isCash', 'isPickUp', 'userId', 'petHouseId'];
+    protected $fillable = ['status', 'duration', 'petCareCosts', 'address', 'villageId', 'isCash', 'isPickUp', 'userId', 'petHouseId','snapToken'];
 
     public function users()
     {
