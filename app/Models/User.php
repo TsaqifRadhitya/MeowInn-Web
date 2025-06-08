@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'role',
         'phoneNumber',
+        'profilePicture',
         'address',
         'villageId'
     ];
@@ -67,7 +68,8 @@ class User extends Authenticatable
         return $this->hasMany(Penitipan::class, 'userId');
     }
 
-    public function village(){
-        return $this->belongsTo(villages::class,'villageId');
+    public function village()
+    {
+        return $this->belongsTo(villages::class, 'villageId');
     }
 }
