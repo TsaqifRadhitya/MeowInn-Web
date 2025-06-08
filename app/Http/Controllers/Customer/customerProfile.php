@@ -1,28 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
-use App\Models\city;
-use App\Models\User;
 use App\HasCloudinary;
-use App\Models\district;
+use App\Models\city;
 use App\Models\province;
+use App\Models\User;
+use App\Models\district;
 use App\Models\villages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
-class profileAdminController extends Controller
+
+class customerProfile extends Controller
 {
     use HasCloudinary;
     public function index()
     {
         $user = User::with("village.district.city.province")->find(Auth::user()->id);
-        return view('pages.meowinn.Profile.Index', compact('user'));
+        return view('pages.customer.Profile.Index', compact('user'));
     }
-    public function edit()
+
+    public function edit(string $id)
     {
         $user = User::with("village.district.city.province")->find(Auth::user()->id);
-        return view('pages.meowinn.Profile.Edit', compact('user'));
+        return view('pages.customer.Profile.Edit', compact('user'));
     }
 
     public function update(Request $request)
@@ -73,6 +76,6 @@ class profileAdminController extends Controller
         $validated['villageId'] = $village->id;
         $user->update($validated);
 
-        return redirect()->route('meowinn.profile.index')->with('success', 'Berhasil Memperbarui Profile');
+        return redirect()->route('customer.profile.index')->with('success', 'Berhasil Memperbarui Profile');
     }
 }

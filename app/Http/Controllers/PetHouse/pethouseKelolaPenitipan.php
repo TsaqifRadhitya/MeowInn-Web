@@ -23,7 +23,21 @@ class pethousekelolaPenitipan extends Controller
     }
     public function update($id)
     {
+        $penitipan = Penitipan::find($id);
 
+        if ($penitipan) {
+            $currentStatus = $penitipan->status;
+            if ($currentStatus === "menunggu penjemputan" || $currentStatus === "menunggu diantar ke pethouse") {
+                $nextStatus = "sedang dititipkan";
+            } else {
+                $nextStatus = "selesai";
+            }
+            $penitipan->status = $nextStatus;
+            $penitipan->save();
+            return redirect()->route("pethouse.penitipan.show", $id)->with("success", "Berhasil Memperbarui Status Penitipan");
+        }
+
+        abort(404);
     }
 
     public function riwayat()

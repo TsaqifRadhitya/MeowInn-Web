@@ -1,16 +1,22 @@
 <?php
 
 use App\Http\Controllers\dashboard;
-use App\Http\Controllers\PetHouse\pethousekelolaLayanan;
-use App\Http\Controllers\PetHouse\pethousekelolaPenitipan;
-use App\Http\Controllers\PetHouse\pethouseKelolaPetHouse;
-use App\Http\Controllers\PetHouse\pethouseReport;
-use App\Http\Controllers\pethousePenitipanReport;
-use App\Http\Middleware\pethouseMidleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\pethouseMidleware;
+use App\Http\Controllers\PetHouse\pethouseProfile;
+use App\Http\Controllers\PetHouse\pethousekelolaLayanan;
+use App\Http\Controllers\PetHouse\pethouseKelolaPetHouse;
+use App\Http\Controllers\PetHouse\pethousekelolaPenitipan;
+use App\Http\Controllers\PetHouse\pethousePenitipanReport;
 
 Route::middleware(['auth', pethouseMidleware::class])->group(function () {
     Route::prefix("pethouse")->group(function () {
+
+        Route::prefix('profile')->group(function () {
+            Route::get('/', [pethouseProfile::class, 'index'])->name('pethouse.profile.index');
+            Route::get('edit', [pethouseProfile::class, 'edit'])->name('pethouse.profile.edit');
+            Route::patch('edit', [pethouseProfile::class, 'update'])->name('pethouse.profile.update');
+        });
 
         Route::get('/', [dashboard::class, 'pethouse'])->name('pethouse.dashboard');
 
