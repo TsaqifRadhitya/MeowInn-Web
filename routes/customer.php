@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\Customer\customerPenitipan;
-use App\Http\Controllers\Customer\customerReports;
-use App\Http\Controllers\Customer\customerReportsPenitipan;
-use App\Http\Controllers\customerPethouse;
-use App\Http\Middleware\customerMidleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\customerMidleware;
+use App\Http\Controllers\Customer\customerProfile;
+use App\Http\Controllers\Customer\customerReports;
+use App\Http\Controllers\Customer\customerPethouse;
+use App\Http\Controllers\Customer\customerPenitipan;
 
 Route::middleware(['auth', customerMidleware::class])->group(function () {
 
     Route::prefix('pethouse')->group(function () {
         Route::get('/', [customerPethouse::class, 'index'])->name('customer.pethouse.index');
         Route::get('{id}', [customerPethouse::class, 'show'])->name('customer.pethouse.show');
-        Route::post('{id}', [customerPethouse::class, 'store'])->name('customer.pethouse.store');
+        Route::post('{id}', [customerReports::class, 'storePethouse'])->name('customer.pethouse.store');
     });
 
     Route::prefix('penitipan')->group(function () {
@@ -27,11 +27,9 @@ Route::middleware(['auth', customerMidleware::class])->group(function () {
 
         Route::get('{id}', [customerPenitipan::class, 'show'])->name('customer.penitipan.show');
 
-        Route::patch('{id}', [customerPenitipan::class, 'update'])->name('customer.penitipan.update');
-
         Route::delete('{id}', [customerPenitipan::class, 'destroy'])->name('customer.penitipan.destory');
 
-        Route::post('{id}', [customerPenitipan::class, 'report'])->name('customer.penitipan.report');
+        Route::post('{id}', [customerReports::class, 'storePenitipan'])->name('customer.penitipan.report');
 
     });
 
@@ -41,8 +39,8 @@ Route::middleware(['auth', customerMidleware::class])->group(function () {
     });
 
     Route::prefix('profile')->group(function () {
-        Route::get('/', [customerReports::class, 'index'])->name('customer.profile.index');
-        Route::patch('/edit', [customerReports::class, 'index'])->name('customer.profile.edit');
-        Route::patch('/', [customerReports::class, 'index'])->name('customer.profile.update');
+        Route::get('/', [customerProfile::class, 'index'])->name('customer.profile.index');
+        Route::get('/edit', [customerProfile::class, 'edit'])->name('customer.profile.edit');
+        Route::patch('/', [customerProfile::class, 'update'])->name('customer.profile.update');
     });
 });

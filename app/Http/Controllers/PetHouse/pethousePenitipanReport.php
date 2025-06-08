@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\PetHouse;
 
 use App\HasCloudinary;
 use Illuminate\Http\Request;
 use App\Models\laporanPenitipan;
+use App\Http\Controllers\Controller;
+
 
 class pethousePenitipanReport extends Controller
 {

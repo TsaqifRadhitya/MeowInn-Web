@@ -49,27 +49,6 @@ class customerPenitipan extends Controller
 
     }
 
-    public function report(Request $request, $id)
-    {
-        $request->validate(
-            ['isi' => ['required', 'max:500', 'min:1']]
-        );
-
-        $penitipan = Penitipan::find($id);
-        if ($penitipan) {
-            Report::create(
-                ['jenis_reports' => 'Pet House', 'isi' => $request->isi, 'penitipanId' => $id, 'pethouseId' => $penitipan->petHouseId]
-            );
-            return back()->with('success', 'Berhasil Mengirimakan Feedback');
-        }
-        abort(404);
-    }
-
-    public function update($id)
-    {
-
-    }
-
     public function destroy($id)
     {
         $penitipan = Penitipan::find($id);
