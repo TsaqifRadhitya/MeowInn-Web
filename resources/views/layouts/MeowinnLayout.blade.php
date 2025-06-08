@@ -5,7 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
@@ -195,7 +195,7 @@
                     <ul id="dropdown-Profile"
                         class="{{ $activeMenu == 'Profile' ? 'bg-white bg-opacity-10 rounded-bl-box' : 'hidden' }} py-2 space-y-1 ml-4 pl-4 border-l-2 border-white border-opacity-20">
                         <li>
-                            <a href="#"
+                            <a href="{{ route('meowinn.profile.index') }}"
                                 class="flex items-center w-full p-2 text-white hover:text-[#F69246] transition-all duration-200 rounded-lg pl-3 group hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-1.5 h-1.5 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -266,7 +266,8 @@
                         </button>
                         <div id="user-dropdown"
                             class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your
+                            <a href="{{ route('meowinn.profile.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your
                                 Profile</a>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf

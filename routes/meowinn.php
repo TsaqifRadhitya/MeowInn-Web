@@ -4,12 +4,18 @@ use App\Http\Controllers\dashboard;
 use App\Http\Controllers\Meowinn\meowinnkelolaLayanan;
 use App\Http\Controllers\Meowinn\meowinnkelolaPethouse;
 use App\Http\Controllers\Meowinn\meowinnreport;
+use App\Http\Controllers\profileAdminController;
 use App\Http\Middleware\meowinnMidleware;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', meowinnMidleware::class])->group(function () {
     Route::prefix('meowinn')->group(function () {
 
+        Route::prefix('profile')->group(function () {
+            Route::get('/', [profileAdminController::class, 'index'])->name('meowinn.profile.index');
+            Route::get('edit', [profileAdminController::class, 'edit'])->name('meowinn.profile.edit');
+            Route::patch('edit', [profileAdminController::class, 'update'])->name('meowinn.profile.update');
+        });
 
         Route::get('/', [dashboard::class, 'meowinn'])->name('meowinn.dashboard');
 
