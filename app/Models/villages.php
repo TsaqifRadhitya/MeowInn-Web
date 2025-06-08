@@ -8,7 +8,7 @@ class villages extends Model
 {
     public $incrementing = false;
 
-    protected $fillable = ['villageName','districtId'] ;
+    protected $fillable = ['villageName', 'districtId', 'id'];
     public function district()
     {
         return $this->belongsTo(district::class, "districtId");

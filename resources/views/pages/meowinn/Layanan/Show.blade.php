@@ -1,4 +1,4 @@
-<x-meowinn-layout header="Detail Layanan" id="content" activeMenu="Layanan" class="px-5 pt-5">
+<x-meowinn-layout header="Detail Layanan" id="content" activeMenu="Layanan" class="p-10">
     <div class="mx-auto space-y-6">
 
         <!-- Tombol Kembali -->

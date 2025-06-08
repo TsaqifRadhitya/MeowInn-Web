@@ -1,4 +1,4 @@
-<x-meowinn-layout header="Daftar Penalty" class="px-5 pt-5" id="content" activeMenu="Pet House">
+<x-meowinn-layout header="Daftar Penalty" class="p-10" id="content" activeMenu="Pet House">
     <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
         <!-- Table Header with Summary -->
         <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-[#F69246] to-[#EC7070]">

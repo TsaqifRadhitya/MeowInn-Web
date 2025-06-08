@@ -8,5 +8,5 @@ class province extends Model
 {
     public $incrementing = false;
 
-    protected $fillable = ['provinceName'];
+    protected $fillable = ['provinceName', 'id'];
 }

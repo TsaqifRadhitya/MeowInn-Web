@@ -1,4 +1,4 @@
-<x-meowinn-layout header="Pengajuan Pet House" class="px-5 pt-5" id="content" activeMenu="Pet House">
+<x-meowinn-layout header="Pengajuan Pet House" class="p-10" id="content" activeMenu="Pet House">
     <div class="space-y-6 mb-20">
         <!-- Header Section -->
         <div class="flex flex-col md:flex-row-reverse justify-between items-start md:items-center gap-4">
