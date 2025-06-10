@@ -12,6 +12,6 @@ class city extends Model
 
     public function province()
     {
-        return $this->belongsTo(Province::class, 'proviceId');
+        return $this->belongsTo(province::class, 'proviceId');
     }
 }
