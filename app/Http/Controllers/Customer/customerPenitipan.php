@@ -44,9 +44,19 @@ class customerPenitipan extends Controller
         abort(404);
     }
 
-    public function store($id)
+    public function store(Request $request, $id)
     {
-
+        $validated = $request->validate([
+            'duration' => ['required', 'min:1', 'numeric'],
+            'petCareCosts' => ['required', 'numeric'],
+            'isCash' => ['required', 'boolean'],
+            'isPickUp' => ['required', 'boolean'],
+        ]);
+        $user = Auth::user();
+        $validated['status'] = $validated['isPickUp'] ? 'menunggu penjemputan' : 'menunggu pembayaran';
+        $validated['address'] = $user->address;
+        $validated['villageId'] = $user->villageId;
+        $validated['userId'] = $user->id;
     }
 
     public function destroy($id)
