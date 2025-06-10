@@ -21,5 +21,5 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/meowinn.php';
-require __DIR__ . '/customer.php';
 require __DIR__ . '/pethouse.php';
+require __DIR__ . '/customer.php';
