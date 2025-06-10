@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\dashboard;
+use App\Http\Controllers\PetHouse\pethouseKelolaPethouse;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\pethouseMidleware;
 use App\Http\Controllers\PetHouse\pethouseProfile;
 use App\Http\Controllers\PetHouse\pethouseKelolaLayanan;
-use App\Http\Controllers\PetHouse\pethouseKelolaPetHouse;
 use App\Http\Controllers\PetHouse\pethouseKelolaPenitipan;
 use App\Http\Controllers\PetHouse\pethousePenitipanReport;
 
@@ -37,9 +37,9 @@ Route::middleware(['auth', pethouseMidleware::class])->group(function () {
         });
 
         Route::prefix('managepethouse')->group(function () {
-            Route::get('/preview', [pethouseKelolaPetHouse::class, 'index'])->name('pethouse.index');
-            Route::get('/setting', [pethouseKelolaPetHouse::class, 'edit'])->name('pethouse.setting.edit');
-            Route::patch('/setting', [pethouseKelolaPetHouse::class, 'update'])->name('pethouse.setting.update');
+            Route::get('/preview', [pethouseKelolaPethouse::class, 'index'])->name('pethouse.index');
+            Route::get('/setting', [pethouseKelolaPethouse::class, 'edit'])->name('pethouse.setting.edit');
+            Route::patch('/setting', [pethouseKelolaPethouse::class, 'update'])->name('pethouse.setting.update');
             Route::prefix('layanan')->group(function () {
                 Route::get('/', [pethouseKelolaLayanan::class, 'index'])->name('pethouse.layanan.index');
                 Route::get('{id}', [pethouseKelolaLayanan::class, 'show'])->name('pethouse.layanan.show');
