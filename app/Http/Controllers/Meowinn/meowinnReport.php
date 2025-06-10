@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
-class meowinnreport extends Controller
+class meowinnReport extends Controller
 {
     public function index(Request $request)
     {

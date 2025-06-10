@@ -6,7 +6,7 @@ use App\Models\Penitipan;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class pethousekelolaPenitipan extends Controller
+class pethouseKelolaPenitipan extends Controller
 {
     public function index()
     {
@@ -17,7 +17,7 @@ class pethousekelolaPenitipan extends Controller
     {
         $penitipan = Penitipan::with(['hewans.penitipanLayanans.Layanan', 'laporans'])->find($id);
         if ($penitipan) {
-            return view('pages.Pethouse.Penitipan.Show', compact('penitipans'));
+            return view('pages.petHouse.Penitipan.Show', compact('penitipans'));
         }
         abort(404);
     }
