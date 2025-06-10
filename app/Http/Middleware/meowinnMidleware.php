@@ -20,6 +20,6 @@ class meowinnMidleware
         if($role === 'meowinn'){
             return $next($request);
         }
-        abort(401);
+        abort(403);
     }
 }

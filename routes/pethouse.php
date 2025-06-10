@@ -19,7 +19,7 @@ Route::middleware(['auth', pethouseMidleware::class])->group(function () {
             Route::patch('edit', [pethouseProfile::class, 'update'])->name('pethouse.profile.update');
         });
 
-        Route::get('/', [dashboard::class, 'pethouse'])->name('pethouse.dashboard');
+        Route::get('/dashboard', [dashboard::class, 'pethouse'])->name('pethouse.dashboard');
 
         Route::prefix('penitipan')->group(function () {
             Route::get('/', [pethouseKelolaPenitipan::class, 'index'])->name('pethouse.penitipan.index');

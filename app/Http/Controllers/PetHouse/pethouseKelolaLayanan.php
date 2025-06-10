@@ -31,7 +31,7 @@ class pethouseKelolaLayanan extends Controller
     {
         $layanan = detailLayanan::find($id);
         if ($layanan) {
-            return view('pages.Pethouse.Layanan.Show', compact('layanan'));
+            return view('pages.petHouse.Layanan.Show', compact('layanan'));
         }
         ;
         abort(404);
@@ -41,7 +41,7 @@ class pethouseKelolaLayanan extends Controller
     {
         $layanan = detailLayanan::find($id);
         if ($layanan) {
-            return view('pages.Pethouse.Layanan.Edit', compact('layanan'));
+            return view('pages.petHouse.Layanan.Edit', compact('layanan'));
         }
         ;
         abort(404);

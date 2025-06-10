@@ -9,7 +9,7 @@ use App\Http\Controllers\Customer\customerPenitipan;
 
 Route::middleware(['auth', customerMidleware::class])->group(function () {
 
-    Route::prefix('pethouse')->group(function () {
+    Route::prefix('pethouseterdekat')->group(function () {
         Route::get('/', [customerPethouse::class, 'index'])->name('customer.pethouse.index');
         Route::get('{id}', [customerPethouse::class, 'show'])->name('customer.pethouse.show');
         Route::post('{id}', [customerReports::class, 'storePethouse'])->name('customer.pethouse.store');
