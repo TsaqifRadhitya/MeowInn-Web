@@ -50,8 +50,8 @@
                 <li class="flex items-center justify-between mb-8">
                     <span class="text-2xl font-bold text-white sm:hidden">MeowInn</span>
                     <div onclick="document.location.href = '/'"
-                        class="hidden sm:flex items-center justify-center space-x-3 bg-white p-3 rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all">
-                        <img src="{{ asset('asset/icon.png') }}" class="h-8 w-auto" alt="MeowInn Logo">
+                        class="hidden sm:flex items-center justify-center space-x-3 w-full bg-white p-3 rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all">
+                        <img src="{{ asset('asset/icon.png') }}" class="h-12 w-auto" alt="MeowInn Logo">
                         <h1
                             class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#F69246] to-[#EC7070]">
                             MeowInn</h1>

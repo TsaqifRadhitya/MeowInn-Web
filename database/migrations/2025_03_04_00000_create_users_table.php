@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->ulid('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phoneNumber')->unique();
+            $table->string('phoneNumber')->nullable()->unique();
             $table->string('password');
             $table->string('profilePicture')->nullable();
             $table->enum('role', ['meowinn', 'customer', 'pethouse']);

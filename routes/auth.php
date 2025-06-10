@@ -16,6 +16,8 @@ Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
+    Route::get('register/option', [RegisteredUserController::class, 'option'])->name('register.option');
+
     Route::post('register', [RegisteredUserController::class, 'store']);
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
@@ -35,11 +37,11 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
 
-    Route::get('/regiteroption',fn() =>view('auth.registerOption'))->name('register.option');
+    Route::get('/regiteroption', fn() => view('auth.registerOption'));
 
-    Route::get('/regiterpethouse',[pethouseRegisterController::class,'index'])->name('register.pethouse.index');
+    Route::get('/regiterpethouse', [pethouseRegisterController::class, 'index'])->name('register.pethouse.index');
 
-    Route::post('/regiterpethouse',[pethouseRegisterController::class,'store'])->name('register.pethouse.store');
+    Route::post('/regiterpethouse', [pethouseRegisterController::class, 'store'])->name('register.pethouse.store');
 
 });
 

@@ -1,4 +1,4 @@
-<x-meowinn-layout header="Edit Profile" class="p-10 flex w-full bg-none" id="content" activeMenu="Profile">
+<x-meowinn-layout header="Edit Profile" class="p-5 md:p-10 md:pb-0 flex w-full bg-none" id="content" activeMenu="Profile">
     <section class="flex-1">
         <form action="{{ route('meowinn.profile.update') }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -26,22 +26,10 @@
                                 class="hidden">
                         </div>
                         <div class="w-full text-center md:text-left">
-                            <div>
-                                <label for="name" class="sr-only">Nama</label>
-                                <input type="text" id="name" value="{{ old('name', $user->name) }}" disabled
-                                    class="text-2xl font-bold bg-transparent border-0 border-b-2 border-white/50 focus:ring-0 focus:border-white w-full placeholder-white/70 transition-colors duration-200"
-                                    placeholder="Nama Lengkap">
-                            </div>
-                            <div class="mt-1">
-                                <label for="email" class="sr-only">Email</label>
-                                <input type="email" name="email" id="email"
-                                    value="{{ old('email', $user->email) }}"
-                                    class="text-blue-100 bg-transparent border-0 border-white/50 focus:ring-0 focus:border-white w-full placeholder-white/70"
-                                    placeholder="Alamat Email" disabled>
-                                @error('email')
-                                    <p class="text-red-200 text-sm mt-1">{{ $message }}</p>
-                                @enderror
-                            </div>
+                            <p class="text-2xl font-bold bg-transparent">
+                                {{ $user->name }}</p>
+                            <p class="text-blue-100 bg-transparent">
+                                {{ $user->email }}</p>
                         </div>
                     </div>
                 </div>
@@ -182,11 +170,13 @@
             const villageSelect = document.getElementById('village');
 
             const initialData = {
-                provinceId: '{{ $user->village?->district?->city?->province?->id }}',
-                cityId: '{{ $user->village?->district?->city?->id }}',
-                districtId: '{{ $user->village?->district?->id }}',
-                villageId: '{{ $user->villageId }}'
+                provinceId: {!! json_encode(old('province', $user->village?->district?->city?->province?->id)) !!},
+                cityId: {!! json_encode(old('city', $user->village?->district?->city?->id)) !!},
+                districtId: {!! json_encode(old('district', $user->village?->district?->id)) !!},
+                villageId: {!! json_encode(old('village', $user->villageId)) !!}
             };
+
+            console.log(initialData)
 
             const populateDropdown = (selectElement, data, placeholder, selectedValue = null) => {
                 selectElement.innerHTML = `<option value="">${placeholder}</option>`;
