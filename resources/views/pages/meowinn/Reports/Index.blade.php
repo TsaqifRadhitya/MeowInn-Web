@@ -1,13 +1,8 @@
-<x-meowinn-layout header="Reports" class="m-10 md:mb-0 rounded-2xl" id="content" activeMenu="Reports">
-    <div class="bg-white rounded-2xl shadow-sm p-6">
+<x-meowinn-layout header="Reports" class="p-5 md:p-10 md:pb-0 rounded-2xl @if ($reports->count() > 0) h-fit  @endif" id="content" activeMenu="Reports">
+    <div class="bg-white rounded-2xl shadow-sm p-6 h-full">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-800">Reports Management</h1>
-                <p class="text-gray-600 mt-1">View and manage all system reports</p>
-            </div>
-
+            <h1 class="text-2xl font-bold text-gray-800">Daftar Laporan</h1>
             <form method="GET" action="{{ request()->url() }}" id="filter-form" class="w-full md:w-64">
-                <label for="report-type" class="sr-only">Filter by Type</label>
                 <select id="report-type" name="type" onchange="this.form.submit()"
                     class="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md">
                     <option value="">All Report Types</option>
@@ -85,15 +80,19 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
-                    <h3 class="mt-4 text-lg font-medium text-gray-700">No reports found</h3>
-                    <p class="mt-1 text-gray-500">There are currently no reports matching your criteria</p>
+                    <h3 class="mt-4 text-lg font-medium text-gray-700">Daftar laporan tidak ada</h3>
+                    @if (!!request('type'))
+                        <p class="mt-1 text-gray-500">Daftar Laporan <span class="font-semibold uppercase text-orange-500">{{ request('type') }}</span> Tidak Tersedia
+                        </p>
+                    @endif
                 </div>
             @endforelse
         </div>
-
         <!-- Pagination -->
-        <div class="mt-8 border-t border-gray-200 pt-4 flex justify-center">
-            {{ $reports->links() }}
-        </div>
+        @if ($reports->count() > 0)
+            <div class="mt-auto border-t border-gray-200 pt-4 flex justify-center">
+                {{ $reports->links() }}
+            </div>
+        @endif
     </div>
 </x-meowinn-layout>

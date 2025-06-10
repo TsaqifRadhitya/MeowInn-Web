@@ -1,20 +1,5 @@
 <x-meowinn-layout header="Detail Layanan" id="content" activeMenu="Layanan" class="p-10">
     <div class="mx-auto space-y-6">
-
-        <!-- Tombol Kembali -->
-        <div>
-            <a href="{{ route('meowinn.layanan.index') }}"
-                class="inline-flex items-center text-blue-600 hover:text-blue-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
-                        clip-rule="evenodd" />
-                </svg>
-                Kembali ke Daftar Layanan
-            </a>
-        </div>
-
-        <!-- Card Detail -->
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <!-- Swiper Gallery -->
             <div class="relative">
@@ -56,17 +41,6 @@
                 </div>
 
                 <p class="text-gray-700 break-words break-all">{!! nl2br($layanan->description) !!}</p>
-
-                <div class="flex justify-between grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                    <div>
-                        <h4 class="text-sm font-semibold text-gray-600">Tanggal Dibuat</h4>
-                        <p class="text-gray-800">{{ $layanan->created_at->format('d F Y H:i') }}</p>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-semibold text-gray-600">Terakhir Diupdate</h4>
-                        <p class="text-gray-800">{{ $layanan->updated_at->format('d F Y H:i') }}</p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

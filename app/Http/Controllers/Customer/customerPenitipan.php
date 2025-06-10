@@ -16,7 +16,7 @@ class customerPenitipan extends Controller
     use HasCloudinary;
     public function index()
     {
-        $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('userId', Auth::user()->id)->whereNotIn('status', ['selesai', 'gagal'])->paginate(4);
+        $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('userId', Auth::user()->id)->paginate(4);
         return view('pages.customer.Penitipan.Index', compact('penitipans'));
     }
 

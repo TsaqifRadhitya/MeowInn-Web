@@ -20,8 +20,11 @@
 
             <button class="btn btn-info min-h-10 md:min-h-12 mt-2 md:mt-0">GPS</button>
         </div>
-        <button onclick="$('#search').submit()"
-            class="z-50 btn w-4/5 md:w-auto md:min-w-48 lg:min-w-64 mt-auto h-12 md:h-16 -bottom-6 md:-bottom-8 absolute bg-blue-400 border-0 rounded-xl text-lg md:text-xl lg:text-2xl font-medium text-white hover:bg-blue-300">Search</button>
+        <form action="{{ route('logout') }}" method="post">
+            @csrf
+            <button
+                class="z-50 btn w-4/5 md:w-auto md:min-w-48 lg:min-w-64 mt-auto h-12 md:h-16 -bottom-6 md:-bottom-8 absolute bg-blue-400 border-0 rounded-xl text-lg md:text-xl lg:text-2xl font-medium text-white hover:bg-blue-300">Search</button>
+        </form>
         <iframe class="z-10 absolute top-0 w-full h-full rounded-3xl" src="https://www.google.com/maps/embed"
             loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
