@@ -272,7 +272,6 @@
                 </div>
             </div>
         </div>
-        <!-- Main content -->
         <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-100px)]']) }}>
             {{ $slot }}
         </div>

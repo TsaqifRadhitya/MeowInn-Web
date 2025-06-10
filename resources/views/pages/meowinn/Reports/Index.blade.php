@@ -1,6 +1,5 @@
 <x-meowinn-layout header="Reports" class="m-10 md:mb-0 rounded-2xl" id="content" activeMenu="Reports">
     <div class="bg-white rounded-2xl shadow-sm p-6">
-        <!-- Header and Filter -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
             <div>
                 <h1 class="text-2xl font-bold text-gray-800">Reports Management</h1>
@@ -21,7 +20,6 @@
             </form>
         </div>
 
-        <!-- Reports List -->
         <div class="space-y-4">
             @forelse($reports as $report)
                 <div
