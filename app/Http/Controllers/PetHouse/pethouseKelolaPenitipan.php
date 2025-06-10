@@ -17,7 +17,7 @@ class pethouseKelolaPenitipan extends Controller
     {
         $penitipan = Penitipan::with(['hewans.penitipanLayanans.Layanan', 'laporans'])->find($id);
         if ($penitipan) {
-            return view('pages.Pethouse.Penitipan.Show', compact('penitipans'));
+            return view('pages.petHouse.Penitipan.Show', compact('penitipans'));
         }
         abort(404);
     }
