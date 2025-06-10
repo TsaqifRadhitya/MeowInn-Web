@@ -9,7 +9,7 @@ use App\Models\Layanan;
 use Auth;
 use Illuminate\Http\Request;
 
-class pethousekelolaLayanan extends Controller
+class pethouseKelolaLayanan extends Controller
 {
     use HasCloudinary;
     public function index()

@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Meowinn;
+use App\Http\Controllers\Controller;
 use App\Models\city;
 use App\Models\User;
 use App\HasCloudinary;

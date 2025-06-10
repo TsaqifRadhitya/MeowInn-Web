@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\dashboard;
-use App\Http\Controllers\Meowinn\meowinnkelolaLayanan;
-use App\Http\Controllers\Meowinn\meowinnkelolaPethouse;
-use App\Http\Controllers\Meowinn\meowinnreport;
-use App\Http\Controllers\profileAdminController;
+use App\Http\Controllers\Meowinn\meowinnKelolaLayanan;
+use App\Http\Controllers\Meowinn\meowinnKelolaPethouse;
+use App\Http\Controllers\Meowinn\meowinnReport;
+use App\Http\Controllers\Meowinn\profileAdminController;
 use App\Http\Middleware\meowinnMidleware;
 use Illuminate\Support\Facades\Route;
 

@@ -6,7 +6,7 @@ use App\Models\Penitipan;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class pethousekelolaPenitipan extends Controller
+class pethouseKelolaPenitipan extends Controller
 {
     public function index()
     {

@@ -7,7 +7,7 @@ use App\Models\Layanan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class meowinnkelolaLayanan extends Controller
+class meowinnKelolaLayanan extends Controller
 {
     use HasCloudinary;
     public function index()

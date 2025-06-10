@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PetHouse;
 use Illuminate\Http\Request;
 
-class meowinnkelolaPethouse extends Controller
+class meowinnKelolaPethouse extends Controller
 {
     public function index(Request $request)
     {
