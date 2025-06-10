@@ -13,7 +13,7 @@ Route::get('/', function () {
     return view('pages.welcome');
 })->name('welcome.index');
 
-Route::post('midtrans/callback',[midtransController::class,'update'])->name('');
+Route::post('midtrans/callback',[midtransController::class,'update'])->name('midtrans.callback');
 
 Route::get('/dashboard', [dashboard::class, 'index'])->middleware('auth')->name('dashboard');
 
