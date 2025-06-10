@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\dashboard;
+use App\Http\Controllers\PetHouse\pethouseKelolaPetHouse;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\pethouseMidleware;
 use App\Http\Controllers\PetHouse\pethouseProfile;
 use App\Http\Controllers\PetHouse\pethouseKelolaLayanan;
-use App\Http\Controllers\PetHouse\pethouseKelolaPetHouse;
 use App\Http\Controllers\PetHouse\pethouseKelolaPenitipan;
 use App\Http\Controllers\PetHouse\pethousePenitipanReport;
 
