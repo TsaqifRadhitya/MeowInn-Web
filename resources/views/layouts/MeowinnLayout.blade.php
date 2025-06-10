@@ -1,4 +1,4 @@
-@props(['header', 'activeMenu'])
+@props(['header', 'activeMenu' => null])
 
 <head>
     <title>{{ env('APP_NAME') }}</title>

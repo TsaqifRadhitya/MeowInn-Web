@@ -34,7 +34,7 @@ class profileAdminController extends Controller
             'name' => ['required', 'string'],
             'district' => ['required'],
             'village' => ['required'],
-            'phoneNumber' => ['required', 'unique:users,phoneNumber,' . $user->id . ',id', 'min:12'],
+            'phoneNumber' => ['required','alpha_num' ,'unique:users,phoneNumber,' . $user->id . ',id', 'min:12'],
             'address' => ['required'],
             'profilePicture' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);

@@ -21,6 +21,8 @@ class meowinnReport extends Controller
                 case 'penitipan':
                     $reports = Report::whereNotNull('penitipanId')->orderBy('created_at', 'desc')->paginate(3);
                     break;
+                default:
+                    $reports = Report::orderBy('created_at', 'desc')->paginate(perPage: 3);
             }
         } else {
             $reports = Report::orderBy('created_at', 'desc')->paginate(perPage: 3);

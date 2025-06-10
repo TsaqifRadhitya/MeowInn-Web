@@ -83,7 +83,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="button" onclick="confirmDelete(this.form, '{{ $layanan->name }}')"
-                                    class="inline-flex items-center px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
+                                    class="inline-flex cursor-pointer items-center px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
                                         fill="currentColor">
                                         <path fill-rule="evenodd"
