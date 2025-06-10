@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,20 +12,19 @@ return new class extends Migration
     {
         Schema::create('pet_houses', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->text('description');
             $table->integer('petCareCost');
             $table->json('locationPhotos');
             $table->integer('penalty')->default(0);
-            $table->boolean('isOpen')->default(true);
-            $table->enum('verificationStatus', ['menunggu persetujuan', 'ditolak', 'disetujui']);
+            $table->boolean('isOpen')->default(false);
+            $table->enum('verificationStatus', ['menunggu persetujuan', 'ditolak', 'disetujui'])->default('menunggu persetujuan');
             $table->boolean('pickUpService')->default(false);
-            $table->enum('range', ['village', 'district', 'city'])->nullable();
+            $table->enum('range', ['village', 'district', 'district'])->nullable();
             $table->foreignUlid('userId')->constrained('users', 'id')->onDelete('cascade');
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

@@ -1,4 +1,4 @@
-@props(['header', 'activeMenu'])
+@props(['header', 'activeMenu' => null])
 
 <head>
     <title>{{ env('APP_NAME') }}</title>
@@ -77,19 +77,16 @@
                         @endif
                     </a>
                 </li>
-
                 <!-- Pet House -->
                 <li>
-                    <button type="button"
+                    <button type="button" @disabled(Auth::user()->petHouses?->verificationStatus !== 'disetujui')
                         onclick="handleOpenAndClose('#dropdown-Pet-House','#icon-dropdown-Pet-House','#button-dropdown-Pet-House')"
                         id="button-dropdown-Pet-House"
                         class="flex items-center justify-between w-full p-3 rounded-lg transition-all duration-200
-                               {{ $activeMenu == 'Pet House'
-                                   ? 'bg-white text-[#F69246] shadow-md rounded-tl-lg'
-                                   : 'text-white hover:bg-white hover:bg-opacity-20 hover:shadow-sm rounded-l-full hover:text-[#F69246]' }}">
+                               {{ $activeMenu == 'Pet House' ? 'bg-white text-[#F69246] shadow-md rounded-tl-lg' : 'text-white ' }} {{ Auth::user()->petHouses?->verificationStatus === 'disetujui' && $activeMenu != 'Pet House' ? 'hover:bg-white hover:bg-opacity-20 hover:shadow-sm rounded-l-full hover:text-[#F69246]' : '' }}">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-6 h-6 {{ $activeMenu == 'Pet House' ? 'text-[#F69246]' : 'text-white hover:text-[#F69246]' }}"
+                                class="w-6 h-6 {{ $activeMenu == 'Pet House' ? 'text-[#F69246]' : 'text-white' }} {{ Auth::user()->petHouses?->verificationStatus === 'disetujui' && $activeMenu != 'Pet House' ? 'hover:text-[#F69246]' : '' }}"
                                 fill="currentColor" viewBox="0 0 24 24">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path
@@ -134,15 +131,13 @@
 
                 <!-- Penitipan -->
                 <li>
-                    <button type="button"
+                    <button type="button" @disabled(Auth::user()->petHouses?->verificationStatus !== 'disetujui')
                         onclick="handleOpenAndClose('#dropdown-Layanan','#icon-dropdown-Layanan','#button-dropdown-Layanan')"
                         id="button-dropdown-Layanan"
                         class="flex items-center justify-between w-full p-3 rounded-lg transition-all duration-200
-                               {{ $activeMenu == 'Penitipan'
-                                   ? 'bg-white text-[#F69246] shadow-md rounded-tl-lg'
-                                   : 'text-white hover:bg-white hover:bg-opacity-20 hover:shadow-sm rounded-l-full hover:text-[#F69246]' }}">
+                               {{ $activeMenu == 'Penitipan' ? 'bg-white text-[#F69246] shadow-md rounded-tl-lg' : 'text-white ' }} {{ Auth::user()->petHouses?->verificationStatus === 'disetujui' && $activeMenu != 'Penitipan' ? 'hover:bg-white hover:bg-opacity-20 hover:shadow-sm rounded-l-full hover:text-[#F69246]' : '' }}">
                         <div class="flex items-center">
-                            <svg class="w-6 h-6 {{ $activeMenu == 'Penitipan' ? 'text-[#F69246]' : 'text-white hover:text-[#F69246]' }}"
+                            <svg class="w-6 h-6 {{ $activeMenu == 'Penitipan' ? 'text-[#F69246]' : 'text-white' }} {{ Auth::user()->petHouses?->verificationStatus === 'disetujui' && $activeMenu != 'Penitipan' ? 'hover:text-[#F69246]' : '' }}"
                                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 21">
                                 <path
                                     d="M15 12a1 1 0 0 0 .962-.726l2-7A1 1 0 0 0 17 3H3.77L3.175.745A1 1 0 0 0 2.208 0H1a1 1 0 0 0 0 2h.438l.6 2.255v.019l2 7 .746 2.986A3 3 0 1 0 9 17a2.966 2.966 0 0 0-.184-1h2.368c-.118.32-.18.659-.184 1a3 3 0 1 0 3-3H6.78l-.5-2H15Z" />

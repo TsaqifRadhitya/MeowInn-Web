@@ -1,9 +1,50 @@
 <x-pethouse-layout header="Dashboard" class="p-5 md:p-10 md:pb-0 relative" id="content" activeMenu="Dashboard">
-    @if (!$statusPethouse)
-        <section class="w-full backdrop-blur-xs h-full absolute left-0 top-0 z-50">
+    @if ($statusPethouse !== 'disetujui')
+        <section
+            class="absolute inset-0 z-10 backdrop-blur-md flex flex-col items-center justify-center p-6 transition-all duration-300">
+            <div class="max-w-md w-full p-8  text-center animate-fade-in-up">
+                <!-- Animated Illustration -->
+                <div class="mb-6 animate-bounce-slow">
+                    <svg class="w-32 h-32 mx-auto" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="64" cy="64" r="60" fill="#FEE2E2" />
+                        <path
+                            d="M64 24C42.4 24 24 42.4 24 64C24 85.6 42.4 104 64 104C85.6 104 104 85.6 104 64C104 42.4 85.6 24 64 24ZM64 96C48.5 96 32 79.5 32 64C32 48.5 48.5 32 64 32C79.5 32 96 48.5 96 64C96 79.5 79.5 96 64 96Z"
+                            fill="#EF4444" />
+                        <path
+                            d="M64 40C67.3 40 70 42.7 70 46V66C70 69.3 67.3 72 64 72C60.7 72 58 69.3 58 66V46C58 42.7 60.7 40 64 40Z"
+                            fill="#EF4444" />
+                        <circle cx="64" cy="82" r="6" fill="#EF4444" />
+                        <path d="M88 24L104 8" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
+                    </svg>
+                </div>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-3">
+                    @if ($statusPethouse)
+                        Menunggu Verifikasi Pethouse
+                    @else
+                        Verifikasi Pethouse Diperlukan
+                    @endif
+                </h2>
+                <p class="text-gray-600 mb-6">Untuk mengakses semua fitur, Anda perlu menyelesaikan verifikasi pethouse
+                    terlebih dahulu. Proses verifikasi biasanya memakan waktu 1-2 hari kerja.</p>
+
+                <div class="space-y-4">
+                    <a href="{{ route($statusPethouse ? 'pethouse.verifikasi.index' : 'pethouse.verifikasi.create') }}"
+                        class="inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        @if ($statusPethouse)
+                            Periksa Status Verifikasi
+                        @else
+                            Ajukan Verifikasi Sekarang
+                        @endif
+                    </a>
+                </div>
+            </div>
         </section>
     @endif
-
     <div class="flex flex-col lg:flex-row gap-6">
 
         <div class="flex-grow flex flex-col gap-6">
@@ -50,7 +91,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                        <p class="text-2xl font-bold text-gray-800">300</p>
+                        <p class="text-2xl font-bold text-gray-800">{{ $totalHewanDititipkan }}</p>
                         <p class="text-sm text-gray-600 font-semibold">Total Hewan Dititipkan</p>
                     </div>
 
@@ -62,7 +103,7 @@
                                 d="M21 10.03V10.05V12.05C25.39 12.59 28.5 16.58 27.96 20.97C27.5 24.61 24.64 27.5 21 27.93V29.93C26.5 29.38 30.5 24.5 29.95 19C29.5 14.25 25.73 10.5 21 10.03ZM19 10.06C17.05 10.25 15.19 11 13.67 12.26L15.1 13.74C16.22 12.84 17.57 12.26 19 12.06V10.06ZM12.26 13.67C11 15.19 10.25 17.04 10.05 19H12.05C12.24 17.58 12.8 16.23 13.69 15.1L12.26 13.67ZM10.06 21C10.26 22.96 11.03 24.81 12.27 26.33L13.69 24.9C12.81 23.77 12.24 22.42 12.06 21H10.06ZM15.1 26.37L13.67 27.74C15.18 29 17.04 29.79 19 30V28C17.58 27.82 16.23 27.25 15.1 26.37ZM20.5 15V20.25L25 22.92L24.25 24.15L19 21V15H20.5Z"
                                 fill="white" />
                         </svg>
-                        <p class="text-2xl font-bold text-gray-800">10</p>
+                        <p class="text-2xl font-bold text-gray-800">{{ $penitipanBerlangsung }}</p>
                         <p class="text-sm text-gray-600 font-semibold">Penitipan Berlangsung</p>
                     </div>
 
@@ -76,7 +117,7 @@
                                 fill="white" />
                         </svg>
 
-                        <p class="text-2xl font-bold text-gray-800">8</p>
+                        <p class="text-2xl font-bold text-gray-800">{{ $menujuKePethouse }}</p>
                         <p class="text-sm text-gray-600 font-semibold">Menuju ke Pethouse</p>
                     </div>
                 </div>
@@ -119,6 +160,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('weeklyIncomeChart').getContext('2d');
+
             const weeklyIncomeChart = new Chart(ctx, {
                 type: 'bar',
                 data: {

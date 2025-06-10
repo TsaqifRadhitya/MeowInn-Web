@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\detailLayanan;
+use App\Models\Hewan;
 use App\Models\Layanan;
 use App\Models\Penitipan;
 use App\Models\PetHouse;
@@ -43,7 +44,12 @@ class dashboard extends Controller
     {
         $user = Auth::user();
         $layananAktif = detailLayanan::with('layanan')->where('petHouseId', $user->id)->first();
-        $statusPethouse = !!$user->petHouses?->verificationStatus;
-        return view('pages.petHouse.Dashboard.Index', compact('layananAktif', 'statusPethouse'));
+        $penitipanBerlangsung = Penitipan::where('status', 'sedang dititipkan')->where('petHouseId', $user->id)->count();
+        $menujuKePethouse = Penitipan::whereIn('status', ['menunggu diantar ke pethouse', 'menunggu penjemputan'])->where('petHouseId', $user->id)->count();
+        $statusPethouse = $user->petHouses?->verificationStatus;
+        $totalHewanDititipkan = Hewan::whereHas('penitipan', function ($query) use ($user) {
+            $query->where('petHouseId', $user->id);
+        })->count();
+        return view('pages.petHouse.Dashboard.Index', compact('layananAktif', 'statusPethouse', 'penitipanBerlangsung', 'menujuKePethouse', 'totalHewanDititipkan'));
     }
 }

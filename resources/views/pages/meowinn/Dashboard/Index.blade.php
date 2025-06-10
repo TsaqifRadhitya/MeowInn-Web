@@ -38,7 +38,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div
                         class="bg-gradient-to-br from-amber-50 to-amber-100 p-4 rounded-xl shadow-md border border-amber-100">
                         <div class="flex justify-between items-start">
