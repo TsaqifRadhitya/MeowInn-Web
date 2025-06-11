@@ -14,10 +14,8 @@ class pethouseKelolaLayanan extends Controller
     use HasCloudinary;
     public function index()
     {
-        $layanans = Layanan::where('isdeleted', false)->paginate(4)->through(function ($item) {
-            $item->pethouseLayanan = $item->pethouseLayanans;
-            return $item;
-        });
+        $layanans = Layanan::where('isdeleted', false)->paginate(4);
+
         return view('pages.petHouse.Layanan.Index', compact('layanans'));
     }
 
@@ -29,7 +27,7 @@ class pethouseKelolaLayanan extends Controller
 
     public function show($id)
     {
-        $layanan = detailLayanan::find($id);
+        $layanan = Layanan::find($id);
         if ($layanan) {
             return view('pages.petHouse.Layanan.Show', compact('layanan'));
         }
@@ -39,7 +37,7 @@ class pethouseKelolaLayanan extends Controller
 
     public function edit($id)
     {
-        $layanan = detailLayanan::find($id);
+        $layanan = Layanan::find($id);
         if ($layanan) {
             return view('pages.petHouse.Layanan.Edit', compact('layanan'));
         }
