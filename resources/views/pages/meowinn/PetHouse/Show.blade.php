@@ -50,7 +50,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
-            <p class="text-gray-600">{{ $profilePethouse->alamat ?? 'Jalan Manggar No. 127' }}</p>
+            <p class="text-gray-600 uppercase">{{ $profilePethouse->user->address }} {{ $profilePethouse->user->village->villageName }}, {{ $profilePethouse->user->village->district->districtName }}, {{ $profilePethouse->user->village->district->city->cityName }}, {{ $profilePethouse->user->village->district->city->province->provinceName }}</p>
         </div>
 
         <!-- Stats Cards -->
@@ -68,17 +68,17 @@
         <!-- Description -->
         <div class="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200">
             <h3 class="font-semibold text-gray-700 mb-2">Deskripsi</h3>
-            <p class="text-gray-600">{{ $profilePethouse->deskripsi }}</p>
+            <p class="text-gray-600 break-words">{!! nl2br($profilePethouse->description) !!}</p>
         </div>
     </div>
 
     <!-- Gallery Section -->
     <div class="mb-8">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Foto Lokasi</h2>
-        @if ($profilePethouse->locationPhotos && count($profilePethouse->locationPhotos) > 0)
+        @if ($profilePethouse->locationPhotos && count(json_decode($profilePethouse->locationPhotos)) > 0)
             <div class="swiper mySwiper rounded-2xl shadow lg:max-w-2/3 aspect- mx-auto">
                 <div class="swiper-wrapper">
-                    @foreach ($profilePethouse->locationPhotos as $photo)
+                    @foreach (json_decode($profilePethouse->locationPhotos) as $photo)
                         <div class="swiper-slide">
                             <img src="{{ $photo }}" class="w-full object-cover" alt="Pet House Photo" />
                         </div>

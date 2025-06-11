@@ -250,7 +250,7 @@
                 try {
                     const provinceResponse = await fetch(`${API_BASE_URL}/provinces`);
                     const provinces = await provinceResponse.json();
-                    populateDropdown(provinceSelect, provinces, 'Pilih Provinsi', initialData.provinceId);
+                    populateDropdown(provinceSelect, provinces, 'Pilih Provinsi', initialData.provinceId && JSON.parse(initialData.provinceId).id);
 
                     if (initialData.provinceId) {
                         const provinceId = JSON.parse(initialData.provinceId).id
@@ -258,7 +258,7 @@
                         const cityResponse = await fetch(
                             `${API_BASE_URL}/regencies/${provinceId}`);
                         const cities = await cityResponse.json();
-                        populateDropdown(citySelect, cities, 'Pilih Kota/Kabupaten', provinceId);
+                        populateDropdown(citySelect, cities, 'Pilih Kota/Kabupaten', initialData.cityId && JSON.parse(initialData.cityId).id);
                     }
 
                     if (initialData.cityId) {
@@ -266,7 +266,7 @@
                         const districtResponse = await fetch(
                             `${API_BASE_URL}/districts/${cityId}`);
                         const districts = await districtResponse.json();
-                        populateDropdown(districtSelect, districts, 'Pilih Kecamatan', cityId);
+                        populateDropdown(districtSelect, districts, 'Pilih Kecamatan', initialData.districtId && JSON.parse(initialData.districtId).id );
                     }
 
                     if (initialData.districtId) {
@@ -274,7 +274,7 @@
                         const villageResponse = await fetch(
                             `${API_BASE_URL}/villages/${districtId}`);
                         const villages = await villageResponse.json();
-                        populateDropdown(villageSelect, villages, 'Pilih Kelurahan/Desa', districtId);
+                        populateDropdown(villageSelect, villages, 'Pilih Kelurahan/Desa', initialData.villageId && JSON.parse(initialData.villageId).id );
                     }
 
                 } catch (error) {

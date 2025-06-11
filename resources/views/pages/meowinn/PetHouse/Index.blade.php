@@ -52,14 +52,13 @@
                     <div class="flex flex-col md:flex-row">
                         <div class="md:w-1/4 h-48 md:h-auto overflow-hidden">
                             <img class="w-full object-cover h-48 object-center"
-                                src="{{ $petHouse->locationPhotos ? $petHouse->locationPhotos[0] : 'https://img.daisyui.com/images/stock/photo-1635805737707-575885ab0820.webp' }}"
-                                alt="{{ $petHouse->name }}" />
+                                src="{{ json_decode($petHouse->locationPhotos)[0]}}" alt="{{ $petHouse->name }}" />
                         </div>
 
                         <div class="md:w-3/4 p-4 flex flex-col">
                             <div class="flex-grow">
                                 <h2 class="text-xl font-bold text-gray-800 mb-1">{{ $petHouse->name }}</h2>
-                                <div class="flex items-center text-sm text-gray-500 mb-3">
+                                <div class="flex items-center text-sm text-gray-500 mb-3 uppercase">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -67,7 +66,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                     </svg>
-                                    {{ $petHouse->address }}
+                                    {{ $petHouse->user->address }} {{ $petHouse->user->village->villageName }},{{ $petHouse->user->village->district->districtName }}, {{ $petHouse->user->village->district->city->cityName }}, {{ $petHouse->user->village->district->city->province->provinceName}}
                                 </div>
                                 <p class="text-gray-600 line-clamp-2">{{ $petHouse->description }}</p>
                             </div>
