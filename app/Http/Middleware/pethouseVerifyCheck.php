@@ -16,9 +16,10 @@ class pethouseVerifyCheck
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->petHouses?->verificationStatus === "disetujui") {
+        $status = Auth::user()->petHouses?->verificationStatus;
+        if ($status === "disetujui") {
             return $next($request);
         }
-        return redirect()->route("pethouse.verifikasi.create")->with("error", "Harap Menyelesaikan Verifikasi Pethouse Sebelum Mengakses Fitur Tersebut");
+        return redirect()->route("pethouse.dashboard")->with("error", "Harap Menyelesaikan Verifikasi Pethouse Sebelum Mengakses Fitur Tersebut");
     }
 }

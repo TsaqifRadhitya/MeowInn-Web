@@ -10,20 +10,21 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\pethouseRegisterController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\authController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    // Route::get('register', [RegisteredUserController::class, 'create'])
+    //     ->name('register');
 
-    Route::get('register/option', [RegisteredUserController::class, 'option'])->name('register.option');
+    // Route::get('register/option', [RegisteredUserController::class, 'option'])->name('register.option');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    // Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+    // Route::get('login', [AuthenticatedSessionController::class, 'create'])
+    //     ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    // Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
@@ -37,11 +38,11 @@ Route::middleware('guest')->group(function () {
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
 
-    Route::get('/regiteroption', fn() => view('auth.registerOption'));
+    // Route::get('/regiteroption', fn() => view('auth.registerOption'));
 
-    Route::get('/regiterpethouse', [pethouseRegisterController::class, 'index'])->name('register.pethouse.index');
+    // Route::get('/regiterpethouse', [pethouseRegisterController::class, 'index'])->name('register.pethouse.index');
 
-    Route::post('/regiterpethouse', [pethouseRegisterController::class, 'store'])->name('register.pethouse.store');
+    // Route::post('/regiterpethouse', [pethouseRegisterController::class, 'store'])->name('register.pethouse.store');
 
 });
 
@@ -64,6 +65,33 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('logout');
+    // Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+    //     ->name('logout');
+});
+
+// AuthBaru
+
+Route::post('logout', [authController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::middleware('guest')->group(function () {
+    Route::prefix('login')->group(function () {
+        Route::get('/', [authController::class, 'loginIndex'])->name('login.store');
+        Route::post('/', [authController::class, 'loginStore'])->name('login');
+
+        Route::get('oauth', [authController::class, 'oauthRedirect'])->name('login.oauth');
+    });
+
+    Route::post('oauth', [authController::class, 'oauthCallback'])->name('oauth.callback');
+
+    Route::prefix('register')->group(function () {
+        Route::get('/option', [authController::class, 'registerOption'])->name('register.option');
+
+        Route::get('/', [authController::class, 'registerCustomer'])->name('register');
+        Route::post('/', [authController::class, 'registerCustomerStore'])->name('register.store');
+
+        Route::get('/pethouse', [authController::class, 'registerPethouse'])->name('register.pethouse.index');
+        Route::post('/pethouse', [authController::class, 'registerPethouseStore'])->name('register.pethouse.store');
+
+        Route::get('oauth', [authController::class, 'oauthRedirect'])->name('register.oauth');
+    });
 });

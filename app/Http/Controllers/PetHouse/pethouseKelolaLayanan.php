@@ -14,8 +14,7 @@ class pethouseKelolaLayanan extends Controller
     use HasCloudinary;
     public function index()
     {
-        $layanans = Layanan::where('isdeleted', false)->paginate(4);
-
+        $layanans = Layanan::with('pethouselayanans')->where('isdeleted', false)->paginate(4);
         return view('pages.petHouse.Layanan.Index', compact('layanans'));
     }
 

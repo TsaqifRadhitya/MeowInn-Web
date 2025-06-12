@@ -19,7 +19,7 @@
 
                 @foreach (json_decode($layanan->photos) as $photo)
                     <div class="relative group">
-                        <img src="{{ asset('storage/' . $photo) }}" alt="{{ $layanan->name }}"
+                        <img src="{{ $photo }}" alt="{{ $layanan->name }}"
                             class="w-24 h-24 object-cover rounded-lg shadow-sm border border-gray-200">
                     </div>
                 @endforeach
