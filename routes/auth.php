@@ -81,7 +81,7 @@ Route::middleware('guest')->group(function () {
         Route::get('oauth', [authController::class, 'oauthRedirect'])->name('login.oauth');
     });
 
-    Route::post('oauth', [authController::class, 'oauthCallback'])->name('oauth.callback');
+    Route::get('oauth', [authController::class, 'oauthCallback'])->name('oauth.callback');
 
     Route::prefix('register')->group(function () {
         Route::get('/option', [authController::class, 'registerOption'])->name('register.option');
