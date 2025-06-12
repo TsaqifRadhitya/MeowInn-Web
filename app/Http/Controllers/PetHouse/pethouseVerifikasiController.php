@@ -24,6 +24,7 @@ class pethouseVerifikasiController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        $pethouse = $user->petHouses;
         $validated = $request->validate([
             'phoneNumber' => ['required', 'alpha_num', 'unique:users,phoneNumber,' . $user->id . ',id', 'min:12'],
             'address' => ['required'],
@@ -31,13 +32,13 @@ class pethouseVerifikasiController extends Controller
             'district' => ['required'],
             'city' => ['required'],
             'province' => ['required'],
-            'name' => ['required', 'string', 'unique:pet_houses,name'],
+            'name' => ['required', 'string', 'unique:pet_houses,name,' . $pethouse?->id . ',id'],
             'petCareCost' => ['required', 'numeric', 'min:20000'],
             'locationPhotos' => ['required', 'array'],
             'locationPhotos.*' => ['required', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
             'pickUpService' => ['nullable'],
             'range' => ['required_if:pickUpService,on', 'in:village,district,district'],
-            'description' => ['required', 'string', 'min:300'],
+            'description' => ['required', 'string', 'max:300'],
             'profilePicture' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
 
@@ -97,8 +98,8 @@ class pethouseVerifikasiController extends Controller
             'description' => $validated['description'],
             'pickUpService' => $validated['pickUpService'],
         ];
-        if ($user->petHouses) {
-            $user->petHouses->update($petHouseData);
+        if ($pethouse) {
+            $pethouse->update($petHouseData);
         } else {
             $user->petHouses()->create($petHouseData);
         }

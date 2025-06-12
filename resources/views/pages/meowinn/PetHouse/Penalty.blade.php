@@ -16,7 +16,7 @@
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">No
+                            class="px-6 py-3 text-xs font-medium text-gray-700 uppercase tracking-wider text-center">No
                         </th>
                         <th scope="col"
                             class="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider">Pet
@@ -32,13 +32,14 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @forelse($daftarPenalty as $index => $penalty)
                         <tr class="hover:bg-gray-50 transition-colors duration-150">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium text-gray-900">
                                 {{ $index + 1 }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
                                     <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">{{ $penalty->name }}</div>
+                                        <a href="{{ route('meowinn.pethouse.show', ['id' => $penalty->id]) }}"
+                                            class="text-sm font-medium text-gray-900">{{ $penalty->name }}</a>
                                         <div class="text-sm text-gray-500">ID: {{ $penalty->id }}</div>
                                     </div>
                                 </div>
@@ -46,18 +47,19 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
                                     class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                    {{ $penalty->penalty > 7 ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800' }}">
+                                    {{ $penalty->penalty > 5 ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800' }}">
                                     {{ $penalty->penalty }} days
                                 </span>
                             </td>
-                            <td class="px-6 flex justify-center py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <td
+                                class="px-6 flex items-center justify-center mt-2 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <form id="form-delete-{{ $penalty->id }}"
                                     action="{{ route('meowinn.penalty.delete', ['id' => $penalty->id]) }}"
                                     method="POST" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                        class="text-red-600 hover:text-red-900 transition-colors duration-200 delete-btn"
+                                        class="text-red-600 hover:text-red-900 h-full transition-colors duration-200 delete-btn"
                                         data-pethouse="{{ $penalty->name }}"
                                         data-duration="{{ $penalty->penalty }} days">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"

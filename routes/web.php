@@ -3,6 +3,7 @@
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\midtransController;
 use App\Http\Controllers\ProfileController;
+use Cloudinary\Transformation\Rotate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

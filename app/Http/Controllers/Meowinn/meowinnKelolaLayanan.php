@@ -52,7 +52,8 @@ class meowinnKelolaLayanan extends Controller
             'name' => ['required', 'string', 'unique:layanans,name,' . $id . ',id'],
             'description' => [
                 'required',
-                'string'
+                'string',
+                'max:300'
             ],
             'photos' => ['nullable', 'array'],
             'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
@@ -73,7 +74,8 @@ class meowinnKelolaLayanan extends Controller
             'name' => ['required', 'string', 'unique:layanans,name'],
             'description' => [
                 'required',
-                'string'
+                'string',
+                'max:300'
             ],
             'photos' => ['required', 'array'],
             'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']

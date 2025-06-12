@@ -1,4 +1,5 @@
-<x-meowinn-layout header="Reports" class="p-5 md:p-10 md:pb-0 rounded-2xl @if ($reports->count() > 0) h-fit  @endif" id="content" activeMenu="Reports">
+<x-meowinn-layout header="Reports" class="p-5 md:p-10 md:pb-0 rounded-2xl @if ($reports->count() > 0) h-fit @endif"
+    id="content" activeMenu="Reports">
     <div class="bg-white rounded-2xl shadow-sm p-6 h-full">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
             <h1 class="text-2xl font-bold text-gray-800">Daftar Laporan</h1>
@@ -55,7 +56,7 @@
 
                         @if ($report->pethouse)
                             <div class="mt-4 pt-3 border-t border-gray-100">
-                                <span class="text-sm text-gray-500">Related Pet House:</span>
+                                <span class="text-sm text-gray-500">Pet House:</span>
                                 <a href="{{ route('meowinn.pethouse.show', $report->pethouse->id) }}"
                                     class="ml-2 text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
                                     {{ $report->pethouse->name }}
@@ -65,7 +66,7 @@
 
                         @if ($report->penitipan)
                             <div class="mt-2">
-                                <span class="text-sm text-gray-500">Related Penitipan ID:</span>
+                                <span class="text-sm text-gray-500">Penitipan ID:</span>
                                 <span class="ml-2 text-sm font-medium text-gray-700">
                                     {{ $report->penitipan->id }}
                                 </span>
@@ -82,7 +83,9 @@
                     </svg>
                     <h3 class="mt-4 text-lg font-medium text-gray-700">Daftar laporan tidak ada</h3>
                     @if (!!request('type'))
-                        <p class="mt-1 text-gray-500">Daftar Laporan <span class="font-semibold uppercase text-orange-500">{{ request('type') }}</span> Tidak Tersedia
+                        <p class="mt-1 text-gray-500">Daftar Laporan <span
+                                class="font-semibold uppercase text-orange-500">{{ request('type') }}</span> Tidak
+                            Tersedia
                         </p>
                     @endif
                 </div>

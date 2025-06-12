@@ -108,7 +108,7 @@
                 </div>
 
                 <div class="mt-6 grid grid-cols-1 gap-3">
-                    <a href="#"
+                    <a href="{{ route('login.oauth', ['type' => 'login']) }}"
                         class="w-full inline-flex justify-center items-center py-2.5 px-4 border border-gray-200 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF7B54] transition-all duration-200 hover:border-[#FFB26B]">
                         <svg class="w-5 h-5 mr-2 text-red-500" viewBox="0 0 24 24" fill="currentColor">
                             <path

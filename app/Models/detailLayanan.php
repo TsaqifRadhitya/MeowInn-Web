@@ -12,13 +12,6 @@ class detailLayanan extends Model
     use HasUlids;
     protected $fillable = ['price', 'description', 'photos', 'status', 'LayananId', 'petHouseId'];
 
-    protected function photos(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => json_decode($value, true),
-            set: fn($value) => json_encode($value)
-        );
-    }
     public function pethouse()
     {
         return $this->belongsTo(PetHouse::class, 'petHouseId');
