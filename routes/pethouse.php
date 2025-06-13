@@ -15,11 +15,7 @@ Route::middleware(['auth', pethouseMidleware::class])->group(function () {
 
     Route::prefix("pethouse")->group(function () {
 
-        Route::prefix('profile')->group(function () {
-            Route::get('/', [pethouseProfile::class, 'index'])->name('pethouse.profile.index');
-            Route::get('edit', [pethouseProfile::class, 'edit'])->name('pethouse.profile.edit');
-            Route::patch('edit', [pethouseProfile::class, 'update'])->name('pethouse.profile.update');
-        });
+        Route::get('profile', [pethouseProfile::class, 'index'])->name('pethouse.profile.index');
 
         Route::prefix('verifikasi')->group(function () {
             Route::get('/', [pethouseVerifikasiController::class, 'index'])->name('pethouse.verifikasi.index');
@@ -51,10 +47,9 @@ Route::middleware(['auth', pethouseMidleware::class])->group(function () {
                 Route::patch('/setting', [pethouseKelolaPethouse::class, 'update'])->name('pethouse.setting.update');
                 Route::prefix('layanan')->group(function () {
                     Route::get('/', [pethouseKelolaLayanan::class, 'index'])->name('pethouse.layanan.index');
-                    Route::get('{id}', [pethouseKelolaLayanan::class, 'show'])->name('pethouse.layanan.show');
                     Route::get('{id}/edit', [pethouseKelolaLayanan::class, 'edit'])->name('pethouse.layanan.edit');
                     Route::patch('{id}', [pethouseKelolaLayanan::class, 'update'])->name('pethouse.layanan.update');
-                    Route::delete('{id}', [pethouseKelolaLayanan::class, 'destory'])->name('pethouse.layanan.destroy');
+                    Route::patch('{id}/status', [pethouseKelolaLayanan::class, 'updateStatus'])->name('pethouse.layanan.status');
                 });
             });
         });

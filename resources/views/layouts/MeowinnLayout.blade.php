@@ -248,7 +248,7 @@
                             onclick="handleOpenAndClose('#user-dropdown','#user-dropdown-icon','#user-dropdown-button')"
                             id="user-dropdown-button" class="flex items-center space-x-2 focus:outline-none">
                             <img src="{{ Auth::user()->profilePicture ?? asset('asset/profile.png') }}"
-                                class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#F69246] font-bold">
+                                class="w-8 h-8 rounded-full object-center object-cover bg-white flex items-center justify-center text-[#F69246] font-bold">
                             <svg id="user-dropdown-icon" class="w-4 h-4 text-white" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

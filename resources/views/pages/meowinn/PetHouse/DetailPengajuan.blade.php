@@ -1,4 +1,4 @@
-<x-pethouse-layout header="Status Verifikasi Pethouse" class="p-5 md:p-10 md:pb-0" id="content">
+<x-meowinn-layout header="Status Verifikasi Pethouse" class="p-5 md:p-10 md:pb-0" id="content">
     <div class="mx-auto bg-white overflow-hidden mb-8">
         <div class="text-center mb-8">
             <div class="w-16 h-2 bg-[#F69246] mx-auto mb-4 rounded-full"></div>
@@ -11,14 +11,14 @@
                 <div class="flex items-center">
                     <div
                         class="p-3 rounded-full mr-4
-                        @if ($user->pethouses->verificationStatus == 'disetujui') bg-green-100 text-green-600
-                        @elseif($user->pethouses->verificationStatus == 'ditolak') bg-red-100 text-red-600
+                        @if ($pethouse->verificationStatus == 'disetujui') bg-green-100 text-green-600
+                        @elseif($pethouse->verificationStatus == 'ditolak') bg-red-100 text-red-600
                         @else bg-yellow-100 text-yellow-600 @endif">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            @if ($user->pethouses->verificationStatus == 'disetujui')
+                            @if ($pethouse->verificationStatus == 'disetujui')
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M5 13l4 4L19 7"></path>
-                            @elseif($user->pethouses->verificationStatus == 'ditolak')
+                            @elseif($pethouse->verificationStatus == 'ditolak')
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M6 18L18 6M6 6l12 12"></path>
                             @else
@@ -30,18 +30,18 @@
 
                     <div>
                         <h3 class="text-lg font-semibold text-gray-800">
-                            @if ($user->pethouses->verificationStatus == 'disetujui')
+                            @if ($pethouse->verificationStatus == 'disetujui')
                                 Verifikasi Disetujui
-                            @elseif($user->pethouses->verificationStatus == 'ditolak')
+                            @elseif($pethouse->verificationStatus == 'ditolak')
                                 Verifikasi Ditolak
                             @else
                                 Menunggu Verifikasi
                             @endif
                         </h3>
                         <p class="text-sm text-gray-500">
-                            @if ($user->pethouses->verificationStatus == 'disetujui')
+                            @if ($pethouse->verificationStatus == 'disetujui')
                                 Pethouse Anda telah diverifikasi dan aktif
-                            @elseif($user->pethouses->verificationStatus == 'ditolak')
+                            @elseif($pethouse->verificationStatus == 'ditolak')
                                 Pengajuan verifikasi Anda ditolak
                             @else
                                 Pengajuan sedang dalam proses verifikasi
@@ -52,10 +52,10 @@
 
                 <span
                     class="px-4 py-2 rounded-full text-sm font-medium capitalize flex items-center justify-center
-                    @if ($user->pethouses->verificationStatus == 'disetujui') bg-green-100 text-green-800
-                    @elseif($user->pethouses->verificationStatus == 'ditolak') bg-red-100 text-red-800
+                    @if ($pethouse->verificationStatus == 'disetujui') bg-green-100 text-green-800
+                    @elseif($pethouse->verificationStatus == 'ditolak') bg-red-100 text-red-800
                     @else bg-yellow-100 text-yellow-800 @endif">
-                    <p> {{ $user->pethouses->verificationStatus }}</p>
+                    <p> {{ $pethouse->verificationStatus }}</p>
                 </span>
             </div>
 
@@ -69,38 +69,39 @@
                 <div class="grid md:grid-cols-2 gap-6">
                     <div>
                         <h4 class="text-sm font-medium text-gray-500">Nama Pethouse</h4>
-                        <p class="text-gray-800 mt-1">{{ $user->pethouses->name }}</p>
+                        <p class="text-gray-800 mt-1">{{ $pethouse->name }}</p>
                     </div>
 
                     <div>
                         <h4 class="text-sm font-medium text-gray-500">Nomor Telepon</h4>
                         <p class="text-gray-800 mt-1">
-                            {{ $user->phoneNumber }}
+                            {{ $pethouse->user->phoneNumber }}
                         </p>
                     </div>
 
                     <div>
                         <h4 class="text-sm font-medium text-gray-500">Biaya Perawatan</h4>
                         <p class="text-gray-800 mt-1">
-                            Rp{{ number_format($user->pethouses->petCareCost, 0, ',', '.') }}/hari
+                            Rp{{ number_format($pethouse->petCareCost, 0, ',', '.') }}/hari
                         </p>
                     </div>
 
                     <div>
                         <h4 class="text-sm font-medium text-gray-500">Lokasi</h4>
-                        <p class="text-gray-800 mt-1">{{ $user->village->villageName }},
-                            {{ $user->village->district->districtName }}, {{ $user->village->district->city->cityName }}
+                        <p class="text-gray-800 mt-1">{{ $pethouse->user->village->villageName }},
+                            {{ $pethouse->user->village->district->districtName }},
+                            {{ $pethouse->user->village->district->city->cityName }}
                         </p>
                     </div>
 
                     <div>
                         <h4 class="text-sm font-medium text-gray-500">Jangkauan Antar jemputan</h4>
                         <p class="text-gray-800 mt-1">
-                            @if ($user->pethouses->range == 'village')
+                            @if ($pethouse->range == 'village')
                                 Dalam Desa/Kelurahan
-                            @elseif($user->pethouses->range == 'district')
+                            @elseif($pethouse->range == 'district')
                                 Dalam Kecamatan
-                            @elseif($user->pethouses->range == 'city')
+                            @elseif($pethouse->range == 'city')
                                 Dalam Kota/Kabupaten
                             @else
                                 -
@@ -110,12 +111,12 @@
 
                     <div>
                         <h4 class="text-sm font-medium text-gray-500">Alamat Lengkap</h4>
-                        <p class="text-gray-800 mt-1">{{ $user->address }}</p>
+                        <p class="text-gray-800 mt-1">{{ $pethouse->user->address }}</p>
                     </div>
 
                     <div class="md:col-span-2">
                         <h4 class="text-sm font-medium text-gray-500">Deskripsi</h4>
-                        <p class="text-gray-800 mt-1 break-words">{!! nl2br($user->pethouses->description) !!}</p>
+                        <p class="text-gray-800 mt-1 break-words">{!! nl2br($pethouse->description) !!}</p>
                     </div>
                 </div>
             </div>
@@ -127,7 +128,7 @@
                 </h3>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    @foreach (json_decode($user->pethouses->locationPhotos) as $photo)
+                    @foreach (json_decode($pethouse->locationPhotos) as $photo)
                         <div class="relative group">
                             <img src="{{ $photo }}" alt="Foto Pethouse"
                                 class="w-full h-48 object-cover rounded-lg">
@@ -147,17 +148,28 @@
             </div>
 
             <div class="mt-8 flex flex-col sm:flex-row justify-end gap-4">
-                @if ($user->pethouses->verificationStatus == 'ditolak')
-                    <a href="{{ route('pethouse.verifikasi.create') }}"
-                        class="px-6 py-3 bg-[#F69246] text-white font-medium rounded-lg shadow-md hover:bg-[#e07f35] text-center transition-colors duration-200">
-                        Ajukan Ulang Verifikasi
-                    </a>
+                @if ($pethouse->verificationStatus == 'menunggu persetujuan')
+                    <section class="flex flex-col gap-y-2.5 gap-x-5 md:flex-row w-full justify-end">
+                        <form method="POST" action="{{ route('meowinn.pengajuanpethouse.delete', $pethouse->id) }}"
+                            class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="px-6 py-3 min-w-32 border w-full border-[#F69246] cursor-pointer hover:bg-[#F69246] hover:text-white text-[#F69246] font-medium rounded-lg bg-orange-50 text-center transition-colors duration-200"">
+                                <i class="fas fa-times mr-1"></i> Tolak
+                            </button>
+                        </form>
+                        <form method="POST" action="{{ route('meowinn.pengajuanpethouse.update', $pethouse->id) }}"
+                            class="inline">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit"
+                                class="px-6 py-3 min-w-32 border w-full border-[#F69246] cursor-pointer hover:text-[#F69246] bg-[#F69246] text-white font-medium rounded-lg hover:bg-orange-50 text-center transition-colors duration-200"">
+                                <i class="fas fa-check mr-1"></i> Approve
+                            </button>
+                        </form>
+                    </section>
                 @endif
-
-                <a href="{{ route('pethouse.dashboard') }}"
-                    class="px-6 py-3 border border-[#F69246] text-[#F69246] font-medium rounded-lg hover:bg-orange-50 text-center transition-colors duration-200">
-                    Kembali ke Dashboard
-                </a>
             </div>
         </div>
-</x-pethouse-layout>
+</x-meowinn-layout>

@@ -1,27 +1,21 @@
 <x-pethouse-layout header="Layanan" class="p-5 md:p-10 md:pb-0" id="content" activeMenu="Pet House">
     <div class="max-w-7xl mx-auto">
-        <!-- Header and Add Button -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
             <div>
                 <h1 class="text-2xl font-bold text-gray-800">Daftar Layanan</h1>
                 <p class="text-gray-600">Kelola layanan yang tersedia di pethouse Anda</p>
             </div>
         </div>
-
-        <!-- Services List -->
         <div class="bg-white rounded-xl shadow overflow-hidden">
             @if ($layanans->count() > 0)
                 <div class="divide-y divide-gray-200">
                     @foreach ($layanans as $layanan)
                         <div class="p-4 hover:bg-gray-50 transition-colors">
                             <div class="flex flex-col md:flex-row gap-4">
-                                <!-- Service Image -->
                                 <div class="w-full md:w-48 h-40 flex-shrink-0 rounded-lg overflow-hidden">
                                     <img src="{{ json_decode($layanan->pethouselayanans?->photos ?? $layanan->photos)[0] }}"
                                         alt="{{ $layanan->name }}" class="w-full h-full object-cover">
                                 </div>
-
-                                <!-- Service Details -->
                                 <div class="flex-grow">
                                     <div class="flex flex-col h-full">
                                         <!-- Status and Name -->
@@ -39,14 +33,10 @@
                                             <span
                                                 class="text-lg font-bold text-[#F69246]">Rp{{ number_format($layanan->pethouselayanans?->price ?? 0, 0, ',', '.') }}</span>
                                         </div>
-
-                                        <!-- Description -->
                                         <p class="text-gray-600 mt-2 line-clamp-2 break-words">{!! nl2br($layanan->pethouselayanans?->description ?? $layanan->description) !!}
                                         </p>
-
-                                        <!-- Action Buttons -->
                                         <div class="mt-auto pt-4 flex flex-wrap gap-2">
-                                            <a href="{{ route('pethouse.layanan.show', $layanan->id) }}"
+                                            {{-- <a href="{{ route('pethouse.layanan.show', $layanan->id) }}"
                                                 class="px-3 py-1.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors text-sm flex items-center">
                                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
                                                     viewBox="0 0 24 24">
@@ -58,7 +48,7 @@
                                                     </path>
                                                 </svg>
                                                 Detail
-                                            </a>
+                                            </a> --}}
                                             <a href="{{ route('pethouse.layanan.edit', $layanan->id) }}"
                                                 class="px-3 py-1.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors text-sm flex items-center">
                                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
@@ -70,10 +60,12 @@
                                                 </svg>
                                                 Edit
                                             </a>
-                                            <form action="{{ route('pethouse.layanan.update', $layanan->id) }}"
+                                            <form action="{{ route('pethouse.layanan.status', $layanan->id) }}"
                                                 method="POST" class="inline">
                                                 @csrf
                                                 @method('PATCH')
+                                                <input type="hidden" name="isActive"
+                                                    value="{{ $layanan->pethouselayanans?->isActive ? false : true }}">
                                                 <button type="submit"
                                                     class="px-3 py-1.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors text-sm flex items-center">
                                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor"
@@ -93,8 +85,6 @@
                         </div>
                     @endforeach
                 </div>
-
-                <!-- Pagination -->
                 <div class="px-4 py-3 bg-gray-50 border-t border-gray-200">
                     {{ $layanans->links() }}
                 </div>

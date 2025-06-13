@@ -6,7 +6,6 @@
                 <h1 class="text-2xl font-bold text-gray-800">Daftar Pet House</h1>
                 <p class="text-gray-600 mt-1">Kelola semua pet house yang terdaftar</p>
             </div>
-
             <form class="w-full md:w-auto" action="{{ route('meowinn.pethouse.index') }}" method="GET">
                 <div class="relative">
                     <input type="search" id="search-dropdown" name="search" value="{{ request('search') }}"
@@ -23,7 +22,6 @@
                 </div>
             </form>
         </div>
-
         @if (count($daftarPethouse) == 0)
             <div
                 class="bg-gray-50 rounded-lg p-8 text-center border border-gray-200 h-2/3 flex flex-col justify-center items-center">
@@ -32,8 +30,6 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                         d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-
-
                 @if (count($daftarPethouse) == 0 && request('search'))
                     <h3 class="mt-4 text-lg font-medium text-gray-700">Pecarian Pet House Tidak Ditemukan</h3>
                 @else
@@ -44,7 +40,6 @@
                 @endif
             </div>
         @endif
-
         <div class="grid grid-cols-1 gap-4 max-h-[65vh] overflow-y-auto">
             @foreach ($daftarPethouse as $petHouse)
                 <div
@@ -69,25 +64,10 @@
                             </div>
                             <p class="text-gray-600 line-clamp-2 break-words">{!! nl2br($petHouse->description) !!}</p>
                         </div>
-
-                        <div class="mt-4 flex justify-end">
-                            <a href="{{ route('meowinn.pethouse.show', ['id' => $petHouse->id]) }}"
-                                class="btn btn-primary px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                </svg>
-                                Lihat Detail
-                            </a>
-                        </div>
                     </div>
                 </div>
             @endforeach
         </div>
-
         <div class="mt-6 flex justify-center">
             {{ $daftarPethouse->links() }}
         </div>

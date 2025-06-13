@@ -1,5 +1,4 @@
 <x-meowinn-layout header="Daftar Layanan" id="content" activeMenu="Layanan" class="p-10">
-    <!-- Success Message -->
     @if (Session::has('message'))
         <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6 rounded-lg shadow-sm">
             <div class="flex items-center">
@@ -12,8 +11,6 @@
             </div>
         </div>
     @endif
-
-    <!-- Header Section -->
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Daftar Layanan</h1>
@@ -29,8 +26,6 @@
             Tambah Layanan
         </a>
     </div>
-
-    <!-- Services Grid -->
     <div class="grid grid-cols-1 gap-6 pb-16">
         @forelse ($layanans as $layanan)
             <div
@@ -44,8 +39,6 @@
                             class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         </div>
                     </div>
-
-                    <!-- Service Content -->
                     <div class="lg:w-2/3 p-6 flex flex-col">
                         <div class="flex-grow">
                             <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $layanan->name }}</h3>
@@ -53,8 +46,6 @@
                                 {!! nl2br($layanan->description) !!}
                             </div>
                         </div>
-
-                        <!-- Action Buttons -->
                         <div class="flex flex-wrap gap-3 justify-end mt-4">
                             <a href="{{ route('meowinn.layanan.show', $layanan->id) }}"
                                 class="inline-flex items-center px-4 py-2 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors">
@@ -67,7 +58,6 @@
                                 </svg>
                                 Detail
                             </a>
-
                             <a href="{{ route('meowinn.layanan.edit', $layanan->id) }}"
                                 class="inline-flex items-center px-4 py-2 bg-yellow-50 text-yellow-600 rounded-lg hover:bg-yellow-100 transition-colors">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
@@ -77,7 +67,6 @@
                                 </svg>
                                 Edit
                             </a>
-
                             <form method="POST" action="{{ route('meowinn.layanan.destroy', $layanan->id) }}"
                                 class="inline">
                                 @csrf
@@ -103,7 +92,6 @@
                 </div>
             </div>
         @empty
-            <!-- Empty State -->
             <div class="bg-white rounded-xl shadow-sm p-8 text-center border border-gray-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-gray-400" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
@@ -127,9 +115,6 @@
             </div>
         @endforelse
     </div>
-
-    <!-- Pagination would go here if needed -->
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function confirmDelete(form, layananName) {

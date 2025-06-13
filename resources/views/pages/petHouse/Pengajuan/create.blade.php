@@ -1,6 +1,5 @@
 <x-pethouse-layout header="Pengajuan Verifikasi Pethouse" class="md:p-10 md:pb-0 p-5" id="content">
-    <div class="mx-auto bg-white rounded-xl shadow-lg overflow-hidden p-6 mb-8 border border-orange-100">
-        <!-- Header with accent color -->
+    <div class="mx-auto bg-white overflow-hidden mb-8">
         <div class="text-center mb-8">
             <div class="w-16 h-2 bg-[#F69246] mx-auto mb-4 rounded-full"></div>
             <h1 class="text-3xl font-bold text-gray-800">Formulir Verifikasi Pethouse</h1>
@@ -10,38 +9,31 @@
         <form method="POST" action="{{ route('pethouse.verifikasi.store') }}" enctype="multipart/form-data"
             class="space-y-8">
             @csrf
-
-            <!-- Basic Information Section -->
             <div class="bg-orange-50 p-6 rounded-lg">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
                     <span class="w-3 h-3 bg-[#F69246] rounded-full mr-2"></span>
                     Informasi Dasar
                 </h2>
-
                 <div class="grid md:grid-cols-2 gap-6">
-                    <!-- Pethouse Name -->
                     <div>
                         <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Pethouse</label>
-                        <input type="text" id="name" name="name" value="{{ old('name') }}"
-                            placeholder="nama pethouse"
+                        <input type="text" id="name" name="name"
+                            value="{{ old('name', $user->petHouses?->name) }}" placeholder="nama pethouse"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#F69246] focus:border-[#F69246] placeholder-gray-400">
                         @error('name')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-
                     <div>
                         <label for="phoneNumber" class="block text-sm font-medium text-gray-700 mb-1">Nomor
                             Telepon</label>
-                        <input type="text" id="phoneNumber" name="phoneNumber" value="{{ old('phoneNumber') }}"
-                            placeholder="nomor telepon"
+                        <input type="text" id="phoneNumber" name="phoneNumber"
+                            value="{{ old('phoneNumber', $user->phoneNumber) }}" placeholder="nomor telepon"
                             class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#F69246] focus:border-[#F69246] placeholder-gray-400">
                         @error('phoneNumber')
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-
-                    <!-- Pet Care Cost -->
                     <div>
                         <label for="petCareCost" class="block text-sm font-medium text-gray-700 mb-1">Biaya Perawatan
                             per Hari</label>
@@ -49,7 +41,8 @@
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <span class="text-gray-500">Rp</span>
                             </div>
-                            <input type="number" id="petCareCost" name="petCareCost" value="{{ old('petCareCost') }}"
+                            <input type="number" id="petCareCost" name="petCareCost"
+                                value="{{ old('petCareCost', $user->petHouses?->petCareCost) }}"
                                 placeholder="biaya penitipan"
                                 class="pl-10 w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#F69246] focus:border-[#F69246]">
                         </div>
@@ -58,27 +51,22 @@
                         @enderror
                     </div>
                 </div>
-
-                <!-- Description -->
                 <div class="mt-6">
                     <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi
                         Pethouse</label>
                     <textarea id="description" name="description" rows="4"
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-[#F69246] focus:border-[#F69246] placeholder-gray-400"
-                        placeholder="penjelasan pethouse">{{ old('description', $pethouse->description ?? '') }}</textarea>
+                        placeholder="penjelasan pethouse">{{ old('description', $user->petHouses?->description) }}</textarea>
                     @error('description')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
-
-            <!-- Location Information Section -->
             <div class="bg-orange-50 p-6 rounded-lg">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
                     <span class="w-3 h-3 bg-[#F69246] rounded-full mr-2"></span>
                     Informasi Lokasi
                 </h2>
-
                 <div class="space-y-4">
                     <div>
                         <label for="province" class="block text-sm font-medium text-gray-700 mb-1">Provinsi</label>
@@ -129,22 +117,20 @@
                         <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Alamat
                             Lengkap</label>
                         <textarea name="address" id="address" rows="3"
-                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ old('address') }}</textarea>
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ old('address', $user->address) }}</textarea>
                         @error('address')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
-
-                <!-- Service Range -->
                 <div class="mt-6">
-                    <label class="block text-sm font-medium text-gray-700 mb-3">Jangkauan Layanan</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Jangkauan Antar Jemput</label>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <label
                             class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-orange-50 hover:border-[#F69246] transition-colors has-[:checked]:border-[#F69246] has-[:checked]:bg-orange-50">
                             <input id="range-village" name="range" type="radio" value="village"
                                 class="h-4 w-4 text-[#F69246] focus:ring-[#F69246] border-gray-300"
-                                {{ old('range') == 'village' ? 'checked' : '' }}>
+                                {{ old('range', $user->petHouses?->range) == 'village' ? 'checked' : '' }}>
                             <span class="ml-3 block text-sm font-medium text-gray-700">
                                 Dalam Desa/Kelurahan
                             </span>
@@ -162,7 +148,7 @@
                             class="flex items-center p-3 border border-gray-300 rounded-lg cursor-pointer hover:bg-orange-50 hover:border-[#F69246] transition-colors has-[:checked]:border-[#F69246] has-[:checked]:bg-orange-50">
                             <input id="range-city" name="range" type="radio" value="city"
                                 class="h-4 w-4 text-[#F69246] focus:ring-[#F69246] border-gray-300"
-                                {{ old('range', $pethouse->range ?? '') == 'city' ? 'checked' : '' }}>
+                                {{ old('range', $user->petHouses?->range) == 'city' ? 'checked' : '' }}>
                             <span class="ml-3 block text-sm font-medium text-gray-700">
                                 Dalam Kota/Kabupaten
                             </span>
@@ -172,12 +158,10 @@
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
-
-                <!-- Pickup Service -->
                 <div class="mt-6 flex items-center">
                     <input id="pickUpService" name="pickUpService" type="checkbox"
                         class="h-4 w-4 text-[#F69246] focus:ring-[#F69246] border-gray-300 rounded"
-                        {{ old('pickUpService', $pethouse->pickUpService ?? false) ? 'checked' : '' }}>
+                        {{ old('pickUpService', $user->petHouses?->pickUpService) ? 'checked' : '' }}>
                     <label for="pickUpService" class="ml-3 block text-sm font-medium text-gray-700">
                         Menyediakan layanan penjemputan hewan
                     </label>
@@ -186,8 +170,6 @@
                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>
-
-            <!-- Photos Section -->
             <div class="bg-orange-50 p-6 rounded-lg">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
                     <span class="w-3 h-3 bg-[#F69246] rounded-full mr-2"></span>
@@ -195,8 +177,6 @@
                 </h2>
                 <p class="text-sm text-gray-600 mb-6">Unggah foto yang menunjukkan fasilitas pethouse Anda (maksimal
                     5MB per foto)</p>
-
-                <!-- Multiple Photo Upload -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-3">Foto Fasilitas Pethouse</label>
                     <div
@@ -214,10 +194,7 @@
                             <span class="text-xs">(Bisa pilih beberapa foto sekaligus)</span>
                         </span>
                     </div>
-
-                    <!-- Photo Previews Container -->
                     <div id="photoPreviewsContainer"></div>
-
                     @error('locationPhotos')
                         <p class="mt-3 text-sm text-red-600">{{ $message }}</p>
                     @enderror
@@ -225,8 +202,6 @@
                         <p class="mt-3 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
-
-                <!-- Profile Picture -->
                 <div class="mt-8">
                     <label class="block text-sm font-medium text-gray-700 mb-3">Foto Profil Anda</label>
                     <div class="flex items-center space-x-6">
@@ -269,24 +244,21 @@
                     @enderror
                 </div>
             </div>
-
-
-            <!-- Submission -->
             <div class="flex justify-center">
                 <button type="submit"
-                    class="px-8 py-3 bg-[#F69246] text-white font-medium rounded-lg shadow-md hover:bg-[#e07f35] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F69246] transition-colors duration-200 transform hover:scale-105">
+                    class="px-8 py-3 cursor-pointer bg-[#F69246] text-white font-medium rounded-lg shadow-md hover:bg-[#e07f35] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F69246] transition-colors duration-200 transform hover:scale-105">
                     <span class="flex items-center justify-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7">
                             </path>
                         </svg>
-                        Ajukan Verifikasi Sekarang
+                        Ajukan {{ !!$user->petHouses ? 'Ulang' : '' }} Verifikasi
+                        {{ !$user->petHouses ? 'Sekarang' : '' }}
                     </span>
                 </button>
             </div>
         </form>
     </div>
-
     <style>
         input[type="file"]::file-selector-button {
             display: none;
@@ -296,7 +268,6 @@
             display: none;
         }
     </style>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const profilePictureInput = document.getElementById('profilePicture');
@@ -314,16 +285,12 @@
                     reader.readAsDataURL(e.target.files[0]);
                 }
             });
-
-            // Multiple Photos Preview
             const locationPhotosInput = document.getElementById('locationPhotos');
             const photoPreviewsContainer = document.getElementById('photoPreviewsContainer');
             let selectedFiles = [];
 
             locationPhotosInput.addEventListener('change', function(e) {
                 const files = Array.from(e.target.files);
-
-                // Add new files to selected files array
                 files.forEach(file => {
                     if (!selectedFiles.some(f => f.name === file.name && f.size === file.size)) {
                         selectedFiles.push(file);
@@ -363,13 +330,11 @@
             }
 
             function updateFileInput() {
-                // Create new DataTransfer object
                 const dt = new DataTransfer();
                 selectedFiles.forEach(file => dt.items.add(file));
                 locationPhotosInput.files = dt.files;
             }
 
-            // Make removePhoto function global
             window.removePhoto = function(index) {
                 selectedFiles.splice(index, 1);
                 updatePhotoPreview();
@@ -383,12 +348,22 @@
             const villageSelect = document.getElementById('village');
 
             const initialData = {
-                provinceId: {!! json_encode(old('province')) !!},
-                cityId: {!! json_encode(old('city')) !!},
-                districtId: {!! json_encode(old('district')) !!},
-                villageId: {!! json_encode(old('village')) !!}
+                provinceId: {!! json_encode(
+                    old(
+                        'province',
+                        !!$user->village?->district?->city?->province
+                            ? json_encode($user->village?->district?->city?->province?->toArray())
+                            : null,
+                    ),
+                ) !!},
+                cityId: {!! json_encode(
+                    old('city', !!$user->village?->district?->city ? json_encode($user->village?->district?->city?->toArray()) : null),
+                ) !!},
+                districtId: {!! json_encode(
+                    old('district', !!$user->village?->district ? json_encode($user->village?->district?->toArray()) : null),
+                ) !!},
+                villageId: {!! json_encode(old('village', !!$user->villageId ? json_encode(['id' => $user->villageId]) : null)) !!}
             };
-
             const populateDropdown = (selectElement, data, placeholder, selectedValue = null) => {
                 selectElement.innerHTML = `<option value="">${placeholder}</option>`;
                 data.forEach(item => {
@@ -468,21 +443,27 @@
                         const cityResponse = await fetch(
                             `${API_BASE_URL}/regencies/${provinceId}`);
                         const cities = await cityResponse.json();
-                        populateDropdown(citySelect, cities, 'Pilih Kota/Kabupaten', JSON.parse(initialData.cityId).id)
+                        populateDropdown(citySelect, cities, 'Pilih Kota/Kabupaten', initialData.cityId &&
+                            JSON.parse(initialData
+                                .cityId).id)
                     }
                     if (initialData.cityId) {
                         const cityId = JSON.parse(initialData.cityId).id
                         const districtResponse = await fetch(
                             `${API_BASE_URL}/districts/${cityId}`);
                         const districts = await districtResponse.json();
-                        populateDropdown(districtSelect, districts, 'Pilih Kecamatan', JSON.parse(initialData.districtId).id);
+                        populateDropdown(districtSelect, districts, 'Pilih Kecamatan', initialData
+                            .districtId && JSON.parse(
+                                initialData.districtId).id);
                     }
                     if (initialData.districtId) {
                         const districtId = JSON.parse(initialData.districtId).id
                         const villageResponse = await fetch(
                             `${API_BASE_URL}/villages/${districtId}`);
                         const villages = await villageResponse.json();
-                        populateDropdown(villageSelect, villages, 'Pilih Kelurahan/Desa', JSON.parse(initialData.villageId).id);
+                        populateDropdown(villageSelect, villages, 'Pilih Kelurahan/Desa', initialData
+                            .villageId && JSON.parse(
+                                initialData.villageId).id);
                     }
 
                 } catch (error) {

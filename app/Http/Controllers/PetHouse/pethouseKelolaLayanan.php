@@ -44,8 +44,19 @@ class pethouseKelolaLayanan extends Controller
         abort(404);
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        $layanan = Layanan::find($id)->pethouselayanans;
+        if (!$layanan || !$layanan?->price) {
+            return back()->with('error', 'Harap mengatur harga layanan terlebih dahulu');
+        }
+        $status = $request->isActive === "1" ? true : false;
+        $layanan->update(['isActive' => $status]);
+        return back()->with('success', 'Barhasil mengubah status layanan');
+    }
     public function update(Request $request, $id)
     {
+        dd($request->all());
         $validated = $request->validate([
             'price' => ['numeric', 'required', 'min:1'],
             'description' => ['nullable', 'string', 'min:1'],

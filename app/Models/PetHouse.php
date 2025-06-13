@@ -13,15 +13,6 @@ class PetHouse extends Model
     use HasUlids;
 
     protected $fillable = ['name', 'petCareCost', 'description', 'locationPhotos', 'penalty', 'isOpen', 'verificationStatus', 'pickUpService', 'range', 'userId'];
-
-    protected function locationPhotos(): Attribute
-    {
-        return Attribute::make(
-            get: fn($value) => json_decode($value, true),
-            set: fn($value) => json_encode($value)
-        );
-    }
-
     public function user()
     {
         return $this->belongsTo(User::class, 'userId');

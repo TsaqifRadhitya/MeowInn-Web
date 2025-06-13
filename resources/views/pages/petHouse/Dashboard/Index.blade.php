@@ -3,7 +3,6 @@
         <section
             class="absolute inset-0 z-10 backdrop-blur-md flex flex-col items-center justify-center p-6 transition-all duration-300">
             <div class="max-w-md w-full p-8  text-center animate-fade-in-up">
-                <!-- Animated Illustration -->
                 <div class="mb-6 animate-bounce-slow">
                     <svg class="w-32 h-32 mx-auto" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="64" cy="64" r="60" fill="#FEE2E2" />
@@ -17,7 +16,6 @@
                         <path d="M88 24L104 8" stroke="#EF4444" stroke-width="4" stroke-linecap="round" />
                     </svg>
                 </div>
-
                 <h2 class="text-2xl font-bold text-gray-800 mb-3">
                     @if ($statusPethouse)
                         Menunggu Verifikasi Pethouse
@@ -27,7 +25,6 @@
                 </h2>
                 <p class="text-gray-600 mb-6">Untuk mengakses semua fitur, Anda perlu menyelesaikan verifikasi pethouse
                     terlebih dahulu. Proses verifikasi biasanya memakan waktu 1-2 hari kerja.</p>
-
                 <div class="space-y-4">
                     <a href="{{ route($statusPethouse ? 'pethouse.verifikasi.index' : 'pethouse.verifikasi.create') }}"
                         class="inline-flex items-center justify-center w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200">
@@ -46,9 +43,7 @@
         </section>
     @endif
     <div class="flex flex-col lg:flex-row gap-6">
-
         <div class="flex-grow flex flex-col gap-6">
-
             <div>
                 <h2 class="text-lg font-semibold text-gray-700 mb-4">Informasi Pethouse</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
@@ -63,7 +58,6 @@
                         <p class="text-2xl font-bold text-gray-800">Rp2.500.000</p>
                         <p class="text-sm text-gray-600 font-semibold">Pendapatan Bulanan</p>
                     </div>
-
                     <div class="bg-[#FFF4DE] p-4 rounded-xl flex flex-col gap-4 justify-center shadow">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -94,7 +88,6 @@
                         <p class="text-2xl font-bold text-gray-800">{{ $totalHewanDititipkan }}</p>
                         <p class="text-sm text-gray-600 font-semibold">Total Hewan Dititipkan</p>
                     </div>
-
                     <div class="bg-green-100 p-4 rounded-xl flex flex-col gap-4 shadow">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -106,8 +99,6 @@
                         <p class="text-2xl font-bold text-gray-800">{{ $penitipanBerlangsung }}</p>
                         <p class="text-sm text-gray-600 font-semibold">Penitipan Berlangsung</p>
                     </div>
-
-                    {{-- 4. Sedang Diantar --}}
                     <div class="bg-purple-100 p-4 rounded-xl flex flex-col gap-4 shadow">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -116,22 +107,18 @@
                                 d="M17.3733 12.6326L17.3856 9.40155L20.6133 9.41843C22.9296 9.4308 23.8994 9.45105 24.0445 9.4893C25.0716 9.76268 25.8738 10.4456 26.2743 11.3883C26.5713 12.2073 26.8548 13.0319 27.1259 13.8599L27.8538 16.0402L29.0463 16.3349C30.5695 16.7107 30.8631 16.8434 31.4256 17.4116C31.8678 17.857 32.1366 18.3205 32.2806 18.8842C32.3639 19.2093 32.3695 19.3916 32.3695 21.8328V24.436H28.4714L28.2734 24.8298C27.9933 25.3855 27.424 25.9559 26.8795 26.2259C26.6691 26.3306 26.3654 26.4498 26.2045 26.4914C25.804 26.5949 24.9771 26.5927 24.5845 26.4881C23.6856 26.2417 22.9353 25.6229 22.5235 24.7871L22.357 24.4417L18.9685 24.4383L15.58 24.436L15.4866 24.6498C15.2391 25.2179 14.7115 25.8153 14.1715 26.1404C13.1961 26.7277 11.8529 26.7277 10.8775 26.1404C10.3375 25.8153 9.80989 25.2179 9.56239 24.6498L9.46902 24.436H6.62952V15.8861L11.9958 15.8748L17.362 15.8636L17.3733 12.6326ZM23.6463 11.6178C23.5248 11.5818 22.8621 11.5661 21.4851 11.5661H19.4995V18.001L8.76702 18.0236V22.2985L9.10789 22.312L9.44764 22.3244L9.63439 21.9521C10.0641 21.0959 10.9158 20.413 11.7854 20.2285C12.2703 20.1431 12.7675 20.1431 13.2524 20.2297C14.1355 20.4142 14.9815 21.0881 15.4135 21.9498L15.5991 22.3211H22.339L22.4324 22.1073C22.6799 21.5392 23.2188 20.9261 23.7588 20.5987C24.3933 20.2128 25.345 20.0609 26.1145 20.2229C27.0325 20.4164 27.9246 21.1376 28.3341 22.0184L28.477 22.3233L29.3545 22.3109L30.232 22.2985V20.8586C30.232 19.4332 30.2309 19.4163 30.1251 19.2014C29.9215 18.7886 29.782 18.7256 28.2295 18.3408L26.857 17.9999H24.2583L21.6595 18.001V15.8861H23.5641C24.6126 15.8861 25.4811 15.8748 25.4958 15.8602C25.525 15.8309 24.3584 12.3221 24.2504 12.1128C24.1548 11.9272 23.8521 11.6797 23.6463 11.6178ZM25.7129 22.3481C25.4418 22.2682 25.4046 22.2671 25.147 22.3267C24.7454 22.4324 24.4394 22.7564 24.3584 23.1637C24.3145 23.3268 24.3235 23.5 24.382 23.6587C24.4765 23.9849 24.7915 24.3134 25.0874 24.3933C25.4676 24.5035 25.8771 24.3978 26.1561 24.1177C26.4363 23.8387 26.542 23.4292 26.4318 23.0489C26.3541 22.762 26.0234 22.4392 25.7129 22.3481ZM12.952 22.3863C11.845 21.9307 10.9304 23.3212 11.8011 24.1357C12.2354 24.5429 12.8136 24.5429 13.2479 24.1357C13.8149 23.6058 13.6574 22.6777 12.952 22.3863Z"
                                 fill="white" />
                         </svg>
-
                         <p class="text-2xl font-bold text-gray-800">{{ $menujuKePethouse }}</p>
                         <p class="text-sm text-gray-600 font-semibold">Menuju ke Pethouse</p>
                     </div>
                 </div>
             </div>
-
             <div class="bg-white p-6 rounded-xl shadow">
                 <h3 class="text-lg font-semibold text-gray-700 mb-4">Total Pemasukan Mingguan</h3>
                 <div>
                     <canvas id="weeklyIncomeChart"></canvas>
                 </div>
             </div>
-
         </div>
-
         <div class="w-full lg:w-[320px] shrink-0 h-fit max-h-full overflow-y-auto p-1 md:mt-10">
             <div class="bg-white p-6 rounded-xl shadow h-full">
                 <h3 class="text-lg font-semibold text-gray-700 mb-4">Layanan Aktif</h3>
@@ -153,14 +140,10 @@
             </div>
         </div>
     </div>
-    {{-- AKHIR KONTEN UTAMA --}}
-
-    {{-- Script untuk Grafik (Contoh menggunakan Chart.js) --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('weeklyIncomeChart').getContext('2d');
-
             const weeklyIncomeChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -183,7 +166,7 @@
                 },
                 options: {
                     responsive: true,
-                    maintainAspectRatio	: true,
+                    maintainAspectRatio: true,
                     scales: {
                         y: {
                             beginAtZero: true,

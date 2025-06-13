@@ -198,7 +198,7 @@
                     <ul id="dropdown-Profile"
                         class="{{ $activeMenu == 'Profile' ? 'block' : 'hidden' }} py-2 space-y-1 ml-4 pl-4 border-l-2 border-white border-opacity-20">
                         <li>
-                            <a href="#"
+                            <a href="{{ route('pethouse.profile.index') }}"
                                 class="flex items-center p-2 text-white hover:text-[#F69246] rounded-lg transition-all hover:bg-white hover:bg-opacity-10">
                                 <span
                                     class="w-2 h-2 bg-white rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -249,19 +249,18 @@
                         <button
                             onclick="handleOpenAndClose('#user-dropdown','#user-dropdown-icon','#user-dropdown-button')"
                             id="user-dropdown-button" class="flex items-center space-x-2 focus:outline-none">
-                            <div
-                                class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#F69246] font-bold  cursor-pointer">
-                                {{ substr(auth()->user()->name, 0, 1) }}
-                            </div>
-                            <svg id="user-dropdown-icon" class="w-4 h-4 text-white  cursor-pointer" fill="none"
+                            <img src="{{ Auth::user()->profilePicture ?? asset('asset/profile.png') }}"
+                                class="w-8 h-8 rounded-full object-center object-cover bg-white flex items-center justify-center text-[#F69246] font-bold">
+                            <svg id="user-dropdown-icon" class="w-4 h-4 text-white" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
+                                    d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
                         <div id="user-dropdown"
                             class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your
+                            <a href="{{ route('pethouse.profile.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your
                                 Profile</a>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
