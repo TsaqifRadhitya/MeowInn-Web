@@ -4,7 +4,7 @@
             <div class="bg-gradient-to-r from-[#F69246] to-[#EC7070] p-6 text-white">
                 <div class="flex flex-col md:flex-row items-center gap-6">
                     <img src="{{ $user->profilePicture ?? asset('asset/profile.png') }}"
-                        class="aspect-square rounded-full shadow w-20" alt="">
+                        class="aspect-square rounded-full shadow w-20 object-center object-cover" alt="">
                     <div class="text-center md:text-left">
                         <h1 class="text-2xl font-bold">{{ $user->name }}</h1>
                         <p class="text-blue-100">{{ $user->email }}</p>

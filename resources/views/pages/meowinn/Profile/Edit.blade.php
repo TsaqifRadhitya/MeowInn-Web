@@ -170,13 +170,22 @@
             const villageSelect = document.getElementById('village');
 
             const initialData = {
-                provinceId: {!! json_encode(old('province', $user->village?->district?->city?->province)) !!},
-                cityId: {!! json_encode(old('city', $user->village?->district?->city)) !!},
-                districtId: {!! json_encode(old('district', $user->village?->district)) !!},
-                villageId: {!! json_encode(old('village', ['id' => $user->villageId])) !!}
+                provinceId: {!! json_encode(
+                    old(
+                        'province',
+                        !!$user->village?->district?->city?->province
+                            ? json_encode($user->village?->district?->city?->province?->toArray())
+                            : null,
+                    ),
+                ) !!},
+                cityId: {!! json_encode(
+                    old('city', !!$user->village?->district?->city ? json_encode($user->village?->district?->city?->toArray()) : null),
+                ) !!},
+                districtId: {!! json_encode(
+                    old('district', !!$user->village?->district ? json_encode($user->village?->district?->toArray()) : null),
+                ) !!},
+                villageId: {!! json_encode(old('village', !!$user->villageId ? json_encode(['id' => $user->villageId]) : null)) !!}
             };
-
-            console.log(initialData)
 
             const populateDropdown = (selectElement, data, placeholder, selectedValue = null) => {
                 selectElement.innerHTML = `<option value="">${placeholder}</option>`;
@@ -250,7 +259,8 @@
                 try {
                     const provinceResponse = await fetch(`${API_BASE_URL}/provinces`);
                     const provinces = await provinceResponse.json();
-                    populateDropdown(provinceSelect, provinces, 'Pilih Provinsi', initialData.provinceId && JSON.parse(initialData.provinceId).id);
+                    populateDropdown(provinceSelect, provinces, 'Pilih Provinsi', initialData.provinceId &&
+                        JSON.parse(initialData.provinceId).id);
 
                     if (initialData.provinceId) {
                         const provinceId = JSON.parse(initialData.provinceId).id
@@ -258,7 +268,8 @@
                         const cityResponse = await fetch(
                             `${API_BASE_URL}/regencies/${provinceId}`);
                         const cities = await cityResponse.json();
-                        populateDropdown(citySelect, cities, 'Pilih Kota/Kabupaten', initialData.cityId && JSON.parse(initialData.cityId).id);
+                        populateDropdown(citySelect, cities, 'Pilih Kota/Kabupaten', initialData.cityId &&
+                            JSON.parse(initialData.cityId).id);
                     }
 
                     if (initialData.cityId) {
@@ -266,7 +277,8 @@
                         const districtResponse = await fetch(
                             `${API_BASE_URL}/districts/${cityId}`);
                         const districts = await districtResponse.json();
-                        populateDropdown(districtSelect, districts, 'Pilih Kecamatan', initialData.districtId && JSON.parse(initialData.districtId).id );
+                        populateDropdown(districtSelect, districts, 'Pilih Kecamatan', initialData
+                            .districtId && JSON.parse(initialData.districtId).id);
                     }
 
                     if (initialData.districtId) {
@@ -274,7 +286,8 @@
                         const villageResponse = await fetch(
                             `${API_BASE_URL}/villages/${districtId}`);
                         const villages = await villageResponse.json();
-                        populateDropdown(villageSelect, villages, 'Pilih Kelurahan/Desa', initialData.villageId && JSON.parse(initialData.villageId).id );
+                        populateDropdown(villageSelect, villages, 'Pilih Kelurahan/Desa', initialData
+                            .villageId && JSON.parse(initialData.villageId).id);
                     }
 
                 } catch (error) {

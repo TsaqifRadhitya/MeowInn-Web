@@ -1,7 +1,5 @@
 <x-meowinn-layout header="Pet House Preview" class="p-10 rounded-2xl shadow-sm" id="content" activeMenu="Pet House">
-    <!-- Profile Section -->
     <div class="mb-8">
-        <!-- Header with Name and Rating -->
         <div class="flex  md:items-center justify-between mb-4">
             <h1 class="text-3xl font-bold text-gray-800">{{ $profilePethouse->name }}</h1>
             @if ($profilePethouse->verificationStatus === 'disetujui')
@@ -35,13 +33,10 @@
                         @csrf
                         @method('PATCH')
                         <button class="btn btn-success">Terima</button>
-
                     </form>
                 </div>
             @endif
         </div>
-
-        <!-- Address -->
         <div class="flex items-start mb-4">
             <svg class="w-5 h-5 text-gray-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
@@ -50,10 +45,12 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
             </svg>
-            <p class="text-gray-600 uppercase">{{ $profilePethouse->user->address }} {{ $profilePethouse->user->village->villageName }}, {{ $profilePethouse->user->village->district->districtName }}, {{ $profilePethouse->user->village->district->city->cityName }}, {{ $profilePethouse->user->village->district->city->province->provinceName }}</p>
+            <p class="text-gray-600 uppercase">{{ $profilePethouse->user->address }}
+                {{ $profilePethouse->user->village->villageName }},
+                {{ $profilePethouse->user->village->district->districtName }},
+                {{ $profilePethouse->user->village->district->city->cityName }},
+                {{ $profilePethouse->user->village->district->city->province->provinceName }}</p>
         </div>
-
-        <!-- Stats Cards -->
         <div class="grid grid-cols-2 gap-4 mb-6">
             <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
                 <p class="text-sm text-gray-500">Layanan</p>
@@ -64,15 +61,11 @@
                 <p class="font-semibold text-green-600 text-2xl">{{ $profilePethouse->penitipans->count() }}</p>
             </div>
         </div>
-
-        <!-- Description -->
         <div class="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200">
             <h3 class="font-semibold text-gray-700 mb-2">Deskripsi</h3>
             <p class="text-gray-600 break-words">{!! nl2br($profilePethouse->description) !!}</p>
         </div>
     </div>
-
-    <!-- Gallery Section -->
     <div class="mb-8">
         <h2 class="text-xl font-semibold text-gray-800 mb-4">Foto Lokasi</h2>
         @if ($profilePethouse->locationPhotos && count(json_decode($profilePethouse->locationPhotos)) > 0)
@@ -84,7 +77,6 @@
                         </div>
                     @endforeach
                 </div>
-
                 <div class="swiper-pagination"></div>
             </div>
         @else
@@ -93,15 +85,12 @@
             </div>
         @endif
     </div>
-
-    <!-- Services Section -->
     <div class="mb-8">
         <div class="flex justify-between items-center mb-4">
             <h2 class="text-xl font-semibold text-gray-800">Layanan Kami</h2>
             <span class="text-sm text-gray-500">{{ $profilePethouse->pethouseLayanans->count() }} layanan
                 tersedia</span>
         </div>
-
         @if ($profilePethouse->pethouseLayanans->count() > 0)
             <div class="swiper mySwiper rounded-2xl shadow lg:max-w-2/3 mx-auto aspect-video">
                 <!-- Tambahkan aspect-ratio di sini -->
@@ -126,8 +115,6 @@
     </div>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const swiper = new Swiper(".mySwiper", {
@@ -135,7 +122,6 @@
                     el: ".swiper-pagination",
                 },
             });
-
             const deleteForm = document.getElementById('delete-penalty-form');
             if (deleteForm) {
                 deleteForm.addEventListener('submit', function(e) {
@@ -154,7 +140,6 @@
                     });
                 });
             }
-
             const createForm = document.getElementById('create-penalty-form');
             if (createForm) {
                 createForm.addEventListener('submit', function(e) {
@@ -181,10 +166,8 @@
                     });
                 });
             }
-
             const formTolak = document.getElementById('form-tolak');
             const formTerima = document.getElementById('form-terima');
-
             if (formTolak) {
                 formTolak.addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -202,7 +185,6 @@
                     });
                 });
             }
-
             if (formTerima) {
                 formTerima.addEventListener('submit', function(e) {
                     e.preventDefault();
@@ -220,10 +202,8 @@
                     });
                 });
             }
-
         });
     </script>
-
     <style>
         html,
         body {

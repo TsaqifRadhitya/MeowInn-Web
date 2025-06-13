@@ -76,7 +76,6 @@
     </form>
 
     <script>
-        // Preview gambar baru yang diupload
         function previewImages(event) {
             const files = event.target.files;
             const preview = document.getElementById('preview');

@@ -39,7 +39,7 @@ class pethouseVerifikasiController extends Controller
             'pickUpService' => ['nullable'],
             'range' => ['required_if:pickUpService,on', 'in:village,district,district'],
             'description' => ['required', 'string', 'max:300'],
-            'profilePicture' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'profilePicture' => ['required', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
 
         $validated['profilePicture'] = $this->cloudinarySingleUpload($request->file('profilePicture'), 'profile/' . $user->email);
@@ -89,6 +89,7 @@ class pethouseVerifikasiController extends Controller
             $validated['pickUpService'] = true;
         } else {
             $validated['pickUService'] = false;
+            $validated['range'] = null;
         }
 
         $petHouseData = [
@@ -97,6 +98,8 @@ class pethouseVerifikasiController extends Controller
             'locationPhotos' => $validated['locationPhotos'],
             'description' => $validated['description'],
             'pickUpService' => $validated['pickUpService'],
+            'isOpen' => false,
+            'verificationStatus' => 'menunggu persetujuan'
         ];
         if ($pethouse) {
             $pethouse->update($petHouseData);
@@ -108,7 +111,7 @@ class pethouseVerifikasiController extends Controller
 
     public function create()
     {
-        $pethouse = User::with('petHouses')->find(Auth::user()->id);
-        return view("pages.petHouse.Pengajuan.create", compact("pethouse"));
+        $user = User::with(['petHouses', "village.district.city.province"])->find(Auth::user()->id);
+        return view("pages.petHouse.Pengajuan.create", compact("user"));
     }
 }

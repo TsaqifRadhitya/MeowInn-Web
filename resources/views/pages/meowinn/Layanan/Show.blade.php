@@ -1,7 +1,6 @@
 <x-meowinn-layout header="Detail Layanan" id="content" activeMenu="Layanan" class="p-10">
     <div class="mx-auto space-y-6">
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <!-- Swiper Gallery -->
             <div class="relative">
                 @if ($layanan->photos)
                     <div class="swiper mySwiper">
@@ -19,8 +18,6 @@
                     </div>
                 @endif
             </div>
-
-            <!-- Info Layanan -->
             <div class="p-8">
                 <div class="flex justify-between items-start mb-6">
                     <h1 class="text-3xl font-bold text-gray-800">{{ $layanan->name }}</h1>
@@ -39,16 +36,12 @@
                         </form>
                     </div>
                 </div>
-
                 <p class="text-gray-700 break-words break-all">{!! nl2br($layanan->description) !!}</p>
             </div>
         </div>
     </div>
-
-    <!-- SwiperJS & SweetAlert -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             new Swiper(".mySwiper", {
@@ -83,7 +76,6 @@
             });
         }
     </script>
-
     <style>
         .swiper {
             width: 100%;

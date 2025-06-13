@@ -54,7 +54,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Rating Rata-rata -->
                     <div
                         class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-xl shadow-md border border-purple-100">
                         <div class="flex justify-between items-start">
@@ -78,10 +77,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-                <!-- Pendapatan Mingguan -->
                 <div class="bg-white p-6 rounded-xl md:col-span-3 shadow-md border border-gray-100">
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-semibold text-gray-800">Pendapatan Mingguan</h3>
@@ -109,7 +105,6 @@
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
                         document.addEventListener('DOMContentLoaded', function() {
-                            // Weekly Income Chart
                             const weeklyIncomeCtx = document.getElementById('weeklyIncomeChart').getContext('2d');
                             const weeklyIncomeChart = new Chart(weeklyIncomeCtx, {
                                 type: 'bar',

@@ -1,6 +1,5 @@
 <x-meowinn-layout header="Daftar Penalty" class="p-10" id="content" activeMenu="Pet House">
     <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-        <!-- Table Header with Summary -->
         <div class="px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-[#F69246] to-[#EC7070]">
             <div class="flex items-center justify-between">
                 <h2 class="text-xl font-bold text-white">Penalty</h2>
@@ -9,8 +8,6 @@
                 </span>
             </div>
         </div>
-
-        <!-- Table Container -->
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
@@ -89,8 +86,6 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Pagination would go here if needed -->
     </div>
 
     <script>

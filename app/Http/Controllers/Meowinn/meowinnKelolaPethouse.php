@@ -34,6 +34,16 @@ class meowinnKelolaPethouse extends Controller
         return view('pages.meowinn.PetHouse.Pengajuan', compact('daftarPengajuan'));
     }
 
+    public function detailPengajuan($id)
+    {
+
+        $pethouse = PetHouse::find($id);
+        if ($pethouse) {
+            return view('pages.meowinn.PetHouse.DetailPengajuan', compact('pethouse'));
+        }
+        abort(404);
+    }
+
     public function show(Request $request, $id)
     {
         $profilePethouse = PetHouse::find($id);
