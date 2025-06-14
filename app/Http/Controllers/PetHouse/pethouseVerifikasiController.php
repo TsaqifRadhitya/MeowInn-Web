@@ -84,7 +84,7 @@ class pethouseVerifikasiController extends Controller
 
         $user->update($userData);
 
-        if ($validated['pickUpService'] === "on") {
+        if ($request->pickUpService === "on") {
             $petHouseData['range'] = $validated['range'];
             $validated['pickUpService'] = true;
         } else {
