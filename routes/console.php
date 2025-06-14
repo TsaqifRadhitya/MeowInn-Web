@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\PetHouse;
 use App\Models\User;
+use App\Models\PetHouse;
 use Database\Seeders\DatabaseSeeder;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
@@ -13,6 +13,6 @@ Artisan::command('inspire', function () {
 
 Schedule::call(function () {
     PetHouse::where('penalty', '>', 0)->get()->each(function (PetHouse $a) {
-        PetHouse::whereId($a->id)->update(['penalty' => $a->penalty -1]);
+        $a->decrement('penalty');
     });
 })->dailyAt('00.00');
