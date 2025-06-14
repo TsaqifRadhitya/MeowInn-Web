@@ -10,11 +10,9 @@
                 <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
             @enderror
         </div>
-
         <div class="space-y-3">
             <label for="photos" class="block text-sm font-medium text-gray-700 mb-1">Foto Layanan</label>
             <div id="preview" class="flex flex-wrap gap-3 mt-2"></div>
-
             <div class="flex items-center justify-center w-full">
                 <label for="photos"
                     class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition duration-150">
@@ -39,7 +37,6 @@
                 <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
             @enderror
         </div>
-
         <div class="space-y-1">
             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
             <textarea name="description" id="description" rows="5"
@@ -48,15 +45,15 @@
                 <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
             @enderror
         </div>
-
-        <div class="flex justify-end pt-2">
+        <div class="flex gap-5 justify-between pt-2">
+            <a class="px-6 cursor-pointer py-2.5 hover:bg-[#FF7B54] ring ring-[#FF7B54] text-[#FF7B54] hover:text-white font-medium rounded-lg transition duration-200 shadow-sm"
+                href="{{ route('meowinn.layanan.index') }}">Batal</a>
             <button type="submit"
-                class="px-6 cursor-pointer py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 shadow-sm">
+                class="px-6 cursor-pointer py-2.5 bg-[#FF7B54] hover:ring hover:ring-[#FF7B54] hover:bg-transparent hover:text-[#FF7B54] text-white font-medium rounded-lg transition duration-200 shadow-sm">
                 Simpan Layanan
             </button>
         </div>
     </form>
-
     <script>
         function previewImages(event) {
             const files = event.target.files;
