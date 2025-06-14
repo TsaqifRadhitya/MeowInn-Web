@@ -55,7 +55,7 @@ class meowinnKelolaLayanan extends Controller
 
         Layanan::whereId($id)->update($validated);
 
-        return redirect()->route('meowinn.layanan.show', ['id' => $id])->with('success', 'Berhasil Mengubah Layanan');
+        return redirect()->route('meowinn.layanan.index')->with('success', 'Berhasil Mengubah Layanan');
     }
 
     public function store(Request $request)
@@ -77,6 +77,6 @@ class meowinnKelolaLayanan extends Controller
 
         $dataLayanan = Layanan::create($validated);
 
-        return redirect()->route('meowinn.layanan.show', ['id' => $dataLayanan->id])->with('Berhasil menambahkan layanan');
+        return redirect()->route('meowinn.layanan.index')->with('Berhasil menambahkan layanan');
     }
 }
