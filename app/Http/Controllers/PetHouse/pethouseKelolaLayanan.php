@@ -17,23 +17,6 @@ class pethouseKelolaLayanan extends Controller
         $layanans = Layanan::with('pethouselayanans')->where('isdeleted', false)->paginate(4);
         return view('pages.petHouse.Layanan.Index', compact('layanans'));
     }
-
-    public function destroy($id)
-    {
-        detailLayanan::whereId($id)->update(['status' => false]);
-        return back()->with('success', 'Berhasil Menonaktifkan Layanan');
-    }
-
-    public function show($id)
-    {
-        $layanan = Layanan::find($id);
-        if ($layanan) {
-            return view('pages.petHouse.Layanan.Show', compact('layanan'));
-        }
-        ;
-        abort(404);
-    }
-
     public function edit($id)
     {
         $layanan = Layanan::find($id);
@@ -50,27 +33,26 @@ class pethouseKelolaLayanan extends Controller
         if (!$layanan || !$layanan?->price) {
             return back()->with('error', 'Harap mengatur harga layanan terlebih dahulu');
         }
-        $status = $request->isActive === "1" ? true : false;
-        $layanan->update(['isActive' => $status]);
+        $status = $request->status === "1" ? true : false;
+        $layanan->update(['status' => $status]);
         return back()->with('success', 'Barhasil mengubah status layanan');
     }
     public function update(Request $request, $id)
     {
-        dd($request->all());
         $validated = $request->validate([
-            'price' => ['numeric', 'required', 'min:1'],
-            'description' => ['nullable', 'string', 'min:1'],
+            'price' => ['numeric', 'required', 'min:1000'],
+            'description' => ['nullable', 'string', 'min:10'],
             'photos' => ['nullable', 'array'],
             'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048'],
-            'status' => ['nullable', 'boolean']
+            'status' => ['nullable', 'string']
         ]);
 
         $pethouseId = Auth::user()->petHouses->id;
 
         if ($request->hasFile('photos')) {
-            $validated['photos'] = $this->cloudinaryBatchUpload($request->file('photos'), Auth::user()->petHouses->name . '/layananphtos');
+            $validated['photos'] = json_encode($this->cloudinaryBatchUpload($request->file('photos'), Auth::user()->petHouses->name . '/layananphtos'));
         }
-
+        $validated['status'] = $request->status ? true : false;
         $layanan = detailLayanan::where([
             'layananId' => $id,
             'petHouseId' => $pethouseId,

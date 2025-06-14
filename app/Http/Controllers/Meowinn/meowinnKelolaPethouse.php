@@ -47,8 +47,11 @@ class meowinnKelolaPethouse extends Controller
     public function show(Request $request, $id)
     {
         $profilePethouse = PetHouse::find($id);
-        if ($profilePethouse) {
+        if ($profilePethouse?->verificationStatus === 'disetujui') {
             return view('pages.meowinn.PetHouse.Show', compact('profilePethouse'));
+        }
+        if ($profilePethouse) {
+            return redirect()->route('meowinn.pengajuanpethouse.show', ['id' => $id]);
         }
         abort(404);
     }
@@ -68,7 +71,6 @@ class meowinnKelolaPethouse extends Controller
     public function penaltyCreate($id, Request $request)
     {
         $profilePethouse = PetHouse::find($id);
-
         $duration = $request->input('penalty');
         if ($duration && $profilePethouse) {
             $profilePethouse->increment('penalty', $duration);

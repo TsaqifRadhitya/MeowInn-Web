@@ -10,7 +10,7 @@ class detailLayanan extends Model
 {
 
     use HasUlids;
-    protected $fillable = ['price', 'description', 'photos', 'status', 'LayananId', 'petHouseId'];
+    protected $fillable = ['price', 'description', 'photos', 'status', 'layananId', 'petHouseId'];
 
     public function pethouse()
     {
@@ -25,5 +25,10 @@ class detailLayanan extends Model
     public function penitipanLayanans()
     {
         $this->hasMany(DetaiLayananPenitipan::class, 'detailLayananId');
+    }
+
+    public function penitipanLayanansActive()
+    {
+        $this->belongsTo(Layanan::class, 'detailLayananId')->where('status', true);
     }
 }

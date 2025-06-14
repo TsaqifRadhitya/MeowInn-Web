@@ -1,138 +1,92 @@
-<x-meowinn-layout header="Pet House Preview" class="p-10 rounded-2xl shadow-sm" id="content" activeMenu="Pet House">
-    <div class="mb-8">
-        <div class="flex  md:items-center justify-between mb-4">
-            <h1 class="text-3xl font-bold text-gray-800">{{ $profilePethouse->name }}</h1>
-            @if ($profilePethouse->verificationStatus === 'disetujui')
+<x-meowinn-layout header="Pet House Preview" class="p-10 rounded-2xl shadow-sm flex flex-col gap-5 text-[#787878]"
+    id="content" activeMenu="Pet House">
+    <section class="flex flex-col md:flex-row gap-10">
+        <img src="{{ $profilePethouse->user->profilePicture }}" class="aspect-video h-fit md:w-1/3" alt="">
+        <article class="md:w-2/3 w-full text-lg">
+            <div class="flex justify-between items-start">
+                <h1 class="font-black text-[#FF7B54] text-4xl">{{ $profilePethouse->name }}</h1>
                 @if ($profilePethouse->penalty)
-                    <form id="delete-penalty-form"
-                        action="{{ route('meowinn.penalty.delete', ['id' => $profilePethouse->id]) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-error rounded-xl">Hapus Penalty</button>
-                    </form>
-                @else
-                    <form id="create-penalty-form"
-                        action="{{ route('meowinn.penalty.create', ['id' => $profilePethouse->id]) }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="penalty" id="penalty-duration">
-                        <button class="btn btn-error rounded-xl">Penalty</button>
-                    </form>
+                    <div class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">
+                        Penalty: {{ $profilePethouse->penalty }} hari
+                    </div>
                 @endif
-            @else
-                <div class="flex flex-col md:flex-row gap-2.5">
-                    <form id="form-tolak"
-                        action="{{ route('meowinn.pengajuanlayanan.delete', ['id' => $profilePethouse->id]) }}"
-                        method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-error min-w-22">Tolak</button>
-                    </form>
-                    <form id="form-terima"
-                        action="{{ route('meowinn.pengajuanlayanan.update', ['id' => $profilePethouse->id]) }}"
-                        method="POST">
-                        @csrf
-                        @method('PATCH')
-                        <button class="btn btn-success">Terima</button>
-                    </form>
-                </div>
-            @endif
-        </div>
-        <div class="flex items-start mb-4">
-            <svg class="w-5 h-5 text-gray-500 mt-0.5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-            <p class="text-gray-600 uppercase">{{ $profilePethouse->user->address }}
-                {{ $profilePethouse->user->village->villageName }},
-                {{ $profilePethouse->user->village->district->districtName }},
-                {{ $profilePethouse->user->village->district->city->cityName }},
-                {{ $profilePethouse->user->village->district->city->province->provinceName }}</p>
-        </div>
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
-                <p class="text-sm text-gray-500">Layanan</p>
-                <p class="font-semibold text-blue-600 text-2xl">{{ $profilePethouse->pethouseLayanans->count() }}</p>
             </div>
-            <div class="bg-green-50 p-4 rounded-lg border border-green-100">
-                <p class="text-sm text-gray-500">Transaksi</p>
-                <p class="font-semibold text-green-600 text-2xl">{{ $profilePethouse->penitipans->count() }}</p>
+            <div class="flex gap-x-2.5 gap-y-1 flex-col md:flex-row">
+                <h1 class="md:w-1/5">Nomor Telepon : </h1>
+                <h1>{{ $profilePethouse->user->phoneNumber }}</h1>
             </div>
-        </div>
-        <div class="bg-gray-50 p-4 rounded-lg mb-6 border border-gray-200">
-            <h3 class="font-semibold text-gray-700 mb-2">Deskripsi</h3>
-            <p class="text-gray-600 break-words">{!! nl2br($profilePethouse->description) !!}</p>
-        </div>
-    </div>
-    <div class="mb-8">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Foto Lokasi</h2>
-        @if ($profilePethouse->locationPhotos && count(json_decode($profilePethouse->locationPhotos)) > 0)
-            <div class="swiper mySwiper rounded-2xl shadow lg:max-w-2/3 aspect- mx-auto">
-                <div class="swiper-wrapper">
-                    @foreach (json_decode($profilePethouse->locationPhotos) as $photo)
-                        <div class="swiper-slide">
-                            <img src="{{ $photo }}" class="w-full object-cover" alt="Pet House Photo" />
-                        </div>
-                    @endforeach
-                </div>
-                <div class="swiper-pagination"></div>
+            <div class="flex gap-x-2.5 gap-y-1 flex-col md:flex-row">
+                <h1 class="md:w-1/9">Alamat : </h1>
+                <h1>{{ $profilePethouse->user->address }}, {{ $profilePethouse->user->village->villageName }},
+                    {{ $profilePethouse->user->village->district->districtName }},
+                    {{ $profilePethouse->user->village->district->city->cityName }},
+                    {{ $profilePethouse->user->village->district->city->province->provinceName }}</h1>
             </div>
+            <div class="flex flex-col md:flex-row gap-x-2.5 gap-y-1">
+                <h1 class="md:w-1/8">Deskripsi : </h1>
+                <h1 class="break-words">{!! nl2br($profilePethouse->description) !!}</h1>
+            </div>
+        </article>
+    </section>
+
+    <!-- Penalty Action Buttons -->
+    <section class="flex gap-4 justify-end">
+        @if ($profilePethouse->penalty)
+            <form id="delete-penalty-form" method="POST"
+                action="{{ route('meowinn.penalty.delete', $profilePethouse->id) }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit"
+                    class="px-4 py-2 bg-green-500 cursor-pointer text-white rounded-lg hover:bg-green-600 transition-colors">
+                    Hapus Penalty
+                </button>
+            </form>
         @else
-            <div class="h-64 bg-gray-100 rounded-xl flex items-center justify-center">
-                <p class="text-gray-500">Tidak ada foto tersedia</p>
-            </div>
+            <form id="create-penalty-form" method="POST"
+                action="{{ route('meowinn.penalty.create', $profilePethouse->id) }}">
+                @csrf
+                <input type="hidden" id="penalty-duration" name="penalty">
+                <button type="submit"
+                    class="px-4 py-2 bg-red-500 cursor-pointer text-white rounded-lg hover:bg-red-600 transition-colors">
+                    Berikan Penalty
+                </button>
+            </form>
         @endif
-    </div>
-    <div class="mb-8">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-semibold text-gray-800">Layanan Kami</h2>
-            <span class="text-sm text-gray-500">{{ $profilePethouse->pethouseLayanans->count() }} layanan
-                tersedia</span>
+    </section>
+
+    <section class="space-y-2.5">
+        <h1 class="font-bold text-2xl">Fasilitas Pet House</h1>
+        <div class="grid md:grid-cols-3 gap-10">
+            @foreach (json_decode($profilePethouse->locationPhotos) as $photos)
+                <img src="{{ $photos }}" class="aspect-video object-center object-cover" alt="">
+            @endforeach
         </div>
-        @if ($profilePethouse->pethouseLayanans->count() > 0)
-            <div class="swiper mySwiper rounded-2xl shadow lg:max-w-2/3 mx-auto aspect-video">
-                <!-- Tambahkan aspect-ratio di sini -->
-                <div class="swiper-wrapper">
-                    @foreach ($profilePethouse->locationPhotos as $photo)
-                        <div class="swiper-slide">
-                            <!-- Gunakan parent div untuk aspect ratio -->
-                            <div class="aspect-video w-full">
-                                <img src="{{ $photo }}" class="w-full h-full object-cover"
-                                    alt="Pet House Photo" />
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
+    </section>
+    <section class="flex flex-col gap-2.5 min-h-56">
+        <h1 class="font-bold text-2xl">Layanan</h1>
+        @if ($profilePethouse->penitipanLayanansActive)
         @else
-            <div class="bg-gray-50 p-8 rounded-lg text-center">
-                <p class="text-gray-500">Belum ada layanan yang tersedia</p>
-            </div>
+            <h1 class="font-bold text-2xl text-center my-auto">Belum Tersedia Layanan Lainnya</h1>
         @endif
-    </div>
+    </section>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const swiper = new Swiper(".mySwiper", {
-                pagination: {
-                    el: ".swiper-pagination",
-                },
-            });
             const deleteForm = document.getElementById('delete-penalty-form');
             if (deleteForm) {
                 deleteForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     Swal.fire({
                         title: 'Yakin ingin menghapus penalty?',
-                        text: 'Tindakan ini tidak bisa dibatalkan!',
+                        text: 'Pet House ini akan kembali aktif',
                         icon: 'warning',
                         showCancelButton: true,
                         confirmButtonText: 'Ya, hapus',
                         cancelButtonText: 'Batal',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
                     }).then((result) => {
                         if (result.isConfirmed) {
                             deleteForm.submit();
@@ -145,19 +99,26 @@
                 createForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     Swal.fire({
-                        title: 'Masukkan durasi penalty (dalam hari)',
-                        input: 'number',
-                        inputAttributes: {
-                            min: 1
-                        },
-                        inputValidator: (value) => {
-                            if (!value || value < 1) {
-                                return 'Durasi harus lebih dari 0 hari';
-                            }
-                        },
+                        title: 'Berikan Penalty',
+                        html: `
+                            <p class="mb-4">Masukkan durasi penalty (dalam hari)</p>
+                            <input type="number" id="duration-input" class="swal2-input" min="1" placeholder="Jumlah hari" required>
+                            <p class="mt-2 text-sm text-gray-500">Pet House akan dinonaktifkan selama periode penalty</p>
+                        `,
+                        icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonText: 'Kirim',
-                        cancelButtonText: 'Batal'
+                        confirmButtonText: 'Berikan Penalty',
+                        cancelButtonText: 'Batal',
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        preConfirm: () => {
+                            const value = document.getElementById('duration-input').value;
+                            if (!value || value < 1) {
+                                Swal.showValidationMessage('Durasi harus lebih dari 0 hari');
+                                return false;
+                            }
+                            return value;
+                        }
                     }).then((result) => {
                         if (result.isConfirmed) {
                             document.getElementById('penalty-duration').value = result.value;
@@ -166,71 +127,6 @@
                     });
                 });
             }
-            const formTolak = document.getElementById('form-tolak');
-            const formTerima = document.getElementById('form-terima');
-            if (formTolak) {
-                formTolak.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    Swal.fire({
-                        title: 'Tolak Pengajuan?',
-                        text: 'Pengajuan layanan akan ditolak.',
-                        icon: 'warning',
-                        showCancelButton: true,
-                        confirmButtonText: 'Ya, Tolak',
-                        cancelButtonText: 'Batal',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            formTolak.submit();
-                        }
-                    });
-                });
-            }
-            if (formTerima) {
-                formTerima.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    Swal.fire({
-                        title: 'Terima Pengajuan?',
-                        text: 'Pengajuan layanan akan disetujui.',
-                        icon: 'question',
-                        showCancelButton: true,
-                        confirmButtonText: 'Ya, Terima',
-                        cancelButtonText: 'Batal',
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            formTerima.submit();
-                        }
-                    });
-                });
-            }
         });
     </script>
-    <style>
-        html,
-        body {
-            position: relative;
-            height: 100%;
-        }
-
-        body {
-            background: #000;
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-            font-size: 14px;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-        }
-
-        .swiper {
-            width: 100%;
-        }
-
-        .swiper-slide {
-            text-align: center;
-            font-size: 18px;
-            background: #444;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
 </x-meowinn-layout>
