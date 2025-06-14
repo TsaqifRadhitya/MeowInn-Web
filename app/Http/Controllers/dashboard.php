@@ -43,7 +43,7 @@ class dashboard extends Controller
     public function petHouse()
     {
         $user = Auth::user();
-        $layananAktif = detailLayanan::with('layanan')->where('petHouseId', $user->id)->where('status', true)->get();
+        $layananAktif = detailLayanan::with('layanan')->where('petHouseId', $user->petHouses->id)->where('status', true)->get();
         $penitipanBerlangsung = Penitipan::where('status', 'sedang dititipkan')->where('petHouseId', $user->id)->count();
         $menujuKePethouse = Penitipan::whereIn('status', ['menunggu diantar ke pethouse', 'menunggu penjemputan'])->where('petHouseId', $user->id)->count();
         $statusPethouse = $user->petHouses?->verificationStatus;
