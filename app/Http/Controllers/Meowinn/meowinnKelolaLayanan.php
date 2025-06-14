@@ -25,16 +25,6 @@ class meowinnKelolaLayanan extends Controller
         }
         abort(404);
     }
-
-    public function show($id)
-    {
-        $layanan = Layanan::find($id);
-        if ($layanan) {
-            return view('pages.meowinn.Layanan.Show', compact('layanan'));
-        }
-        abort(404);
-    }
-
     public function edit($id)
     {
         $layanan = Layanan::find($id);

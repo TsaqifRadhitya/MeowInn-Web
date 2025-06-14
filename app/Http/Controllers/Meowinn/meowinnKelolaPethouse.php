@@ -68,7 +68,6 @@ class meowinnKelolaPethouse extends Controller
     public function penaltyCreate($id, Request $request)
     {
         $profilePethouse = PetHouse::find($id);
-
         $duration = $request->input('penalty');
         if ($duration && $profilePethouse) {
             $profilePethouse->increment('penalty', $duration);

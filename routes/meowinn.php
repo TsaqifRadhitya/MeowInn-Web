@@ -41,7 +41,6 @@ Route::middleware(['auth', meowinnMidleware::class])->group(function () {
             Route::get('/', [meowinnkelolaLayanan::class, 'index'])->name('meowinn.layanan.index');
             Route::get('/create', [meowinnkelolaLayanan::class, 'create'])->name('meowinn.layanan.create');
             Route::post('/', [meowinnkelolaLayanan::class, 'store'])->name('meowinn.layanan.store');
-            Route::get('{id}', [meowinnkelolaLayanan::class, 'show'])->name('meowinn.layanan.show');
             Route::get('{id}/edit', [meowinnkelolaLayanan::class, 'edit'])->name('meowinn.layanan.edit');
             Route::patch('{id}', [meowinnkelolaLayanan::class, 'update'])->name('meowinn.layanan.update');
             Route::delete('{id}', [meowinnkelolaLayanan::class, 'destroy'])->name('meowinn.layanan.destroy');

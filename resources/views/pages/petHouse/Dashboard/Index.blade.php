@@ -123,19 +123,17 @@
             <div class="bg-white p-6 rounded-xl shadow h-full">
                 <h3 class="text-lg font-semibold text-gray-700 mb-4">Layanan Aktif</h3>
                 <div class="space-y-4 min-h-10 md:min-h-20 relative">
-                    @if ($layananAktif)
-                        @foreach ($layananAktif as $layanan)
-                            <label class="flex items-center gap-3">
-                                <input type="checkbox" checked
-                                    class="form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500">
-                                <span class="text-gray-700">{{ $layanan->layanan->name }}</span>
-                            </label>
-                        @endforeach
-                    @else
+                    @forelse ($layananAktif as $layanan)
+                        <label class="flex items-center gap-3">
+                            <input type="checkbox" checked
+                                class="form-checkbox h-5 w-5 text-indigo-600 rounded focus:ring-indigo-500">
+                            <span class="text-gray-700">{{ $layanan->layanan->name }}</span>
+                        </label>
+                    @empty
                         <p
                             class="text-gray-700 font-semibold absolute top-1/2 left-1/2 -translate-1/2 w-full text-center">
                             Tidak Terdapat Layanan Aktif</p>
-                    @endif
+                    @endforelse
                 </div>
             </div>
         </div>
