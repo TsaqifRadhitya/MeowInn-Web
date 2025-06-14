@@ -88,7 +88,7 @@ class pethouseVerifikasiController extends Controller
             $petHouseData['range'] = $validated['range'];
             $validated['pickUpService'] = true;
         } else {
-            $validated['pickUService'] = false;
+            $validated['pickUpService'] = false;
             $validated['range'] = null;
         }
 
