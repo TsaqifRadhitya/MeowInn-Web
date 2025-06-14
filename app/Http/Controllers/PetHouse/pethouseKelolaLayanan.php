@@ -64,6 +64,6 @@ class pethouseKelolaLayanan extends Controller
             $layanan->update($validated);
         }
 
-        return back()->with('success', 'Berhasil Mengubah Layanan Pethouse');
+        return redirect()->route('pethouse.penitipan.index')->with('success', 'Berhasil Mengubah Layanan Pethouse');
     }
 }
