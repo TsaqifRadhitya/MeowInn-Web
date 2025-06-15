@@ -1,7 +1,7 @@
 <x-pethouse-layout header="Pet House Preview" class="p-5 md:p-10 flex flex-col gap-5 text-[#787878]" id="content"
     activeMenu="Pet House">
     <section class="flex flex-col md:flex-row gap-10">
-        <img src="{{ $petHouse->user->profilePicture }}" class="aspect-video h-fit md:w-1/3" alt="">
+        <img src="{{ $petHouse->user->profilePicture }}" class="aspect-video h-fit object-cover object-center md:w-1/3" alt="">
         <article class="md:w-2/3 w-full text-lg">
             <h1 class="font-black text-[#FF7B54] text-4xl">{{ $petHouse->name }}</h1>
             <div class="flex gap-x-2.5 gap-y-1 flex-col md:flex-row">

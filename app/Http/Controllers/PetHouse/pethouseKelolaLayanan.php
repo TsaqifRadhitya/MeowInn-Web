@@ -22,8 +22,7 @@ class pethouseKelolaLayanan extends Controller
         $layanan = Layanan::find($id);
         if ($layanan) {
             return view('pages.petHouse.Layanan.Edit', compact('layanan'));
-        }
-        ;
+        };
         abort(404);
     }
 
@@ -64,6 +63,6 @@ class pethouseKelolaLayanan extends Controller
             $layanan->update($validated);
         }
 
-        return redirect()->route('pethouse.penitipan.index')->with('success', 'Berhasil Mengubah Layanan Pethouse');
+        return redirect()->route('pethouse.penitipan.index')->with('success', 'Berhasil mengubah layanan pethouse');
     }
 }

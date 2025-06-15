@@ -3,7 +3,6 @@
 @section('header', 'Login')
 
 @section('content')
-    {{-- Latar belakang menggunakan versi sangat terang dari #FF7B54 --}}
     <div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#FFF1EC] to-white px-4">
         <div class="w-full max-w-lg px-8 py-12 bg-white rounded-2xl shadow-xl transition-all duration-300 hover:shadow-2xl">
             <div class="text-center mb-8">
@@ -84,7 +83,6 @@
                     </div>
                 </div>
                 <div>
-                    {{-- Warna tombol utama diubah ke gradasi #FF7B54 --}}
                     <button type="submit"
                         class="w-full cursor-pointer flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-[#FFB26B] to-[#FF7B54] hover:from-[#FF7B54] hover:to-[#F06C44] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#FF7B54] transition-all duration-300 transform hover:scale-[1.02]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"

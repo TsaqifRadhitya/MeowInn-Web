@@ -34,11 +34,11 @@ Route::middleware(['auth', pethouseMidleware::class])->group(function () {
             });
 
             Route::prefix('laporan')->group(function () {
-                Route::get('{id}', [pethousePenitipanReport::class, 'create'])->name('pethose.reports.create');
-                Route::post('{id}', [pethousePenitipanReport::class, 'store'])->name('pethose.reports.store');
-                Route::get('{penitipanId}/{reportId}', [pethousePenitipanReport::class, 'edit'])->name('pethose.reports.edit');
-                Route::patch('{penitipanId}/{reportId}', [pethousePenitipanReport::class, 'update'])->name('pethose.reports.update');
-                Route::delete('{penitipanId}/{reportId}', [pethousePenitipanReport::class, 'destroy'])->name('pethose.reports.destory');
+                Route::get('{id}/create', [pethousePenitipanReport::class, 'create'])->name('pethouse.reports.create');
+                Route::post('{id}', [pethousePenitipanReport::class, 'store'])->name('pethouse.reports.store');
+                Route::patch('{id}', [pethousePenitipanReport::class, 'update'])->name('pethouse.reports.update');
+                Route::get('{id}/edit', [pethousePenitipanReport::class, 'edit'])->name('pethouse.reports.edit');
+                Route::delete('{id}', [pethousePenitipanReport::class, 'destroy'])->name('pethouse.reports.destroy');
             });
 
             Route::prefix('managepethouse')->group(function () {

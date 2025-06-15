@@ -9,7 +9,7 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-sm text-blue-600 font-medium">Total Transaksi Bulan Ini</p>
-                                <p class="text-2xl font-bold text-gray-800 mt-2">Rp8.500.000</p>
+                                <p class="text-2xl font-bold text-gray-800 mt-2">{{ number_format(array_sum($pendapatan['cash']) + array_sum($pendapatan['nonCash']), 0, ',', '.') }}</p>
                             </div>
                             <div class="p-2 bg-blue-100 rounded-lg">
                                 <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
@@ -88,10 +88,10 @@
                 </div>
                 <div class="w-full shrink-0 space-y-6">
                     <div
-                        class="bg-white p-6 rounded-xl shadow-md border relative border-gray-100 h-full max-h-full overflow-y-auto p-1">
+                        class="bg-white p-6 rounded-xl shadow-md border relative border-gray-100 h-full max-h-full overflow-y-auto">
                         <h3 class="text-lg font-semibold text-gray-800 mb-5">Layanan</h3>
                         @forelse ($layanans as $layanan)
-                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                            <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg mt-2.5">
                                 <div class="flex items-center">
                                     <span class="text-gray-700 font-medium">{{ $layanan->name }}</span>
                                 </div>
@@ -112,7 +112,7 @@
                                     labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Min'],
                                     datasets: [{
                                             label: 'Cash',
-                                            data: [1200000, 1900000, 300000, 2100000, 1500000, 1700000, 2200000],
+                                            data: @json($pendapatan['cash']),
                                             backgroundColor: 'rgba(59, 130, 246, 0.7)',
                                             borderColor: 'rgba(59, 130, 246, 1)',
                                             borderWidth: 1,
@@ -120,7 +120,7 @@
                                         },
                                         {
                                             label: 'Non-Cash',
-                                            data: [800000, 1200000, 1500000, 900000, 1300000, 1900000, 1500000],
+                                            data: @json($pendapatan['nonCash']),
                                             backgroundColor: 'rgba(16, 185, 129, 0.7)',
                                             borderColor: 'rgba(16, 185, 129, 1)',
                                             borderWidth: 1,

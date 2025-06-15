@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 
 class Penitipan extends Model
 {
+    use HasUlids;
     protected $fillable = ['status', 'duration', 'petCareCosts', 'address', 'villageId', 'isCash', 'isPickUp', 'userId', 'petHouseId', 'snapToken'];
 
     public function users()
@@ -21,6 +23,10 @@ class Penitipan extends Model
     public function pethouse()
     {
         return $this->belongsTo(PetHouse::class, 'petHouseId');
+    }
+
+    public function village(){
+        return $this->belongsTo(villages::class,'villageId');
     }
 
     public function laporans()

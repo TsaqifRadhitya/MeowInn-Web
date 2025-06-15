@@ -106,7 +106,7 @@ class pethouseVerifikasiController extends Controller
         } else {
             $user->petHouses()->create($petHouseData);
         }
-        return redirect()->route('pethouse.verifikasi.index')->with('success', 'Berhasil Mengirimkan Pengajuan Verifikasi Pethouse');
+        return redirect()->route('pethouse.verifikasi.index')->with('success', 'Berhasil mengirimkan pengajuan verifikasi pethouse');
     }
 
     public function create()

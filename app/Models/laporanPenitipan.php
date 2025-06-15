@@ -10,4 +10,4 @@ class laporanPenitipan extends Model
     use HasUlids;
     protected $fillable = ["caption", "photos", "penitipanId"];
 
-}
+};

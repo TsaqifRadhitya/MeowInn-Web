@@ -1,5 +1,4 @@
-<x-pethouse-layout header="{{ 'Penitipan - #' . $penitipan->id }}" class="p-5 md:p-10" id="content"
-    activeMenu="Penitipan">
+<x-meowinn-layout header="{{ 'Penitipan - #' . $penitipan->id }}" class="p-5 md:p-10">
     <div class="space-y-6">
         <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
             <div class="flex flex-col md:flex-row md:justify-between">
@@ -9,7 +8,6 @@
                 </h1>
             </div>
         </div>
-
         <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
             <h2 class="text-xl font-bold mb-4 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-orange-500" fill="none"
@@ -19,7 +17,6 @@
                 </svg>
                 Daftar Hewan ({{ $penitipan->hewans->count() }})
             </h2>
-
             <div class="space-y-4">
                 @foreach ($penitipan->hewans as $hewan)
                     <div class="border border-gray-100 rounded-lg p-4 hover:border-orange-200 transition-colors">
@@ -28,7 +25,6 @@
                                 <img src="{{ $hewan->foto }}" alt="{{ $hewan->name }}"
                                     class="aspect-square w-full md:w-50 rounded-lg object-cover border border-orange-100">
                             </div>
-
                             <div class="flex-grow">
                                 <div class="flex flex-col md:flex-row md:items-center md:justify-between">
                                     <div>
@@ -64,7 +60,6 @@
                 @endforeach
             </div>
         </div>
-
         <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
             <div class="flex flex-col md:justify-between">
                 <h1 class="font-bold text-xl mb-5">Total Transaksi</h1>
@@ -85,6 +80,44 @@
                         <span class="font-medium">{{ $penitipan->isPickUp ? 'Diantar' : 'Dititipkan langsung' }}</span>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-orange-500" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Informasi Pethouse
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <img src="{{ $penitipan->pethouse->user->profilePicture }}"
+                            alt="{{ $penitipan->pethouse->name }}"
+                            class="h-12 w-12 rounded-full border-2 border-orange-200">
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">{{  $penitipan->pethouse->name }}</h3>
+                        <p class="text-sm text-gray-600">{{ $penitipan->pethouse->user->email }}</p>
+                        <p class="text-sm text-gray-600">{{ $penitipan->pethouse->user->phoneNumber }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-orange-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span class="text-gray-700">{{ $penitipan->pethouse->user->address }}, {{ $penitipan->pethouse->user->village->villageName }},
+                        {{ $penitipan->pethouse->user->village->district->districtName }}</span>
+                </div>
+
             </div>
         </div>
         <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
@@ -126,7 +159,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <span class="text-gray-700">{{ $penitipan->address }}, {{ $penitipan->village->villageName }},
+                        <span class="text-gray-700">{{ $penitipan->address }},
+                            {{ $penitipan->village->villageName }},
                             {{ $penitipan->village->district->districtName }}</span>
                     </div>
                     <div class="flex items-center">
@@ -149,24 +183,15 @@
                 </div>
             </div>
         </div>
-
-        <!-- Reports Section -->
         <div class="bg-white rounded-xl shadow-sm p-5 border space-y-5 border-gray-100">
-            <section class="flex justify-between items-center">
-                <h2 class="text-xl font-bold mb-4 flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-orange-500" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Laporan Harian
-                </h2>
-                @if ($penitipan->laporans->count() > 0 && $penitipan->status === 'sedang dititipkan')
-                    <a href="{{ route('pethouse.reports.create', $penitipan->id) }}"
-                        class="btn bg-orange-500 text-white border border-orange-500 mt-2 rounded-lg hover:text-orange-500 hover:bg-transparent">Tambah
-                        Laporan</a>
-                @endif
-            </section>
+            <h2 class="text-xl font-bold mb-4 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-orange-500" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Laporan Harian
+            </h2>
             @if ($penitipan->laporans->count() > 0)
                 <div class="space-y-4 text-gray-600">
                     @foreach ($penitipan->laporans as $laporan)
@@ -185,22 +210,6 @@
                                 <div class="flex flex-col md:flex-row justify-between md:items-center gap-y-1.5">
                                     <h3 class="font-medium text-gray-600 w-fit">
                                         {{ \Carbon\Carbon::parse($laporan->created_at)->format('d M Y') }}</h3>
-                                    @if ($penitipan->status === 'sedang dititipkan')
-                                        <div class="flex w-full md:w-fit flex-col md:flex-row gap-2.5">
-                                            <a href="{{ route('pethouse.reports.edit', $laporan->id) }}"
-                                                class="btn btn-warning min-w-32 text-white rounded-lg">Edit</a>
-                                            <form id="delete-form"
-                                                action="{{ route('pethouse.reports.destroy', $laporan->id) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" onclick="confirmDelete()"
-                                                    class="px-6 py-2 w-full cursor-pointer bg-red-500 text-white font-medium rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors">
-                                                    Hapus Laporan
-                                                </button>
-                                            </form>
-                                        </div>
-                                    @endif
                                 </div>
                             </article>
                         </div>
@@ -222,35 +231,5 @@
                 </div>
             @endif
         </div>
-        @if (!in_array($penitipan->status, ['menunggu pembayaran', 'gagal', 'selesai']))
-            <form action="{{ route('pethouse.penitipan.update', $penitipan->id) }}" method="POST"
-                class="flex justify-end">
-                @csrf
-                @method('PATCH')
-                <button type="submit"
-                    class="px-4 py-2 cursor-pointer bg-orange-500 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors">
-                    Perbarui Status
-                </button>
-            </form>
-        @endif
     </div>
-
-    <script>
-        function confirmDelete() {
-            Swal.fire({
-                title: 'Apakah Anda yakin?',
-                text: "Anda tidak akan dapat mengembalikan laporan ini!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Ya, hapus!',
-                cancelButtonText: 'Batal'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('delete-form').submit();
-                }
-            });
-        }
-    </script>
-</x-pethouse-layout>
+</x-meowinn-layout>

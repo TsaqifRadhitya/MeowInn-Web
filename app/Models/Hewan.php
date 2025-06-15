@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Hewan extends Model
 {
     use HasUlids;
-    protected $fillable = ['nama', 'foto', 'fk_penitipan'];
+    protected $fillable = ['nama', 'foto', 'penitipanId'];
 
     public function penitipanLayanans()
     {
-        return $this->hasMany(DetaiLayananPenitipan::class, 'penitipanId');
+        return $this->hasMany(DetaiLayananPenitipan::class, 'hewanId');
     }
 
     public function penitipan()
