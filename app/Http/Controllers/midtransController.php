@@ -9,7 +9,7 @@ class midtransController extends Controller
 {
     public function update(Request $request)
     {
-        $hashedKey = hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . env('VITE_MIDTRANS_SERVER_KEY'));
+        $hashedKey = hash('sha512', $request->order_id . $request->status_code . $request->gross_amount . env('MIDTRANS_SERVER_KEY'));
 
         if ($hashedKey !== $request->signature_key) {
             return response()->json(['message' => 'Invalid signature key'], 403);
