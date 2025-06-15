@@ -14,7 +14,7 @@
             <div id="filterDropdown"
                 class="hidden absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg z-10 border border-gray-100">
                 <div class="p-2">
-                    @foreach (['menunggu penjemputan', 'menunggu diantar ke pethouse', 'sedang dititipkan', 'sedang diantar pulang', 'selesai'] as $status)
+                    @foreach (['menunggu penjemputan', 'menunggu diantar ke pethouse', 'sedang dititipkan', 'sedang diantar pulang'] as $status)
                         <a href="{{ request()->fullUrlWithQuery(['status' => $status]) }}"
                             class="block px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 rounded-md transition-colors {{ request('status') == $status ? 'bg-orange-50 text-orange-600' : '' }}">
                             {{ ucfirst($status) }}
