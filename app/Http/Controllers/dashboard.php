@@ -29,6 +29,10 @@ class dashboard extends Controller
 
     public function user()
     {
+        $role = Auth::user()?->role;
+        if($role !== null && $role !== 'customer'){
+            return back();
+        }
         return view('pages.customer.Dashboard.Index');
     }
 
@@ -37,7 +41,7 @@ class dashboard extends Controller
         $layanans = Layanan::where('isdeleted', false)->get();
         $totalPelanggan = User::where('role', 'customer')->count();
         $jumlahPethouse = PetHouse::where('verificationStatus', 'disetujui')->count();
-        $jumlahPenitipanBerhangsung = Penitipan::whereNotIn('status', ['selesai', 'gagal'])->count();
+        $jumlahPenitipanBerhangsung = Penitipan::where('status', 'sedang dititipkan')->count();
 
         $startOfWeek = Carbon::now()->startOfWeek(Carbon::MONDAY)->startOfDay();
         $endOfWeek = Carbon::now()->endOfWeek(Carbon::SUNDAY)->endOfDay();
@@ -120,7 +124,7 @@ class dashboard extends Controller
         $statusPethouse = $user->petHouses?->verificationStatus;
         $totalHewanDititipkan = Hewan::whereHas('penitipan', function ($query) use ($user) {
             $query->where('petHouseId', $user->id);
-        })->whereRelation('penitipan','status','sedang dititipkan')->count();
+        })->whereRelation('penitipan', 'status', 'sedang dititipkan')->count();
         $startOfWeek = Carbon::now()->startOfWeek(Carbon::MONDAY)->startOfDay();
         $endOfWeek = Carbon::now()->endOfWeek(Carbon::SUNDAY)->endOfDay();
 
@@ -183,6 +187,6 @@ class dashboard extends Controller
             'cash' => array_values($transaksiMingguanCash->toArray()),
             'nonCash' => array_values($transaksiMingguanNonCash->toArray()),
         ];
-        return view('pages.petHouse.Dashboard.Index', compact('layananAktif', 'statusPethouse', 'penitipanBerlangsung', 'menujuKePethouse', 'totalHewanDititipkan','pendapatan'));
+        return view('pages.petHouse.Dashboard.Index', compact('layananAktif', 'statusPethouse', 'penitipanBerlangsung', 'menujuKePethouse', 'totalHewanDititipkan', 'pendapatan'));
     }
 }

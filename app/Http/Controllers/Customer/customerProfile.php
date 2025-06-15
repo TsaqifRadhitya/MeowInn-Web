@@ -22,7 +22,7 @@ class customerProfile extends Controller
         return view('pages.customer.Profile.Index', compact('user'));
     }
 
-    public function edit(string $id)
+    public function edit()
     {
         $user = User::with("village.district.city.province")->find(Auth::user()->id);
         return view('pages.customer.Profile.Edit', compact('user'));

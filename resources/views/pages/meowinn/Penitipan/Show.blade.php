@@ -100,7 +100,7 @@
                             class="h-12 w-12 rounded-full border-2 border-orange-200">
                     </div>
                     <div>
-                        <h3 class="font-semibold text-gray-800">{{  $penitipan->pethouse->name }}</h3>
+                        <h3 class="font-semibold text-gray-800">{{ $penitipan->pethouse->name }}</h3>
                         <p class="text-sm text-gray-600">{{ $penitipan->pethouse->user->email }}</p>
                         <p class="text-sm text-gray-600">{{ $penitipan->pethouse->user->phoneNumber }}</p>
                     </div>
@@ -114,7 +114,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
-                    <span class="text-gray-700">{{ $penitipan->pethouse->user->address }}, {{ $penitipan->pethouse->user->village->villageName }},
+                    <span class="text-gray-700">{{ $penitipan->pethouse->user->address }},
+                        {{ $penitipan->pethouse->user->village->villageName }},
                         {{ $penitipan->pethouse->user->village->district->districtName }}</span>
                 </div>
 
@@ -225,9 +226,6 @@
                     <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada laporan</h3>
                     <p class="mt-1 text-sm text-gray-500">Tidak ada laporan harian yang tersedia untuk penitipan ini.
                     </p>
-                    <a href="{{ route('pethouse.reports.create', $penitipan->id) }}"
-                        class="btn bg-orange-500 text-white border border-orange-500 mt-2 rounded-lg hover:text-orange-500 hover:bg-transparent">Tambah
-                        Laporan</a>
                 </div>
             @endif
         </div>

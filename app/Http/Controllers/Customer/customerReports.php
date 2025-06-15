@@ -32,7 +32,7 @@ class customerReports extends Controller
         $petHouse = PetHouse::with(['user.village.district.city', 'pethouseLayanans'])->find($id);
 
         if ($petHouse) {
-            PetHouse::create(
+            Report::create(
                 ['jenis_reports' => 'Pet House', 'isi' => $request->isi, 'pethouseId' => $petHouse->id]
             );
             return back()->with('success', 'Berhasil Mengirimakan Feedback');
