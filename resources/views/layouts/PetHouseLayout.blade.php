@@ -1,11 +1,11 @@
 @props(['header', 'activeMenu' => null])
 
 <head>
-    <title>{{ env('APP_NAME') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>pethouse - {{ $header }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         const handleOpen = () => {
@@ -39,7 +39,6 @@
     <!-- Mobile overlay -->
     <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden" onclick="handleClose()">
     </div>
-
     <!-- Sidebar -->
     <aside id="default-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
@@ -279,5 +278,6 @@
         <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-60px)]']) }}>
             {{ $slot }}
         </div>
+        <x-sweet-alert />
     </div>
 </div>

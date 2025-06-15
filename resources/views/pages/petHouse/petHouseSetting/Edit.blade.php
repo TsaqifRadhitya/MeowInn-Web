@@ -188,7 +188,7 @@
                 </div>
                 <div class="flex justify-end mt-10">
                     <button type="submit"
-                        class="px-6 py-3 bg-[#F69246] cursor-pointer text-white font-medium rounded-lg shadow-md hover:bg-[#e07f35] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F69246] transition-colors duration-200 transform hover:scale-[1.02]">
+                        class="px-6 py-3 w-full md:w-fit bg-[#F69246] cursor-pointer text-white font-medium rounded-lg shadow-md hover:bg-[#e07f35] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F69246] transition-colors duration-200 transform hover:scale-[1.02]">
                         Simpan Perubahan
                     </button>
                 </div>

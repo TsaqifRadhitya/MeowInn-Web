@@ -1,12 +1,12 @@
 @props(['header', 'activeMenu' => null])
 
 <head>
-    <title>{{ env('APP_NAME') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <title>Meowinn - {{ $header }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script>
         const handleOpen = () => {
@@ -275,5 +275,6 @@
         <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-100px)]']) }}>
             {{ $slot }}
         </div>
+        <x-sweet-alert />
     </div>
 </div>

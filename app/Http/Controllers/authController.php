@@ -7,9 +7,7 @@ use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\ValidationException;
 use Laravel\Socialite\Facades\Socialite;
-use function PHPUnit\Framework\returnArgument;
 
 class authController extends Controller
 {
@@ -141,15 +139,11 @@ class authController extends Controller
         Auth::login($user);
         switch ($user->role) {
             case 'pethouse':
-                $redirectRoute = route('pethouse.dashboard');
-                break;
+                return redirect()->route('pethouse.dashboard')->with('success', 'Login Berhasil!');
             case 'customer':
-                $redirectRoute = route('dashboard');
-                break;
+                return redirect()->intended(route('dashboard'))->with('success', 'Login Berhasil!');
             case 'meowinn':
-                $redirectRoute = route('meowinn.dashboard');
-                break;
+                return redirect()->route('meowinn.dashboard')->with('success', 'Login Berhasil!');
         }
-        return redirect()->intended($redirectRoute)->with('success', 'Login Berhasil!');
     }
 }
