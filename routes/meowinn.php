@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\Meowinn\meowinnKelolaLayanan;
+use App\Http\Controllers\Meowinn\meowinnKelolaPenitipan;
 use App\Http\Controllers\Meowinn\meowinnKelolaPethouse;
 use App\Http\Controllers\Meowinn\meowinnReport;
 use App\Http\Controllers\Meowinn\profileAdminController;
@@ -30,6 +31,8 @@ Route::middleware(['auth', meowinnMidleware::class])->group(function () {
             Route::delete('/{id}', [meowinnkelolaPethouse::class, 'tolak'])->name('meowinn.pengajuanpethouse.delete');
             Route::patch('/{id}', [meowinnkelolaPethouse::class, 'approve'])->name('meowinn.pengajuanpethouse.update');
         });
+
+        Route::get('penitipan/{id}',[meowinnKelolaPenitipan::class,'show'])->name('meowinn.penitipan.show');
 
         Route::prefix('penalty')->group(function () {
             Route::get('/', [meowinnkelolaPethouse::class, 'penalty'])->name('meowinn.penalty.index');

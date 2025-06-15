@@ -67,9 +67,10 @@
                         @if ($report->penitipan)
                             <div class="mt-2">
                                 <span class="text-sm text-gray-500">Penitipan ID:</span>
-                                <span class="ml-2 text-sm font-medium text-gray-700">
+                                <a href="{{ route('meowinn.penitipan.show', $report->penitipan->id) }}"
+                                    class="ml-2 text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline">
                                     {{ $report->penitipan->id }}
-                                </span>
+                                </a>
                             </div>
                         @endif
                     </div>

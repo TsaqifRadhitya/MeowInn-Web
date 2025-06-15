@@ -13,7 +13,7 @@ class pethousePenitipanReport extends Controller
     use HasCloudinary;
     public function create($id)
     {
-        // return view(, compact("id"));
+        return view('pages.petHouse.LaporanPenitipan.create', compact("id"));
     }
 
     public function store(Request $request, $id)
@@ -21,50 +21,53 @@ class pethousePenitipanReport extends Controller
         $validated = $request->validate(
             [
                 'caption' => ['required', 'string', 'min:1', 'max:500'],
-                'photos' => ['required', 'array'],
-                'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
+                'photos' => ['required', 'file', 'mimes:jpg,jpeg,png', 'max:2048']
             ]
         );
-
+        $validated['photos'] = $this->cloudinarySingleUpload($request->file('photos'), 'laporan/' . $id);
         laporanPenitipan::create([...$validated, 'penitipanId' => $id]);
 
-        return back()->with('success', 'Berhasil Mengirimkan Laporan Penitipan');
+        return redirect()->route('pethouse.penitipan.show', $id)->with('success', 'Berhasil mengirimkan laporan penitipan');
 
     }
 
-    public function edit()
+    public function edit($id)
     {
-
-    }
-
-    public function update(Request $request, $penitipanId, $reportId)
-    {
-        $validated = $request->validate(
-            [
-                'caption' => ['nullable', 'string', 'min:1', 'max:500'],
-                'photos' => ['nullable', 'array'],
-                'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
-            ]
-        );
-
-        if ($request->hasFile('photos')) {
-            $validated['photos'] = json_encode($this->cloudinaryBatchUpload($request->file('photos'), 'penitipan/' . $penitipanId . '/laporan'));
-        }
-
-        $updated = laporanPenitipan::where('penitipanId', $penitipanId)->where('id ', $reportId)->update($validated);
-
-        if ($updated) {
-            return back()->with('success', 'Berhasil Mengubah Laporan Penitipan');
+        $laporan = laporanPenitipan::find($id);
+        if ($laporan) {
+            return view('pages.petHouse.LaporanPenitipan.edit', compact('laporan'));
         }
         abort(404);
     }
 
-    public function destroy($penitipanId, $reportId)
+    public function update(Request $request, $id)
     {
-        $deletedAmount = laporanPenitipan::where('id', $reportId)->where('penitipanId', $penitipanId)->delete();
+        $validated = $request->validate(
+            [
+                'caption' => ['required', 'string', 'min:1', 'max:500'],
+                'photos' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048']
+            ]
+        );
+        $laporan = laporanPenitipan::find($id);
+        if ($laporan) {
+            if ($request->hasFile('photos')) {
+                $validated['photos'] = $this->cloudinarySingleUpload($request->file('photos'), 'laporan/' . $id);
+            }
+
+            $laporan->update($validated);
+            return redirect()->route('pethouse.penitipan.show', $laporan->penitipanId)->with('success', 'Berhasil mengubah laporan penitipan');
+
+        }
+        ;
+        abort(404);
+    }
+
+    public function destroy($id)
+    {
+        $deletedAmount = laporanPenitipan::destroy($id);
 
         if ($deletedAmount > 0) {
-            return back()->with('success', 'Berhasil Menghapus Laporan Penitipan');
+            return back()->with('success', 'Berhasil menghapus laporan penitipan');
         }
         abort(404);
     }

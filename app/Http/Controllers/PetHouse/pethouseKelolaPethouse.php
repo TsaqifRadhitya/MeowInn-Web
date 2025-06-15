@@ -59,6 +59,6 @@ class pethouseKelolaPethouse extends Controller
         $user->update($userPayloadData);
         unset($validated['phoneNumber']);
         $user->petHouses()->update($validated);
-        return back()->with('success', 'Berhasil Mengubah Pengaturan Pethouse');
+        return back()->with('success', 'Berhasil mengubah pengaturan pethouse');
     }
 }

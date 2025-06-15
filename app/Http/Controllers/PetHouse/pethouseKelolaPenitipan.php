@@ -4,20 +4,25 @@ namespace App\Http\Controllers\PetHouse;
 
 use App\Models\Penitipan;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class pethouseKelolaPenitipan extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('petHouseId', Auth::user()->petHouses?->id)->whereNotIn('status', ['selesai', 'gagal'])->paginate(4);
+        if ($request->status && $request->status != "") {
+            $penitipans = Penitipan::with('hewans.penitipanLayanans', 'users.village.district.city.province')->where('petHouseId', Auth::user()->petHouses?->id)->where('status', $request->status)->paginate(2);
+        } else {
+            $penitipans = Penitipan::with('hewans.penitipanLayanans', 'users.village.district.city.province')->where('petHouseId', Auth::user()->petHouses?->id)->whereNotIn('status', ['selesai', 'gagal', 'menunggu pembayaran'])->paginate(2);
+        }
         return view('pages.petHouse.Penitipan.Index', compact('penitipans'));
     }
     public function show($id)
     {
-        $penitipan = Penitipan::with(['hewans.penitipanLayanans.Layanan', 'laporans'])->find($id);
+        $penitipan = Penitipan::with(['hewans.penitipanLayanans.pethouseLayanan', 'laporans'])->find($id);
         if ($penitipan) {
-            return view('pages.petHouse.Penitipan.Show', compact('penitipans'));
+            return view('pages.petHouse.Penitipan.Show', compact('penitipan'));
         }
         abort(404);
     }
@@ -30,11 +35,10 @@ class pethouseKelolaPenitipan extends Controller
             if ($currentStatus === "menunggu penjemputan" || $currentStatus === "menunggu diantar ke pethouse") {
                 $nextStatus = "sedang dititipkan";
             } else {
-                $nextStatus = "selesai";
+                $nextStatus = $penitipan->isPickUp === 0 || $penitipan->status === 'sedang diantar pulang' ? "selesai" : 'sedang diantar pulang';
             }
-            $penitipan->status = $nextStatus;
-            $penitipan->save();
-            return redirect()->route("pethouse.penitipan.show", $id)->with("success", "Berhasil Memperbarui Status Penitipan");
+            $penitipan->update(['status' => $nextStatus]);
+            return redirect()->route("pethouse.penitipan.show", $id)->with("success", "Berhasil memperbarui status penitipan");
         }
 
         abort(404);
@@ -42,7 +46,7 @@ class pethouseKelolaPenitipan extends Controller
 
     public function riwayat()
     {
-        $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('petHouseId', Auth::user()->petHouses?->id)->whereIn('status', ['selesai', 'gagal'])->paginate(4);
+        $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('petHouseId', Auth::user()->petHouses?->id)->where('status', 'selesai')->paginate(4);
         return view('pages.petHouse.Penitipan.Riwayat', compact('penitipans'));
     }
 }

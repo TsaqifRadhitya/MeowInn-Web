@@ -1,7 +1,7 @@
 <x-meowinn-layout header="Pet House Preview" class="p-10 rounded-2xl shadow-sm flex flex-col gap-5 text-[#787878]"
     id="content" activeMenu="Pet House">
     <section class="flex flex-col md:flex-row gap-10">
-        <img src="{{ $profilePethouse->user->profilePicture }}" class="aspect-video h-fit md:w-1/3" alt="">
+        <img src="{{ $profilePethouse->user->profilePicture }}" class="aspect-video h-fit md:w-1/3 object-cover object-center" alt="">
         <article class="md:w-2/3 w-full text-lg">
             <div class="flex justify-between items-start">
                 <h1 class="font-black text-[#FF7B54] text-4xl">{{ $profilePethouse->name }}</h1>

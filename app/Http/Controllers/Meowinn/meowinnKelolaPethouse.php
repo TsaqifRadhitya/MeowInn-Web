@@ -17,14 +17,14 @@ class meowinnKelolaPethouse extends Controller
                 ->paginate(3);
 
         } else {
-            $daftarPethouse = PetHouse::where('verificationStatus', 'disetujui')->paginate(2);
+            $daftarPethouse = PetHouse::where('verificationStatus', 'disetujui')->paginate(3);
         }
         return view('pages.meowinn.PetHouse.Index', compact('daftarPethouse'));
     }
 
     public function penalty()
     {
-        $daftarPenalty = PetHouse::where('penalty', '>', 0)->get();
+        $daftarPenalty = PetHouse::where('penalty', '>', 0)->paginate(5);
         return view('pages.meowinn.PetHouse.Penalty', compact('daftarPenalty'));
     }
 
@@ -74,7 +74,7 @@ class meowinnKelolaPethouse extends Controller
         $duration = $request->input('penalty');
         if ($duration && $profilePethouse) {
             $profilePethouse->increment('penalty', $duration);
-            return back()->with('success', 'Berhasl memberikan penalty');
+            return back()->with('success', 'Berhasl memberikan penalty selama'.$duration.' hari');
         } else {
             abort(404);
         }
@@ -82,7 +82,7 @@ class meowinnKelolaPethouse extends Controller
 
     public function penaltyRemove($id)
     {
-        $result = PetHouse::whereId($id)->update(['penalty' => 0]);
-        return back()->with('success', 'Berhasil Menghapus Penalty');
+        $result = PetHouse::whereId($id)->update(['penalty' => null]);
+        return back()->with('success', 'Berhasil menghapus penalty');
     }
 }
