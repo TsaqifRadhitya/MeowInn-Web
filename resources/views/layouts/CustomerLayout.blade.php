@@ -12,10 +12,12 @@
         }
     </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
+
 <body>
     <x-customer-navbar />
     <main class="p-5 md:p-10 bg-[#FFF6F2]">@yield('main')</main>
     <x-customer-footer />
-    <x-sweet-alert/>
+    <x-sweet-alert />
 </body>
