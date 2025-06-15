@@ -33,7 +33,7 @@ class dashboard extends Controller
         if($role !== null && $role !== 'customer'){
             return back();
         }
-        return view('pages.customer.Dashboard.Index');
+        return view('pages.customer.Dashboard.index');
     }
 
     public function meowinn()
