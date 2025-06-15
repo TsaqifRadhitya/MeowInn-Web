@@ -46,7 +46,7 @@ class pethouseKelolaPenitipan extends Controller
 
     public function riwayat()
     {
-        $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('petHouseId', Auth::user()->petHouses?->id)->where('status', 'selesai')->paginate(4);
+        $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('petHouseId', Auth::user()->petHouses?->id)->where('status', 'selesai')->paginate(2);
         return view('pages.petHouse.Penitipan.Riwayat', compact('penitipans'));
     }
 }
