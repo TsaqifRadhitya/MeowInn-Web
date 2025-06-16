@@ -82,7 +82,7 @@ class meowinnKelolaPethouse extends Controller
 
     public function penaltyRemove($id)
     {
-        $result = PetHouse::whereId($id)->update(['penalty' => null]);
+        $result = PetHouse::whereId($id)->update(['penalty' => 0]);
         return back()->with('success', 'Berhasil menghapus penalty');
     }
 }
