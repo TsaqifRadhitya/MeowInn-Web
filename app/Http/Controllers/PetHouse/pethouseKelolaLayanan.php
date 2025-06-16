@@ -22,7 +22,8 @@ class pethouseKelolaLayanan extends Controller
         $layanan = Layanan::find($id);
         if ($layanan) {
             return view('pages.petHouse.Layanan.Edit', compact('layanan'));
-        };
+        }
+        ;
         abort(404);
     }
 
@@ -40,16 +41,15 @@ class pethouseKelolaLayanan extends Controller
     {
         $validated = $request->validate([
             'price' => ['numeric', 'required', 'min:1000'],
-            'description' => ['nullable', 'string', 'min:10'],
-            'photos' => ['nullable', 'array'],
-            'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'description' => ['nullable', 'string', 'min:1'],
+            'photos' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
             'status' => ['nullable', 'string']
         ]);
 
         $pethouseId = Auth::user()->petHouses->id;
 
         if ($request->hasFile('photos')) {
-            $validated['photos'] = json_encode($this->cloudinaryBatchUpload($request->file('photos'), Auth::user()->petHouses->name . '/layananphtos'));
+            $validated['photos'] = $this->cloudinarySingleUpload($request->file('photos'), Auth::user()->petHouses->name . '/layananphtos');
         }
         $validated['status'] = $request->status ? true : false;
         $layanan = detailLayanan::where([

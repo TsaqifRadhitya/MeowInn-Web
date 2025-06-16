@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->ulid('id')->primary();
             $table->string('caption');
             $table->json('photos');
-            $table->foreignUlid('penitipanId')->constrained('penitipans');
+            $table->foreignUlid('penitipanId')->constrained('penitipans')->onDelete('cascade');
             $table->timestamps();
         });
     }

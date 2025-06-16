@@ -33,7 +33,7 @@
                 <div class="flex flex-col lg:flex-row">
                     <!-- Service Image -->
                     <div class="lg:w-1/3 h-56 lg:h-60 overflow-hidden relative">
-                        <img src="{{ json_decode($layanan->photos)[0] }}" alt="{{ $layanan->name }}"
+                        <img src="{{ $layanan->photos }}" alt="{{ $layanan->name }}"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         <div
                             class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -91,7 +91,7 @@
                 <p class="mt-1 text-gray-500">Tambahkan layanan baru untuk memulai</p>
                 <div class="mt-6">
                     <a href="{{ route('meowinn.layanan.create') }}"
-                        class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        class="inline-flex items-center px-4 py-2 bg-[#FF7B54] text-white rounded-lg hover:bg-[#fe6a3d] transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"

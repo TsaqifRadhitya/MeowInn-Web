@@ -105,8 +105,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Customer Info -->
                 <div class="pt-4 border-t border-gray-100">
                     <h4 class="text-sm font-medium text-gray-500 mb-3 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" style="color: #F69246;"

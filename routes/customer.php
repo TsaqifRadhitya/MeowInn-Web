@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\customerAddressCheck;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\customerMidleware;
 use App\Http\Controllers\Customer\customerProfile;
@@ -13,7 +14,7 @@ Route::middleware(['auth', customerMidleware::class])->group(function () {
         Route::get('/', [customerPethouse::class, 'index'])->name('customer.pethouse.index');
         Route::get('{id}', [customerPethouse::class, 'show'])->name('customer.pethouse.show');
         Route::post('{id}', [customerReports::class, 'storePethouse'])->name('customer.pethouse.store');
-    });
+    })->middleware([customerAddressCheck::class]);
 
     Route::prefix('penitipan')->group(function () {
 
@@ -25,11 +26,9 @@ Route::middleware(['auth', customerMidleware::class])->group(function () {
 
         Route::get('{id}', [customerPenitipan::class, 'show'])->name('customer.penitipan.show');
 
-        Route::delete('{id}', [customerPenitipan::class, 'destroy'])->name('customer.penitipan.destory');
-
         Route::post('{id}/report', [customerReports::class, 'storePenitipan'])->name('customer.penitipan.report');
 
-    });
+    })->middleware(customerAddressCheck::class);
 
     Route::post('reports/', [customerReports::class, 'store'])->name('customer.reports.store');
 

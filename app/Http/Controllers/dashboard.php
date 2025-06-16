@@ -131,14 +131,14 @@ class dashboard extends Controller
 
         $layananAktif = detailLayanan::with('layanan')->where('petHouseId', $user->petHouses?->id)->where('status', true)->get();
 
-        $penitipanBerlangsung = Penitipan::where('status', 'sedang dititipkan')->where('petHouseId', $user->id)->count();
+        $penitipanBerlangsung = Penitipan::where('status', 'sedang dititipkan')->where('petHouseId', $user->petHouses?->id)->count();
 
-        $menujuKePethouse = Penitipan::whereIn('status', ['menunggu diantar ke pethouse', 'menunggu penjemputan'])->where('petHouseId', $user->id)->count();
+        $menujuKePethouse = Penitipan::whereIn('status', ['menunggu diantar ke pethouse', 'menunggu penjemputan'])->where('petHouseId', $user->petHouses?->id)->count();
 
         $statusPethouse = $user->petHouses?->verificationStatus;
 
         $totalHewanDititipkan = Hewan::whereHas('penitipan', function ($query) use ($user) {
-            $query->where('petHouseId', $user->id);
+            $query->where('petHouseId', $user->petHouses?->id);
         })->whereRelation('penitipan', 'status', 'sedang dititipkan')->count();
 
         $totalPendapatanBulanIni = Penitipan::whereNotIn('status', ['gagal', 'menunggu pembayaran'])

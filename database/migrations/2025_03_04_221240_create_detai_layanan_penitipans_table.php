@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('detai_layanan_penitipans', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->integer('price');
-            $table->foreignUlid('detailLayananId')->constrained('detail_layanans', 'id')->delete('cascade');
+            $table->foreignUlid('detailLayananId')->constrained('detail_layanans', 'id')->onDelete('cascade');
             $table->foreignUlid('hewanId')->constrained('hewans', 'id')->ondelete('cascade');
             $table->timestamps();
         });

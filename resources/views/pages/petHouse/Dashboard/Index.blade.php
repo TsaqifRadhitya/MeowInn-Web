@@ -87,7 +87,7 @@
                             </defs>
                         </svg>
                         <p class="text-2xl font-bold text-gray-800">{{ $totalHewanDititipkan }}</p>
-                        <p class="text-sm text-gray-600 font-semibold">Total Hewan Dititipkan</p>
+                        <p class="text-sm text-gray-600 font-semibold">Total Sedang Hewan Dititipkan</p>
                     </div>
                     <div class="bg-green-100 p-4 rounded-xl flex flex-col gap-4 shadow">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none"

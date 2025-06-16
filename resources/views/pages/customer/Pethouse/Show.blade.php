@@ -55,15 +55,31 @@
             <div class="mt-8 sm:mt-10">
                 <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Layanan Tambahan</h3>
                 <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
-                    @forelse($petHouse->pethouseLayanans as $layanan)
-                        <div
-                            class="flex items-center bg-[#FF8855] text-white font-semibold rounded-full px-4 sm:px-6 py-1 sm:py-2 shadow gap-2 sm:gap-3 text-sm sm:text-base">
-                            <span>{{ $layanan->layanan->name }}</span>
-                            <span
-                                class="text-white font-bold">Rp{{ number_format($layanan->price ?? 0, 0, ',', '.') }}</span>
+                    @forelse ($petHouse->pethouseLayanansActive as $layanan)
+                        <div class="p-4 hover:bg-gray-50 transition-colors shadow rounded-lg w-full">
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <div class="w-full md:w-48 h-40 flex-shrink-0 rounded-lg overflow-hidden">
+                                    <img src="{{ $layanan->pethouselayanans?->photos ?? $layanan->layanan->photos }}"
+                                        alt="{{ $layanan->name }}" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="flex flex-col h-full">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+
+                                                <h3 class="text-lg font-semibold text-gray-800 mt-1">
+                                                    {{ $layanan->layanan->name }}</h3>
+                                            </div>
+                                            <span
+                                                class="text-lg font-bold text-[#F69246]">Rp{{ number_format($layanan?->price, 0, ',', '.') }}</span>
+                                        </div>
+                                        <p class="text-gray-600 mt-2 line-clamp-2 break-words">{!! nl2br($layanan->description ?? $layanan->pethouselayanans?->description) !!}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @empty
-                        <div class="text-gray-400 italic text-sm sm:text-base">Belum ada layanan tersedia.</div>
+                        <h1 class="font-bold text-2xl text-center my-auto">Belum Tersedia Layanan Tambahan Lainnya</h1>
                     @endforelse
                 </div>
             </div>

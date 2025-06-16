@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->integer('price');
             $table->text('description')->nullable();
-            $table->json('photos')->nullable();
+            $table->string('photos')->nullable();
             $table->boolean('status')->default(false);
             $table->foreignUlid('layananId')->constrained('layanans', 'id')->delete('cascade');
             $table->foreignUlid('petHouseId')->constrained('pet_houses', 'id')->delete('cascade');

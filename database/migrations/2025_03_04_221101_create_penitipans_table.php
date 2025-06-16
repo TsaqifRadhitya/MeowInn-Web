@@ -22,8 +22,8 @@ return new class extends Migration
             $table->boolean('isCash')->default(false);
             $table->boolean('isPickUp')->default(false);
             $table->timestamps();
-            $table->foreignUlid('userId')->constrained('users', 'id')->delete('cascade');
-            $table->foreignUlid('petHouseId')->constrained('pet_houses', 'id')->delete('cascade');
+            $table->foreignUlid('userId')->constrained('users', 'id')->onDelete('cascade');
+            $table->foreignUlid('petHouseId')->constrained('pet_houses', 'id')->onDelete('cascade');
         });
     }
 

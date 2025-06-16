@@ -117,7 +117,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('register') }}"
+                    <a href="{{ route('register.option') }}"
                         class="flex items-center justify-center gap-2 bg-white text-[#FF8855] px-4 py-2 rounded-full">
                         <span class="font-bold">Register</span>
                     </a>
