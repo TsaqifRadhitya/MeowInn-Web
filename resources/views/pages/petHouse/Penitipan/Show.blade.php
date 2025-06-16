@@ -216,9 +216,11 @@
                     <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada laporan</h3>
                     <p class="mt-1 text-sm text-gray-500">Tidak ada laporan harian yang tersedia untuk penitipan ini.
                     </p>
-                    <a href="{{ route('pethouse.reports.create', $penitipan->id) }}"
+                    @if ($penitipan->status === 'sedang dititipkan')
+                        <a href="{{ route('pethouse.reports.create', $penitipan->id) }}"
                         class="btn bg-orange-500 text-white border border-orange-500 mt-2 rounded-lg hover:text-orange-500 hover:bg-transparent">Tambah
                         Laporan</a>
+                    @endif
                 </div>
             @endif
         </div>

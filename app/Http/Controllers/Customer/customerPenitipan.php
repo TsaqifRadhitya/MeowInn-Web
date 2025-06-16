@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\HasCloudinary;
 use App\Models\DetaiLayananPenitipan;
+use App\Models\detailLayanan;
 use App\Models\Hewan;
 use App\Models\Penitipan;
 use App\Models\PetHouse;
@@ -11,13 +12,15 @@ use App\Models\Report;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class customerPenitipan extends Controller
 {
     use HasCloudinary;
     public function index()
     {
-        $penitipans = Penitipan::with(['hewans.penitipanLayanans.pethouseLayanan.layanan', 'pethouse.user.village.district.city.province'])->where('userId', Auth::user()->id)->paginate(10);
+        $penitipans = Penitipan::with(['hewans.penitipanLayanans.pethouseLayanan.layanan', 'pethouse.user.village.district.city.province'])->where('userId', Auth::user()->id)->orderByDesc('created_at')->paginate(4);
         return view('pages.customer.Penitipan.Index', compact('penitipans'));
     }
 
@@ -39,7 +42,23 @@ class customerPenitipan extends Controller
             }
         ])->find($id);
         if ($pethouse) {
-            return view('pages.customer.Penitipan.Create', compact('pethouse'));
+            $user = Auth::user();
+            if ($pethouse->pickUpService) {
+                switch ($pethouse->range) {
+                    case 'village':
+                        $pickupServiceStatus = $pethouse->user->villageId === $user->villageId;
+                        break;
+                    case 'district':
+                        $pickupServiceStatus = $pethouse->user->village->districtId === $user->village->districtId;
+                        break;
+                    case 'city':
+                        $pickupServiceStatus = $pethouse->user->village->district->cityId === $user->village->district->cityId;
+                        break;
+                }
+            } else {
+                $pickupServiceStatus = false;
+            }
+            return view('pages.customer.Penitipan.Create', compact('pethouse', 'pickupServiceStatus'));
         }
         abort(404);
     }
@@ -49,49 +68,53 @@ class customerPenitipan extends Controller
         $validated = $request->validate([
             'duration' => ['required', 'min:1', 'numeric'],
             'petCareCosts' => ['required', 'numeric'],
-            'isCash' => ['required', 'boolean'],
-            'isPickUp' => ['required', 'boolean'],
+            'isCash' => ['required'],
+            'isPickUp' => ['nullable'],
         ]);
+
         $user = Auth::user();
-        $validated['status'] = $validated['isPickUp'] ? 'menunggu penjemputan' : 'menunggu pembayaran';
+        $validated['status'] = $request->isPickUp ? 'menunggu penjemputan' : 'menunggu pembayaran';
+        $validated['isCash'] = $request->isPickUp ? true : false;
         $validated['address'] = $user->address;
         $validated['villageId'] = $user->villageId;
         $validated['userId'] = $user->id;
         $validated['petHouseId'] = $id;
-        dd($request->all());
+
         $penitipan = Penitipan::create($validated);
+        if (!$penitipan->isCash) {
+            Config::$serverKey = config('app.midtrans.server_key');
+            Config::$isProduction = config('app.midtrans.is_production');
+            Config::$isSanitized = config('app.midtrans.is_sanitized');
+            Config::$is3ds = config('app.midtrans.is_3ds');
+            $ress = Snap::createTransaction([
+                "transaction_details" => [
+                    "order_id" => $penitipan->id,
+                    "gross_amount" => $request->total
+                ],
+                "callbacks" => [
+                    "finish" => route('customer.penitipan.show', ["id" => $penitipan->id]),
+                    "error" => route('customer.penitipan.show', ["id" => $penitipan->id])
+                ],
+            ]);
+            $penitipan->update(['snapToken' => $ress->token]);
+        }
         if ($request->has('cats')) {
-            $cats = $request->input('cats');
+            $cats = $request->cats;
             $catFiles = $request->file('cats');
             foreach ($cats as $i => $cat) {
-                if (is_object($cat))
-                    $cat = (array) $cat;
-                $foto = null;
-                if (isset($catFiles[$i]['foto']) && $catFiles[$i]['foto']->isValid()) {
-                    $file = $catFiles[$i]['foto'];
-                    $filename = 'kucing/' . uniqid() . '.' . $file->getClientOriginalExtension();
-                    $file->move(public_path('storage/kucing'), $filename);
-                    $foto = 'kucing/' . basename($filename);
-                } else {
-                    $foto = 'kucing/default.png';
-                }
-                // $hewan = Hewan::create([
-                //     'foto' =>
-                // ])
-                $hewan = Hewan([
-                    'name' => isset($cat['nama']) ? $cat['nama'] : (isset($cat['name']) ? $cat['name'] : 'Tanpa Nama'),
+                $file = $catFiles[$i]['foto'];
+                $foto = $this->cloudinarySingleUpload($file, $cat['nama']);
+                $hewan = Hewan::create([
                     'foto' => $foto,
-                    'description' => $cat['jenis'] ?? null,
+                    'name' => $cat['nama'],
+                    'description' => $cat['description'],
                     'penitipanId' => $penitipan->id,
-                    'petCareCost' => $penitipan->petCareCosts,
                 ]);
-                $hewan->save();
-                if (!empty($cat['layanans'])) {
+                if (isset($cat['layanans'])) {
                     foreach ($cat['layanans'] as $layananId) {
-                        $detailLayanan = $detailLayanan::find($layananId);
-                        $hargaLayanan = $detailLayanan ? $detailLayanan->price : 0;
+                        $detailLayanan = detailLayanan::find($layananId);
                         DetaiLayananPenitipan::create([
-                            'price' => $hargaLayanan,
+                            'price' => $detailLayanan->price,
                             'detailLayananId' => $layananId,
                             'hewanId' => $hewan->id,
                         ]);
@@ -99,7 +122,7 @@ class customerPenitipan extends Controller
                 }
             }
         }
-        return redirect()->route('customer.penitipan.index')->with('success', 'Penitipan berhasil disimpan!');
+        return redirect()->route('customer.penitipan.show', $penitipan->id)->with('success', 'Penitipan berhasil disimpan!');
     }
 
     public function destroy($id)

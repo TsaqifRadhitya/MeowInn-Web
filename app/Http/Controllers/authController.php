@@ -22,8 +22,15 @@ class authController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-
-            return redirect()->intended(route('dashboard', absolute: false));
+            $role = Auth::user()->role;
+            switch ($role) {
+                case 'pethouse':
+                    return redirect()->route('pethouse.dashboard')->with('success', 'Login Berhasil!');
+                case 'customer':
+                    return redirect()->intended(route('dashboard'))->with('success', 'Login Berhasil!');
+                case 'meowinn':
+                    return redirect()->route('meowinn.dashboard')->with('success', 'Login Berhasil!');
+            }
         }
 
         return back()->withErrors([

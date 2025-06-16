@@ -9,7 +9,7 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <p class="text-sm text-blue-600 font-medium">Total Transaksi Bulan Ini</p>
-                                <p class="text-2xl font-bold text-gray-800 mt-2">{{ number_format(array_sum($pendapatan['cash']) + array_sum($pendapatan['nonCash']), 0, ',', '.') }}</p>
+                                <p class="text-2xl font-bold text-gray-800 mt-2">{{ number_format($totalPendapatanBulanIni, 0, ',', '.') }}</p>
                             </div>
                             <div class="p-2 bg-blue-100 rounded-lg">
                                 <svg class="w-6 h-6 text-blue-600" fill="currentColor" viewBox="0 0 20 20">

@@ -55,7 +55,8 @@
                                 d="M12.3644 11C11.348 11 10.5241 11.8954 10.5241 13V27C10.5241 28.1046 11.348 29 12.3644 29H25.2462C26.2626 29 27.0865 28.1046 27.0865 27V13C27.0865 11.8954 26.2626 11 25.2462 11H12.3644ZM15.1248 21C15.1248 20.4477 14.7128 20 14.2046 20C13.6965 20 13.2845 20.4477 13.2845 21V25C13.2845 25.5523 13.6965 26 14.2046 26C14.7128 26 15.1248 25.5523 15.1248 25V21ZM18.8053 17C19.3135 17 19.7254 17.4477 19.7254 18V25C19.7254 25.5523 19.3135 26 18.8053 26C18.2971 26 17.8852 25.5523 17.8852 25V18C17.8852 17.4477 18.2971 17 18.8053 17ZM24.3261 15C24.3261 14.4477 23.9141 14 23.406 14C22.8978 14 22.4858 14.4477 22.4858 15V25C22.4858 25.5523 22.8978 26 23.406 26C23.9141 26 24.3261 25.5523 24.3261 25V15Z"
                                 fill="white" />
                         </svg>
-                        <p class="text-2xl font-bold text-gray-800">{{ number_format(array_sum($pendapatan['cash']) + array_sum($pendapatan['nonCash']), 0, ',', '.') }}</p>
+                        <p class="text-2xl font-bold text-gray-800">
+                            {{ number_format($totalPendapatanBulanIni, 0, ',', '.') }}</p>
                         <p class="text-sm text-gray-600 font-semibold">Pendapatan Bulanan</p>
                     </div>
                     <div class="bg-[#FFF4DE] p-4 rounded-xl flex flex-col gap-4 justify-center shadow">
@@ -125,8 +126,7 @@
                 <div class="space-y-4 min-h-10 md:min-h-20 relative">
                     @forelse ($layananAktif as $layanan)
                         <label class="flex items-center gap-3">
-                            <input type="checkbox" checked disabled
-                                class="form-checkbox h-5 w-5">
+                            <input type="checkbox" checked disabled class="form-checkbox h-5 w-5">
                             <span class="text-gray-700">{{ $layanan->layanan->name }}</span>
                         </label>
                     @empty

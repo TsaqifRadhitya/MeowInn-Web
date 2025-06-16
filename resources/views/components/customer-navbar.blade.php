@@ -154,7 +154,7 @@
                 Sampaikan pendapat, kesan, atau saranmu karena suara kamu sangat berarti bagi kami dan kucing-kucing
                 tersayang.
             </p>
-            <form method="POST" action="{{ route('customer.reports.store', Auth::user()->id) }}">
+            <form method="POST" action="{{ route('customer.reports.store')}}">
                 @csrf
                 <textarea id="feedback-textarea" name="isi"
                     class="w-full border border-gray-200 rounded-lg p-3 sm:p-4 mb-4 sm:mb-6 focus:outline-none focus:ring-2 focus:ring-[#FF8855] resize-none bg-white text-gray-700 text-sm sm:text-base"
