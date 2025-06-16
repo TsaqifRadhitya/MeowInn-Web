@@ -13,51 +13,7 @@
                         Laporkan
                     </a>
                 </div>
-                <div class="md:flex items-end justify-between">
-                    <div class="mb-3 sm:mb-4 text-xs sm:text-sm text-gray-500">
-                        User login: <span class="font-bold">{{ Auth::user()->name }}</span> |
-                        User ID: <span class="font-mono">{{ Auth::user()->id }}</span>
-                    </div>
-                    <div class="mb-2 flex justify-center md:justify-end">
-                        @if ($penitipan->status === 'menunggu pembayaran')
-                            <span
-                                class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs md:text-lg font-bold flex items-center gap-1 w-max">
-                                Menunggu Pembayaran <span>🕒</span>
-                            </span>
-                        @elseif($penitipan->status === 'gagal')
-                            <span
-                                class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold md:text-lg flex items-center gap-1 w-max">
-                                Pembayaran Gagal <span>❌</span>
-                            </span>
-                        @elseif($penitipan->status === 'menunggu penjemputan')
-                            <span
-                                class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold md:text-lg flex items-center gap-1 w-max">
-                                Menunggu Penjemputan <span>👋</span>
-                            </span>
-                        @elseif($penitipan->status === 'menunggu diantar ke pethouse')
-                            <span
-                                class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold md:text-lg flex items-center gap-1 w-max">
-                                Menunggu Antar ke Pethouse <span>🏠</span>
-                            </span>
-                        @elseif($penitipan->status === 'sedang dititipkan')
-                            <span
-                                class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold flex md:text-lg items-center gap-1 w-max">
-                                Sedang Dititipkan <span>🐱</span>
-                            </span>
-                        @elseif($penitipan->status === 'sedang diantar pulang')
-                            <span
-                                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex md:text-lg items-center gap-1 w-max">
-                                Sedang Diantar Pulang <span>🚗</span>
-                            </span>
-                        @elseif($penitipan->status === 'selesai')
-                            <span
-                                class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex md:text-lg items-center gap-1 w-max">
-                                Selesai <span>✅</span>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-                <div class="mb-4 sm:mb-6">
+                <div class="mb-4 sm:mb-6 flex flex-col-reverse md:flex-row md:justify-between md:items-end">
                     <div class="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                         <div class="flex flex-col">
                             <label class="block text-[#FF8855] font-semibold mb-1 text-lg sm:text-xl">Durasi
@@ -75,8 +31,45 @@
                             </span>
                         </div>
                     </div>
+                    @if ($penitipan->status === 'menunggu pembayaran')
+                        <div class="flex flex-col items-end gap-2">
+                            <span
+                                class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs md:text-lg font-bold flex items-center gap-1 w-max">
+                                Menunggu Pembayaran <span>🕒</span>
+                            </span>
+                        </div>
+                    @elseif($penitipan->status === 'gagal')
+                        <span
+                            class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold md:text-lg flex items-center gap-1 w-max">
+                            Pembayaran Gagal <span>❌</span>
+                        </span>
+                    @elseif($penitipan->status === 'menunggu penjemputan')
+                        <span
+                            class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-bold md:text-lg flex items-center gap-1 w-max">
+                            Menunggu Penjemputan <span>👋</span>
+                        </span>
+                    @elseif($penitipan->status === 'menunggu diantar ke pethouse')
+                        <span
+                            class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-bold md:text-lg flex items-center gap-1 w-max">
+                            Menunggu Antar ke Pethouse <span>🏠</span>
+                        </span>
+                    @elseif($penitipan->status === 'sedang dititipkan')
+                        <span
+                            class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold flex md:text-lg items-center gap-1 w-max">
+                            Sedang Dititipkan <span>🐱</span>
+                        </span>
+                    @elseif($penitipan->status === 'sedang diantar pulang')
+                        <span
+                            class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex md:text-lg items-center gap-1 w-max">
+                            Sedang Diantar Pulang <span>🚗</span>
+                        </span>
+                    @elseif($penitipan->status === 'selesai')
+                        <span
+                            class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold flex md:text-lg items-center gap-1 w-max">
+                            Selesai <span>✅</span>
+                        </span>
+                    @endif
                 </div>
-
                 <div class="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8">
                     <div class="flex-1 relative" style="min-height: 100px;">
                         @foreach ($penitipan->hewans as $i => $cat)
@@ -143,57 +136,106 @@
                     </div>
                 </div>
 
-                <!-- Payment Summary -->
-                <div class="mt-6 sm:mt-8 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 items-start relative">
+                <div class="mt-2.5 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 items-start relative">
                     <div class="flex-1 w-full">
                         <div
                             class="bg-white rounded-lg sm:rounded-xl shadow p-4 sm:p-6 border border-gray-200 mb-4 sm:mb-6">
-                            <div class="font-bold text-blue-700 mb-2 text-base sm:text-lg">Ringkasan Pembayaran</div>
-                            <div class="overflow-x-auto">
-                                <table class="w-full text-xs sm:text-sm mb-2">
-                                    <thead>
-                                        <tr class="text-[#1A1A1A] font-semibold">
-                                            <th class="text-left py-1 sm:py-2">Layanan</th>
-                                            <th class="text-left py-1 sm:py-2">Keterangan</th>
-                                            <th class="text-right py-1 sm:py-2">Subtotal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="py-1 sm:py-2">Penitipan</td>
-                                            <td class="py-1 sm:py-2">{{ $penitipan->hewans->count() }} kucing x
-                                                {{ $penitipan->duration }} hari</td>
-                                            <td class="text-right py-1 sm:py-2">
-                                                Rp{{ number_format(($penitipan->petCareCosts ?? 0) * $penitipan->hewans->count() * $penitipan->duration, 0, ',', '.') }}
-                                            </td>
-                                        </tr>
-                                        @foreach ($penitipan->hewans as $cat)
-                                            @foreach ($cat->penitipanLayanans as $layanan)
-                                                <tr>
-                                                    <td class="py-1 sm:py-2">
-                                                        {{ $layanan->pethouseLayanan->layanan->name ?? '-' }}
-                                                    </td>
-                                                    <td class="py-1 sm:py-2">Kucing: {{ $cat->name }}</td>
-                                                    <td class="text-right py-1 sm:py-2">
-                                                        Rp{{ number_format($layanan->price, 0, ',', '.') }}
-                                                    </td>
-                                                </tr>
+                            <h2 class="font-bold text-blue-700 mb-2 text-base sm:text-lg">Kondisi Kucing</h2>
+                            <section>
+                                @forelse ($penitipan->laporans as $laporan)
+                                    <div class=" p-4 gap-x-5 gap-y-2.5 flex flex-col md:flex-row ">
+                                        <article class="md:flex-2/5 space-y-2.5">
+                                            <h1 class="font-semibold">Foto Kondisi Kucing</h1>
+                                            <img src="{{ $laporan->photos }}" alt="Report Photo"
+                                                class="aspect-video h-fit object-center rounded-lg object-cover border border-gray-200">
+                                        </article>
+                                        <article class="md:flex-3/5 space-y-2.5 flex flex-col justify-between">
+                                            <div>
+                                                <h1 class="font-semibold">Keterangan</h1>
+                                                <p class="break-words">{!! nl2br($laporan->caption) !!}</p>
+                                            </div>
+                                            <h3 class="font-medium text-gray-600 text-right">
+                                                {{ \Carbon\Carbon::parse($laporan->created_at)->format('d M Y') }}</h3>
+                                        </article>
+                                    </div>
+                                @empty
+                                    <div class="text-center py-8 rounded-lg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto text-gray-400"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada laporan</h3>
+                                        <p class="mt-1 text-sm text-gray-500">Tidak ada laporan harian yang tersedia untuk
+                                            penitipan ini.
+                                        </p>
+                                    </div>
+                                @endforelse
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Payment Summary -->
+                    <div class="mt-6 sm:mt-8 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 items-start relative">
+                        <div class="flex-1 w-full">
+                            <div
+                                class="bg-white rounded-lg sm:rounded-xl shadow p-4 sm:p-6 border border-gray-200 mb-4 sm:mb-6">
+                                <div class="font-bold text-blue-700 mb-2 text-base sm:text-lg">Ringkasan Pembayaran</div>
+                                <div class="overflow-x-auto">
+                                    <table class="w-full text-xs sm:text-sm mb-2">
+                                        <thead>
+                                            <tr class="text-[#1A1A1A] font-semibold">
+                                                <th class="text-left py-1 sm:py-2">Layanan</th>
+                                                <th class="text-left py-1 sm:py-2">Keterangan</th>
+                                                <th class="text-right py-1 sm:py-2">Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="py-1 sm:py-2">Penitipan</td>
+                                                <td class="py-1 sm:py-2">{{ $penitipan->hewans->count() }} kucing x
+                                                    {{ $penitipan->duration }} hari</td>
+                                                <td class="text-right py-1 sm:py-2">
+                                                    Rp{{ number_format(($penitipan->petCareCosts ?? 0) * $penitipan->hewans->count() * $penitipan->duration, 0, ',', '.') }}
+                                                </td>
+                                            </tr>
+                                            @foreach ($penitipan->hewans as $cat)
+                                                @foreach ($cat->penitipanLayanans as $layanan)
+                                                    <tr>
+                                                        <td class="py-1 sm:py-2">
+                                                            {{ $layanan->pethouseLayanan->layanan->name ?? '-' }}
+                                                        </td>
+                                                        <td class="py-1 sm:py-2">Kucing: {{ $cat->name }}</td>
+                                                        <td class="text-right py-1 sm:py-2">
+                                                            Rp{{ number_format($layanan->price, 0, ',', '.') }}
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             @endforeach
-                                        @endforeach
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="2" class="font-bold text-[#FF3B3B] py-1 sm:py-2">Total
-                                                Pembayaran</td>
-                                            <td class="text-right font-bold text-[#FF3B3B] py-1 sm:py-2">
-                                                Rp{{ number_format(($penitipan->petCareCosts ?? 0) * $penitipan->hewans->count() * $penitipan->duration + $penitipan->hewans->flatMap->penitipanLayanans->sum('price'), 0, ',', '.') }}
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="2" class="font-bold text-[#FF3B3B] py-1 sm:py-2">Total
+                                                    Pembayaran</td>
+                                                <td class="text-right font-bold text-[#FF3B3B] py-1 sm:py-2">
+                                                    Rp{{ number_format(($penitipan->petCareCosts ?? 0) * $penitipan->hewans->count() * $penitipan->duration + $penitipan->hewans->flatMap->penitipanLayanans->sum('price'), 0, ',', '.') }}
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    @if ($penitipan->status === 'menunggu pembayaran')
+                        <div class="flex justify-end w-full">
+                            <button id="pay-button"
+                                class="bg-green-500 w-full md:w-fit hover:bg-green-600 text-white font-bold px-4 py-2 rounded-lg text-sm sm:text-base shadow transition">
+                                Bayar Sekarang
+                            </button>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -236,13 +278,30 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
+        data-client-key="{{ config('app.midtrans.client_key') }}"></script>
     <script>
-        function closeLaporkanModal() {
-            const modal = document.getElementById('laporkan-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex', 'items-center', 'justify-center');
-        }
         document.addEventListener('DOMContentLoaded', function() {
+            const payButton = document.getElementById('pay-button');
+            if (payButton) {
+                payButton.onclick = function() {
+                    snap.pay('{{ $penitipan->snapToken ?? '' }}', {
+                        onSuccess: function(result) {
+                            // Redirect or show success message
+                            window.location.reload();
+                        },
+                        onPending: function(result) {
+                            // Handle pending payment
+                            window.location.reload();
+                        },
+                        onError: function(result) {
+                            // Handle error
+                            window.location.reload();
+                        }
+                    });
+                };
+            }
+
             const btn = document.getElementById('btn-laporkan');
             const modal = document.getElementById('laporkan-modal');
             if (btn && modal) {
@@ -253,5 +312,11 @@
                 });
             }
         });
+
+        function closeLaporkanModal() {
+            const modal = document.getElementById('laporkan-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex', 'items-center', 'justify-center');
+        }
     </script>
 @endsection

@@ -12,9 +12,9 @@ class pethouseKelolaPenitipan extends Controller
     public function index(Request $request)
     {
         if ($request->status && $request->status != "") {
-            $penitipans = Penitipan::with('hewans.penitipanLayanans', 'users.village.district.city.province')->where('petHouseId', Auth::user()->petHouses?->id)->where('status', $request->status)->paginate(2);
+            $penitipans = Penitipan::with('hewans.penitipanLayanans', 'users.village.district.city.province')->where('petHouseId', Auth::user()->petHouses?->id)->where('status', $request->status)->orderByDesc('created_at')->paginate(2);
         } else {
-            $penitipans = Penitipan::with('hewans.penitipanLayanans', 'users.village.district.city.province')->where('petHouseId', Auth::user()->petHouses?->id)->whereNotIn('status', ['selesai', 'gagal', 'menunggu pembayaran'])->paginate(2);
+            $penitipans = Penitipan::with('hewans.penitipanLayanans', 'users.village.district.city.province')->where('petHouseId', Auth::user()->petHouses?->id)->whereNotIn('status', ['selesai', 'gagal', 'menunggu pembayaran'])->orderByDesc('created_at')->paginate(2);
         }
         return view('pages.petHouse.Penitipan.Index', compact('penitipans'));
     }
@@ -46,7 +46,7 @@ class pethouseKelolaPenitipan extends Controller
 
     public function riwayat()
     {
-        $penitipans = Penitipan::with('hewans.penitipanLayanans.Layanan')->where('petHouseId', Auth::user()->petHouses?->id)->where('status', 'selesai')->paginate(2);
+        $penitipans = Penitipan::with('hewans.penitipanLayanans')->where('petHouseId', Auth::user()->petHouses?->id)->where('status', 'selesai')->orderByDesc('created_at')->paginate(2);
         return view('pages.petHouse.Penitipan.Riwayat', compact('penitipans'));
     }
 }

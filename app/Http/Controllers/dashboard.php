@@ -30,7 +30,7 @@ class dashboard extends Controller
     public function user()
     {
         $role = Auth::user()?->role;
-        if($role !== null && $role !== 'customer'){
+        if ($role !== null && $role !== 'customer') {
             return back();
         }
         return view('pages.customer.Dashboard.index');
@@ -42,7 +42,6 @@ class dashboard extends Controller
         $totalPelanggan = User::where('role', 'customer')->count();
         $jumlahPethouse = PetHouse::where('verificationStatus', 'disetujui')->count();
         $jumlahPenitipanBerhangsung = Penitipan::where('status', 'sedang dititipkan')->count();
-
         $startOfWeek = Carbon::now()->startOfWeek(Carbon::MONDAY)->startOfDay();
         $endOfWeek = Carbon::now()->endOfWeek(Carbon::SUNDAY)->endOfDay();
 
@@ -57,6 +56,16 @@ class dashboard extends Controller
         ];
 
         $defaultData = collect($hariMinggu)->mapWithKeys(fn($val) => [$val => 0]);
+
+        $totalPendapatanBulanIni = Penitipan::whereNotIn('status', ['gagal', 'menunggu pembayaran'])
+            ->whereRaw('MONTH(created_at) = MONTH(CURRENT_DATE())')
+            ->whereRaw('YEAR(created_at) = YEAR(CURRENT_DATE())')
+            ->get()
+            ->sum(function ($penitipan) {
+                $biayaPenitipan = $penitipan->petCareCosts * $penitipan->duration * $penitipan->hewans->count();
+                $biayaLayanan = $penitipan->hewans->flatMap->penitipanLayanans->sum('price');
+                return $biayaPenitipan + $biayaLayanan;
+            });
 
         $penitipanCash = Penitipan::with(['hewans.penitipanLayanans'])
             ->where('isCash', true)
@@ -111,20 +120,39 @@ class dashboard extends Controller
             'totalPelanggan',
             'jumlahPethouse',
             'jumlahPenitipanBerhangsung',
-            'pendapatan'
+            'pendapatan',
+            'totalPendapatanBulanIni'
         ));
     }
 
     public function petHouse()
     {
         $user = Auth::user();
+
         $layananAktif = detailLayanan::with('layanan')->where('petHouseId', $user->petHouses?->id)->where('status', true)->get();
+
         $penitipanBerlangsung = Penitipan::where('status', 'sedang dititipkan')->where('petHouseId', $user->id)->count();
+
         $menujuKePethouse = Penitipan::whereIn('status', ['menunggu diantar ke pethouse', 'menunggu penjemputan'])->where('petHouseId', $user->id)->count();
+
         $statusPethouse = $user->petHouses?->verificationStatus;
+
         $totalHewanDititipkan = Hewan::whereHas('penitipan', function ($query) use ($user) {
             $query->where('petHouseId', $user->id);
         })->whereRelation('penitipan', 'status', 'sedang dititipkan')->count();
+
+        $totalPendapatanBulanIni = Penitipan::whereNotIn('status', ['gagal', 'menunggu pembayaran'])
+            ->whereRaw('MONTH(created_at) = MONTH(CURRENT_DATE())')->where('petHouseId', $user->petHouses?->id)
+            ->whereRaw('YEAR(created_at) = YEAR(CURRENT_DATE())')
+            ->get()
+            ->sum(function ($penitipan) {
+                $biayaPenitipan = $penitipan->petCareCosts * $penitipan->duration * $penitipan->hewans->count();
+                $biayaLayanan = $penitipan->hewans->flatMap->penitipanLayanans->sum('price');
+                return $biayaPenitipan + $biayaLayanan;
+            });
+
+
+
         $startOfWeek = Carbon::now()->startOfWeek(Carbon::MONDAY)->startOfDay();
         $endOfWeek = Carbon::now()->endOfWeek(Carbon::SUNDAY)->endOfDay();
 
@@ -187,6 +215,6 @@ class dashboard extends Controller
             'cash' => array_values($transaksiMingguanCash->toArray()),
             'nonCash' => array_values($transaksiMingguanNonCash->toArray()),
         ];
-        return view('pages.petHouse.Dashboard.Index', compact('layananAktif', 'statusPethouse', 'penitipanBerlangsung', 'menujuKePethouse', 'totalHewanDititipkan', 'pendapatan'));
+        return view('pages.petHouse.Dashboard.Index', compact('layananAktif', 'statusPethouse', 'penitipanBerlangsung', 'menujuKePethouse', 'totalHewanDititipkan', 'pendapatan','totalPendapatanBulanIni'));
     }
 }

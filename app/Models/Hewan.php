@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Hewan extends Model
 {
     use HasUlids;
-    protected $fillable = ['nama', 'foto', 'penitipanId'];
+    protected $fillable = ['name', 'foto', 'penitipanId','description'];
 
     public function penitipanLayanans()
     {

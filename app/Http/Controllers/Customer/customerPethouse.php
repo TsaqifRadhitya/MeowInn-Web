@@ -12,7 +12,7 @@ class customerPethouse extends Controller
 
     public function index()
     {
-        $petHouses = PetHouse::whereNot('penalty', '>', 0)->whereRelation('user.village.district.city', 'cityName', '=', Auth::user()->village?->district?->city?->cityName)->paginate(4);
+        $petHouses = PetHouse::whereNot('penalty', '>', 0)->where('isOpen',true)->whereRelation('user.village.district.city', 'cityName', '=', Auth::user()->village?->district?->city?->cityName)->paginate(4);
         return view('pages.customer.Pethouse.Index', compact('petHouses'));
     }
 

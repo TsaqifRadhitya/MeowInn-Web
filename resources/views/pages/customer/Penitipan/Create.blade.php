@@ -1,11 +1,10 @@
 @extends('layouts.CustomerLayout')
 @section('main')
+
     <body class="bg-[#fdf5f0]">
         <div class="bg-[#fdf5f0] min-h-screen pt-6 pb-2">
             <div class="max-w-6xl mx-auto px-4">
-                <h1 class="text-4xl font-bold text-[#FF8855] mb-6">{{ $pethouse->name ?? 'Pethouse' }}</h1>
-                <div class="mb-4 text-sm text-gray-500">User login: <span class="font-bold">{{ Auth::user()->name }}</span> |
-                    User ID: <span class="font-mono">{{ Auth::user()->id }}</span></div>
+                <h1 class="text-4xl font-bold text-[#FF8855] mb-6">{{ $pethouse->name }}</h1>
                 @if ($errors->any())
                     <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
                         @foreach ($errors->all() as $error)
@@ -13,8 +12,8 @@
                         @endforeach
                     </div>
                 @endif
-                <form action="{{ route('customer.penitipan.store',$pethouse->id) }}" method="POST" enctype="multipart/form-data"
-                    id="penitipanForm">
+                <form action="{{ route('customer.penitipan.store', $pethouse->id) }}" method="POST"
+                    enctype="multipart/form-data" id="penitipanForm">
                     @csrf
                     <input type="hidden" name="petHouseId" value="{{ $pethouse->id }}">
                     <div class="mb-6">
@@ -46,9 +45,46 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="petCareCosts" id="petCareCosts" value="{{ $pethouse->petCareCost ?? 0 }}">
-                    <input type="hidden" name="isCash" value="1">
-                    <input type="hidden" name="isPickUp" value="0">
+                    <input type="hidden" name="petCareCosts" id="petCareCosts" value="{{ $pethouse->petCareCost }}">
+                    <input type="hidden" name="total" id="total" value="">
+                    <!-- Pickup Service Option -->
+                    @if ($pickupServiceStatus)
+                        <div class="mt-6 bg-white rounded-xl shadow p-6 border border-gray-200 mb-6">
+                            <div class="font-bold text-blue-700 mb-4 text-lg">Layanan Antar Jemput</div>
+                            <div class="flex items-center gap-4">
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="isPickUp" value="1"
+                                        class="form-radio text-[#FF8855] h-5 w-5">
+                                    <span class="ml-2 text-gray-700">Gunakan Layanan Antar Jemput (FREE)</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="radio" name="isPickUp" value="0"
+                                        class="form-radio text-[#FF8855] h-5 w-5" checked>
+                                    <span class="ml-2 text-gray-700">Tidak Menggunakan Layanan</span>
+                                </label>
+                            </div>
+                        </div>
+                    @else
+                        <input type="hidden" name="isPickUp" value="0">
+                    @endif
+
+                    <!-- Payment Method Option -->
+                    <div class="mt-6 bg-white rounded-xl shadow p-6 border border-gray-200 mb-6">
+                        <div class="font-bold text-blue-700 mb-4 text-lg">Metode Pembayaran</div>
+                        <div class="flex items-center gap-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="isCash" value="1"
+                                    class="form-radio text-[#FF8855] h-5 w-5" checked>
+                                <span class="ml-2 text-gray-700">Bayar di Tempat (Cash)</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="isCash" value="0"
+                                    class="form-radio text-[#FF8855] h-5 w-5">
+                                <span class="ml-2 text-gray-700">Transfer Online</span>
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="mt-8 flex flex-col md:flex-row gap-8 items-start relative">
                         <div class="flex-1">
                             <div class="bg-white rounded-xl shadow p-6 border border-gray-200 mb-6">
@@ -69,11 +105,9 @@
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <div class="flex gap-4 mt-4">
+                                <div class="flex gap-4 mt-4 justify-end">
                                     <button type="submit"
-                                        class="bg-[#2196F3] text-white px-6 py-2 rounded font-bold shadow hover:bg-blue-700 transition">Selesai</button>
-                                    <button type="button"
-                                        class="bg-[#FF8855] text-white px-6 py-2 rounded font-bold shadow hover:bg-[#ff6d1f] transition">Lanjutkan
+                                        class="bg-[#FF8855] text-white px-6 py-2 rounded font-bold cursor-pointer shadow hover:bg-[#ff6d1f] transition">Lanjutkan
                                         Pembayaran</button>
                                 </div>
                             </div>
@@ -82,7 +116,6 @@
                 </form>
             </div>
         </div>
-        <!-- Template layanan hidden untuk JS -->
         <div id="layanan-template" style="display:none">
             @foreach ($pethouse->pethouseLayanans as $layanan)
                 @if ($layanan->status)
@@ -103,6 +136,7 @@
         </div>
         <script>
             const petCareCost = {{ $pethouse->petCareCost ?? 0 }};
+            const pickupServiceCost = 50000; // Biaya layanan antar jemput
             let catCount = 1;
             const maxCat = 5;
             const catFormsContainer = document.getElementById('cat-forms-container');
@@ -121,14 +155,14 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 mb-1 font-semibold">Jenis Kucing</label>
-                    <input type="text" name="cats[${index}][jenis]" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-base" placeholder="Persia" required>
+                    <input type="text" name="cats[${index}][description]" class="w-full border border-gray-300 rounded-lg px-4 py-2 text-base" placeholder="Persia" required>
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 mb-1 font-semibold">Foto Kucing</label>
                     <div class="upload-area border-1 border-dashed rounded-xl flex flex-col items-center justify-center py-8 cursor-pointer bg-[#FAFAFA] transition relative group min-h-[150px]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-[#FF8855] mb-3 group-hover:scale-110 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4a1 1 0 011-1h8a1 1 0 011 1v12m-4 4h-4a1 1 0 01-1-1v-4m6 5a1 1 0 001-1v-4m-6 5a1 1 0 01-1-1v-4" /></svg>
                         <span class="text-base font-semibold text-[#FF8855] mb-1 text-center group-hover:underline">Click to upload <span class='text-gray-400 font-normal'>or drag and drop</span></span>
-                        <span class="text-xs text-gray-400 mb-2 text-center">JPG, JPEG, PNG less than 1MB</span>
+                        <span class="text-xs text-gray-400 mb-2 text-center">JPG, JPEG, PNG MAX 2MB</span>
                         <input type="file" name="cats[${index}][foto]" accept="image/*" required class="foto-input absolute inset-0 opacity-0 cursor-pointer">
                         <img class="preview-img hidden mt-4 rounded-lg max-h-32 shadow border" alt="Preview Foto Kucing">
                     </div>
@@ -167,7 +201,6 @@
             }
 
             function updateEventListeners() {
-                // Preview gambar kucing
                 document.querySelectorAll('.foto-input').forEach(input => {
                     input.addEventListener('change', function(e) {
                         const file = e.target.files[0];
@@ -185,7 +218,6 @@
                         }
                     });
                 });
-                // Update ringkasan saat layanan di-check/uncheck
                 document.querySelectorAll('.layanan-checkbox').forEach(cb => {
                     cb.addEventListener('change', updateRingkasan);
                 });
@@ -197,15 +229,15 @@
                 ringkasanBody.innerHTML = '';
                 let total = 0;
                 const durasi = parseInt(document.getElementById('durasi-penitipan').value) || 1;
+
                 document.querySelectorAll('.cat-form').forEach((form, i) => {
-                    // Harga penitipan per hari per kucing
                     const nama = form.querySelector(`[name^="cats"][name$="[nama]"]`).value || '-';
                     const biayaHarian = petCareCost;
                     const subtotalPenitipan = biayaHarian * durasi;
                     ringkasanBody.innerHTML +=
                         `<tr><td>Penitipan</td><td>Kucing: ${nama} x ${durasi} hari</td><td class='text-right'>Rp${subtotalPenitipan.toLocaleString('id-ID')}</td></tr>`;
                     total += subtotalPenitipan;
-                    // Layanan tambahan
+
                     form.querySelectorAll('.layanan-checkbox:checked').forEach(cb => {
                         const layananNama = cb.getAttribute('data-nama') || '-';
                         const layananHarga = parseInt(cb.getAttribute('data-harga')) || 0;
@@ -214,18 +246,20 @@
                         total += layananHarga;
                     });
                 });
+
                 totalPembayaran.textContent = `Rp${total.toLocaleString('id-ID')}`;
-                totalPembayaran.textContent = `Rp${total.toLocaleString('id-ID')}`;
+                document.getElementById('total').value = total
             }
 
-            // Panggil updateRingkasan saat durasi berubah
-            const durasiSelect = document.getElementById('durasi-penitipan');
-            durasiSelect.addEventListener('change', updateRingkasan);
+            document.getElementById('durasi-penitipan').addEventListener('change', updateRingkasan);
+
+            document.querySelectorAll('input[name="isPickUp"]').forEach(radio => {
+                radio.addEventListener('change', updateRingkasan);
+            });
 
             document.getElementById('add-cat-form').addEventListener('click', addCatForm);
             document.getElementById('remove-cat-form').addEventListener('click', removeCatForm);
 
-            // Inisialisasi form pertama
             window.addEventListener('DOMContentLoaded', () => {
                 catFormsContainer.innerHTML = '';
                 catCount = 0;
