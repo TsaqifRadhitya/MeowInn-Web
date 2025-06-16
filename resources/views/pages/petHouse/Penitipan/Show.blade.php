@@ -9,7 +9,6 @@
                 </h1>
             </div>
         </div>
-
         <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
             <h2 class="text-xl font-bold mb-4 flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-orange-500" fill="none"
@@ -19,7 +18,6 @@
                 </svg>
                 Daftar Hewan ({{ $penitipan->hewans->count() }})
             </h2>
-
             <div class="space-y-4">
                 @foreach ($penitipan->hewans as $hewan)
                     <div class="border border-gray-100 rounded-lg p-4 hover:border-orange-200 transition-colors">
@@ -64,7 +62,6 @@
                 @endforeach
             </div>
         </div>
-
         <div class="bg-white rounded-xl shadow-sm p-5 border border-gray-100">
             <div class="flex flex-col md:justify-between">
                 <h1 class="font-bold text-xl mb-5">Total Transaksi</h1>
@@ -96,7 +93,6 @@
                 </svg>
                 Informasi Pemilik
             </h2>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
@@ -116,7 +112,6 @@
                         <p class="text-sm text-gray-600">{{ $penitipan->users->phoneNumber }}</p>
                     </div>
                 </div>
-
                 <div class="space-y-2">
                     <div class="flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-orange-500" fill="none"
@@ -149,8 +144,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Reports Section -->
         <div class="bg-white rounded-xl shadow-sm p-5 border space-y-5 border-gray-100">
             <section class="flex justify-between items-center">
                 <h2 class="text-xl font-bold mb-4 flex items-center">
@@ -218,8 +211,8 @@
                     </p>
                     @if ($penitipan->status === 'sedang dititipkan')
                         <a href="{{ route('pethouse.reports.create', $penitipan->id) }}"
-                        class="btn bg-orange-500 text-white border border-orange-500 mt-2 rounded-lg hover:text-orange-500 hover:bg-transparent">Tambah
-                        Laporan</a>
+                            class="btn bg-orange-500 text-white border border-orange-500 mt-2 rounded-lg hover:text-orange-500 hover:bg-transparent">Tambah
+                            Laporan</a>
                     @endif
                 </div>
             @endif

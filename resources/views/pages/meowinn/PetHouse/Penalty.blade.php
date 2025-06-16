@@ -90,7 +90,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // SweetAlert for delete confirmation
             const deleteButtons = document.querySelectorAll('.delete-btn');
 
             deleteButtons.forEach(button => {

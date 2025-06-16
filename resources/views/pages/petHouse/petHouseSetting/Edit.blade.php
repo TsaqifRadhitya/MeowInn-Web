@@ -14,7 +14,6 @@
                     <span class="w-3 h-3 bg-[#F69246] rounded-full mr-2"></span>
                     Status Pethouse
                 </h2>
-
                 <div class="flex items-center">
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" name="isOpen" class="sr-only peer" @checked(old('isOpen', $pethouse->isOpen))>
@@ -29,7 +28,6 @@
                     </label>
                 </div>
             </div>
-
             <div class="bg-orange-50 p-6 rounded-lg">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
                     <span class="w-3 h-3 bg-[#F69246] rounded-full mr-2"></span>
@@ -111,7 +109,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="bg-orange-50 p-6 rounded-lg space-y-5">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center">
                     <span class="w-3 h-3 bg-[#F69246] rounded-full mr-2"></span>
@@ -165,7 +162,6 @@
                     Foto Lokasi
                 </h2>
                 <p class="text-sm text-gray-600 mb-6">Unggah foto yang menunjukkan fasilitas pethouse Anda</p>
-
                 <div class="mb-6">
                     <h3 class="text-sm font-medium text-gray-700 mb-3">Foto Saat Ini</h3>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">

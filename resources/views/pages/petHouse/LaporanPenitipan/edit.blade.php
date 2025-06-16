@@ -40,7 +40,6 @@
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
-        <!-- Submit Button -->
         <div class="flex flex-col-reverse md:flex-row justify-end gap-2.5">
             <a href="{{ route('pethouse.penitipan.show', $laporan->penitipanId) }}"
                 class="px-6 py-2 border border-orange-500 text-orange-500 cursor-pointer text-center font-medium rounded-md hover:bg-orange-10 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors">

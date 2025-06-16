@@ -31,7 +31,6 @@
             <div
                 class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-all duration-300 group">
                 <div class="flex flex-col lg:flex-row">
-                    <!-- Service Image -->
                     <div class="lg:w-1/3 h-56 lg:h-60 overflow-hidden relative">
                         <img src="{{ $layanan->photos }}" alt="{{ $layanan->name }}"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">

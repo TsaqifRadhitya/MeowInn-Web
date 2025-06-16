@@ -97,11 +97,9 @@
         </div>
     </body>
 
-    <!-- Modal Laporkan -->
     <div id="laporkan-modal" class="fixed inset-0 bg-black/30 items-center justify-center z-50 hidden p-4">
         <div
             class="relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-2xl shadow-black/30 w-full max-w-4xl flex flex-col md:flex-row items-stretch overflow-hidden">
-            <!-- Left - Hidden on mobile -->
             <div class="hidden md:flex flex-col justify-center items-center pl-6 md:pl-10 pr-0 py-6 md:py-10 relative"
                 style="background:transparent;">
                 <span
@@ -109,8 +107,6 @@
                 <img src="{{ asset('asset/kucing5.png') }}" alt="Kucing"
                     class="w-48 md:w-64 lg:w-72 h-56 md:h-64 lg:h-80 object-contain z-10" style="margin-left:10px;" />
             </div>
-
-            <!-- Right -->
             <div class="flex-1 flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-10 py-6 md:py-8 lg:py-10">
                 <button onclick="closeLaporkanModal()"
                     class="absolute top-2 right-3 sm:top-3 sm:right-4 text-gray-400 hover:text-gray-700 text-2xl sm:text-3xl font-bold z-10">&times;</button>

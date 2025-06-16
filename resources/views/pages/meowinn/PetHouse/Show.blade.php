@@ -29,8 +29,6 @@
             </div>
         </article>
     </section>
-
-    <!-- Penalty Action Buttons -->
     <section class="flex gap-4 justify-end">
         @if ($profilePethouse->penalty)
             <form id="delete-penalty-form" method="POST"

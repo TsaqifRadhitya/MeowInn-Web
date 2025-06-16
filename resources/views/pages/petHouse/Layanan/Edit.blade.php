@@ -3,8 +3,6 @@
         class="space-y-6">
         @csrf
         @method('PATCH')
-
-        <!-- Photo Section -->
         <div class="space-y-3">
             <h2 class="text-lg font-semibold">Foto Layanan</h2>
             <div id="preview-container" class="relative cursor-pointer max-w-xl mx-auto w-full aspect-video bg-gray-100 rounded-lg overflow-hidden">
@@ -17,8 +15,6 @@
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
-
-        <!-- Description -->
         <div>
             <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi Layanan</label>
             <textarea id="description" name="description" rows="4"
@@ -28,8 +24,6 @@
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
-
-        <!-- Price -->
         <div>
             <label for="price" class="block text-sm font-medium text-gray-700 mb-2">Harga</label>
             <div class="relative rounded-md shadow-sm">
@@ -45,8 +39,6 @@
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
-
-        <!-- Status -->
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
             <div class="flex items-center">
@@ -65,8 +57,6 @@
                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
             @enderror
         </div>
-
-        <!-- Buttons -->
         <div class="flex justify-end pt-4">
             <a href="{{ route('pethouse.layanan.index') }}"
                 class="mr-3 px-4 py-2 cursor-pointer rounded-md shadow-sm text-sm font-medium text-[#FF7B54] bg-white hover:bg-[#FF7B54] hover:text-white ring ring-[#FF7B54]">
@@ -78,22 +68,18 @@
             </button>
         </div>
     </form>
-
     <script>
         function previewImage(event) {
             const file = event.target.files[0];
             const preview = document.getElementById('preview');
-
             if (!file) return;
             if (!file.type.startsWith('image/')) return;
-
             const reader = new FileReader();
             reader.onload = function(e) {
                 preview.src = e.target.result;
             };
             reader.readAsDataURL(file);
         }
-
         document.getElementById('preview-container').addEventListener('click', function() {
             document.getElementById('photos').click();
         });
