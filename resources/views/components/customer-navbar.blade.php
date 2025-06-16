@@ -62,7 +62,7 @@
                         style="height:40px;display:flex;align-items:center;">
                         Login
                     </a>
-                    <a href="{{ route('register') }}"
+                    <a href="{{ route('register.option') }}"
                         class="bg-white text-[#FF8855] px-3 md:px-4 py-1.5 rounded-full transition font-bold flex items-center h-full"
                         style="height:40px;display:flex;align-items:center;">
                         Register
