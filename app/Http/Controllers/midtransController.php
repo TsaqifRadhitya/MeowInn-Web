@@ -29,7 +29,7 @@ class midtransController extends Controller
 
         if ($request->transaction_status === "expired") {
             $penitipan = Penitipan::where('id', $request->order_id)->where('status', 'menunggu pembayaran')->update([
-                'status' => 'Pembayaran Gagal'
+                'status' => 'gagal'
             ]);
         }
         return response()->json(['message' => 'Callback received successfully']);

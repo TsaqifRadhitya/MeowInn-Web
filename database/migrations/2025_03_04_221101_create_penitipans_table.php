@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('penitipans', function (Blueprint $table) {
             $table->ulid('id')->primary();
-            $table->enum('status', ['menunggu pembayaran', 'Pembayaran Gagal', 'menunggu penjemputan', 'menunggu diantar ke pethouse', 'sedang dititipkan','sedang diantar pulang','selesai'])->default('menunggu pembayaran');
+            $table->enum('status', ['menunggu pembayaran', 'gagal', 'menunggu penjemputan', 'menunggu diantar ke pethouse', 'sedang dititipkan','sedang diantar pulang','selesai'])->default('menunggu pembayaran');
             $table->integer('duration');
             $table->integer('petCareCosts');
             $table->string('snapToken')->nullable();
