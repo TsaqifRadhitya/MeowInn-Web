@@ -4,6 +4,19 @@
         @csrf
         @method('PATCH')
 
+        <div class="space-y-3">
+            <label for="photo" class="block text-sm font-medium text-gray-700 mb-1">Foto Layanan</label>
+            <div id="preview-container"
+                class="relative w-full max-w-xl mx-auto cursor-pointer aspect-video bg-gray-100 rounded-lg overflow-hidden mb-4">
+                <img id="preview" src="{{ $layanan->photos }}"
+                    alt="{{ $layanan->name }}" class="w-full h-full object-cover object-center">
+            </div>
+            <input id="photo" name="photos" type="file" accept="image/*" class="hidden"
+                onchange="previewImage(event)">
+            @error('photos')
+                <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
+            @enderror
+        </div>
         <div class="space-y-1">
             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Layanan</label>
             <input type="text" name="name" id="name" value="{{ old('name', $layanan->name) }}"
@@ -13,46 +26,6 @@
             @enderror
         </div>
 
-        <div class="space-y-3">
-            <label class="block text-sm font-medium text-gray-700 mb-1">Foto Layanan Saat Ini</label>
-            <div class="flex flex-wrap gap-3 mb-4">
-
-                @foreach (json_decode($layanan->photos) as $photo)
-                    <div class="relative group">
-                        <img src="{{ $photo }}" alt="{{ $layanan->name }}"
-                            class="w-24 h-24 object-cover rounded-lg shadow-sm border border-gray-200">
-                    </div>
-                @endforeach
-            </div>
-
-            <label for="photos" class="block text-sm font-medium text-gray-700 mb-1">Tambah Foto Baru</label>
-            <div id="preview" class="flex flex-wrap gap-3 mt-2"></div>
-
-            <div class="flex items-center justify-center w-full">
-                <label for="photos"
-                    class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition duration-150">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
-                            </path>
-                        </svg>
-                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Klik untuk upload</span> atau
-                            drag & drop</p>
-                        <p class="text-xs text-gray-500">Format PNG, JPG, JPEG (Maks. 2MB)</p>
-                    </div>
-                    <input id="photos" name="photos[]" type="file" multiple accept="image/*" class="hidden"
-                        onchange="previewImages(event)">
-                </label>
-            </div>
-            @error('photos')
-                <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
-            @enderror
-            @error('photos.*')
-                <p class="text-red-500 text-xs mt-1.5">{{ $message }}</p>
-            @enderror
-        </div>
 
         <div class="space-y-1">
             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Deskripsi</label>
@@ -76,53 +49,27 @@
     </form>
 
     <script>
-        function previewImages(event) {
-            const files = event.target.files;
+        function previewImage(event) {
+            const file = event.target.files[0];
             const preview = document.getElementById('preview');
-            preview.innerHTML = "";
+            const previewContainer = document.getElementById('preview-container');
+            const uploadArea = document.querySelector('label[for="photo"]').parentElement;
 
-            if (files.length === 0) {
+            if (!file) {
                 return;
             }
 
-            Array.from(files).forEach(file => {
-                if (!file.type.startsWith('image/')) return;
+            if (!file.type.startsWith('image/')) return;
 
-                const reader = new FileReader();
-                reader.onload = e => {
-                    const container = document.createElement('div');
-                    container.className = 'relative group';
-
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.className = 'w-24 h-24 object-cover rounded-lg shadow-sm border border-gray-200';
-
-                    const removeBtn = document.createElement('button');
-                    removeBtn.type = 'button';
-                    removeBtn.className =
-                        'absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200';
-                    removeBtn.innerHTML = '&times;';
-                    removeBtn.onclick = () => {
-                        container.remove();
-                        updateFileInput(files, file);
-                    };
-
-                    container.appendChild(img);
-                    container.appendChild(removeBtn);
-                    preview.appendChild(container);
-                };
-                reader.readAsDataURL(file);
-            });
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
 
-        function updateFileInput(allFiles, fileToRemove) {
-            const dt = new DataTransfer();
-            Array.from(allFiles).forEach(file => {
-                if (file !== fileToRemove) {
-                    dt.items.add(file);
-                }
-            });
-            document.getElementById('photos').files = dt.files;
-        }
+        document.getElementById('preview-container').addEventListener('click', function() {
+            document.getElementById('photo').click();
+        });
     </script>
 </x-meowinn-layout>

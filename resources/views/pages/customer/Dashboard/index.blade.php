@@ -77,7 +77,6 @@
                     <div class="text-[#FF8855] font-bold text-2xl md:text-3xl mt-1">MeowInn</div>
                 </div>
                 <div class="relative mt-8">
-                    <!-- Vertical Line -->
                     <div class="absolute left-6 top-0 bottom-0 w-1 bg-[#FF8855] z-0"></div>
                     <div class="flex flex-col gap-8 relative z-10 pl-16">
                         <div class="flex items-start gap-4">

@@ -2,7 +2,6 @@
 @section('main')
     <div class="bg-[#fdf5f0] p-4 sm:p-6 md:p-8 lg:p-10">
         <div class="mx-auto flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8">
-            <!-- Sidebar -->
             <div
                 class="bg-white rounded-xl sm:rounded-2xl shadow-lg w-full md:w-1/3 flex flex-col justify-center items-center py-8 sm:py-12 md:py-16 lg:py-24 px-4 sm:px-6 md:px-6 mb-4 sm:mb-6 md:mb-0">
                 <div
@@ -11,8 +10,6 @@
                         alt="Foto Profil" class="object-cover w-full h-full">
                 </div>
             </div>
-
-            <!-- Main Content -->
             <div class="flex-1 bg-white rounded-xl sm:rounded-2xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-10">
                 <div
                     class="grid grid-cols-1 md:grid-cols-2 gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-3 sm:gap-y-4 md:gap-y-6 mb-6 sm:mb-8 md:mb-10">

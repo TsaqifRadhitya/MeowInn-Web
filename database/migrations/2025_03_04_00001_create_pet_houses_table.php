@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->boolean('isOpen')->default(false);
             $table->enum('verificationStatus', ['menunggu persetujuan', 'ditolak', 'disetujui'])->default('menunggu persetujuan');
             $table->boolean('pickUpService')->default(false);
-            $table->enum('range', ['village', 'district', 'district'])->nullable();
+            $table->enum('range', ['village', 'district', 'city'])->nullable();
             $table->foreignUlid('userId')->constrained('users', 'id')->onDelete('cascade');
             $table->timestamps();
         });

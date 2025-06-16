@@ -15,8 +15,8 @@ return new class extends Migration
             $table->ulid('id')->primary();
             $table->enum('jenis_reports', ['Admin', 'Pet House']);
             $table->text('isi');
-            $table->foreignUlid('penitipanId')->nullable()->constrained('penitipans', 'id')->delete('cascade');
-            $table->foreignUlid('pethouseId')->nullable()->constrained('pet_houses', 'id')->delete('cascade');
+            $table->foreignUlid('penitipanId')->nullable()->constrained('penitipans', 'id')->onDelete('cascade');
+            $table->foreignUlid('pethouseId')->nullable()->constrained('pet_houses', 'id')->onDelete('cascade');
             $table->timestamps();
         });
     }

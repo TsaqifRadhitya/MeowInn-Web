@@ -28,6 +28,11 @@ class PetHouse extends Model
         return $this->hasMany(detailLayanan::class, 'petHouseId');
     }
 
+    public function pethouseLayanansActive()
+    {
+        return $this->hasMany(detailLayanan::class, 'petHouseId')->where('status', true);
+    }
+
     public function penitipans()
     {
         return $this->hasMany(Penitipan::class, 'petHouseId');

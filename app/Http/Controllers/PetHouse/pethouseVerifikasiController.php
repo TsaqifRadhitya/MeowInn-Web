@@ -37,7 +37,7 @@ class pethouseVerifikasiController extends Controller
             'locationPhotos' => ['required', 'array'],
             'locationPhotos.*' => ['required', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
             'pickUpService' => ['nullable'],
-            'range' => ['required_if:pickUpService,on', 'in:village,district,district'],
+            'range' => ['required_if:pickUpService,on', 'in:village,district,city'],
             'description' => ['required', 'string', 'max:300'],
             'profilePicture' => ['required', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);

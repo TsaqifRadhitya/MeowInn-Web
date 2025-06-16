@@ -37,16 +37,13 @@
 </head>
 
 <div class="min-h-screen bg-gray-50">
-    <!-- Mobile overlay -->
     <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-30 sm:hidden" onclick="handleClose()">
     </div>
-    <!-- Sidebar -->
     <aside id="default-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar">
         <div class="h-full px-4 py-6 overflow-y-auto bg-gradient-to-b from-[#F69246] to-[#EC7070] shadow-lg">
             <ul class="space-y-2">
-                <!-- Logo/Brand -->
                 <li class="flex items-center justify-between mb-8">
                     <span class="text-2xl font-bold text-white sm:hidden">MeowInn</span>
                     <div onclick="document.location.href = '/'"
@@ -58,8 +55,6 @@
                     </div>
                     <button onclick="handleClose()" class="text-white text-xl font-bold sm:hidden">✕</button>
                 </li>
-
-                <!-- Dashboard -->
                 <li class="group">
                     <a href="{{ route('pethouse.dashboard') }}"
                         class="flex items-center p-3 rounded-lg transition-all duration-200
@@ -77,7 +72,6 @@
                         @endif
                     </a>
                 </li>
-                <!-- Pet House -->
                 <li>
                     <button type="button" @disabled(Auth::user()->petHouses?->verificationStatus !== 'disetujui')
                         onclick="handleOpenAndClose('#dropdown-Pet-House','#icon-dropdown-Pet-House','#button-dropdown-Pet-House')"
@@ -128,8 +122,6 @@
                         </li>
                     </ul>
                 </li>
-
-                <!-- Penitipan -->
                 <li>
                     <button type="button" @disabled(Auth::user()->petHouses?->verificationStatus !== 'disetujui')
                         onclick="handleOpenAndClose('#dropdown-Layanan','#icon-dropdown-Layanan','#button-dropdown-Layanan')"
@@ -170,8 +162,6 @@
                         </li>
                     </ul>
                 </li>
-
-                <!-- Profile -->
                 <li class="pt-4 mt-4 border-t border-white border-opacity-20 lg:hidden">
                     <button type="button"
                         onclick="handleOpenAndClose('#dropdown-Profile','#icon-dropdown-Profile','#button-dropdown-Profile')"
@@ -222,10 +212,7 @@
             </ul>
         </div>
     </aside>
-
-    <!-- Main content -->
     <div class="sm:ml-64 min-h-screen relative">
-        <!-- Mobile header -->
         <div
             class="sticky top-0 z-30 bg-gradient-to-r from-[#F69246] to-[#EB6F6F] shadow-md p-4 sm:hidden flex items-center">
             <button onclick="handleOpen()" type="button"
@@ -238,13 +225,10 @@
             </button>
             <h1 class="text-white font-semibold text-lg ml-3">{{ $header }}</h1>
         </div>
-
-        <!-- Desktop header -->
         <div class="sticky top-0 z-40 bg-gradient-to-r from-[#F69246] to-[#EB6F6F] p-4 hidden sm:block shadow-md">
             <div class="flex justify-between items-center">
                 <h1 class="text-white font-semibold text-xl">{{ $header }}</h1>
                 <div class="flex items-center space-x-4">
-                    <!-- User profile dropdown -->
                     <div class="relative">
                         <button
                             onclick="handleOpenAndClose('#user-dropdown','#user-dropdown-icon','#user-dropdown-button')"
@@ -274,8 +258,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Content area -->
         <div {{ $attributes->merge(['class' => 'bg-white min-h-[calc(100vh-60px)]']) }}>
             {{ $slot }}
         </div>

@@ -1,7 +1,8 @@
 <x-meowinn-layout header="Pet House Preview" class="p-10 rounded-2xl shadow-sm flex flex-col gap-5 text-[#787878]"
     id="content" activeMenu="Pet House">
     <section class="flex flex-col md:flex-row gap-10">
-        <img src="{{ $profilePethouse->user->profilePicture }}" class="aspect-video h-fit md:w-1/3 object-cover object-center" alt="">
+        <img src="{{ $profilePethouse->user->profilePicture }}"
+            class="aspect-video h-fit md:w-1/3 object-cover object-center" alt="">
         <article class="md:w-2/3 w-full text-lg">
             <div class="flex justify-between items-start">
                 <h1 class="font-black text-[#FF7B54] text-4xl">{{ $profilePethouse->name }}</h1>
@@ -28,8 +29,6 @@
             </div>
         </article>
     </section>
-
-    <!-- Penalty Action Buttons -->
     <section class="flex gap-4 justify-end">
         @if ($profilePethouse->penalty)
             <form id="delete-penalty-form" method="POST"
@@ -64,10 +63,32 @@
     </section>
     <section class="flex flex-col gap-2.5 min-h-56">
         <h1 class="font-bold text-2xl">Layanan</h1>
-        @if ($profilePethouse->penitipanLayanansActive)
-        @else
-            <h1 class="font-bold text-2xl text-center my-auto">Belum Tersedia Layanan Lainnya</h1>
-        @endif
+        @forelse ($profilePethouse->pethouseLayanansActive as $layanan)
+            <div class="p-4 hover:bg-gray-50 transition-colors shadow rounded-lg">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="w-full md:w-48 h-40 flex-shrink-0 rounded-lg overflow-hidden">
+                        <img src="{{ $layanan->pethouselayanans?->photos ?? $layanan->layanan->photos }}"
+                            alt="{{ $layanan->name }}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-grow">
+                        <div class="flex flex-col h-full">
+                            <div class="flex items-start justify-between">
+                                <div>
+
+                                    <h3 class="text-lg font-semibold text-gray-800 mt-1">
+                                        {{ $layanan->layanan->name }}</h3>
+                                </div>
+                                <span
+                                    class="text-lg font-bold text-[#F69246]">Rp{{ number_format($layanan->pethouselayanans?->price, 0, ',', '.') }}</span>
+                            </div>
+                            <p class="text-gray-600 mt-2 line-clamp-2 break-words">{!! nl2br($layanan->pethouselayanans?->description ?? $layanan->description) !!}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <h1 class="font-bold text-2xl text-center my-auto">Belum Tersedia Layanan Tambahan Lainnya</h1>
+        @endforelse
     </section>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">

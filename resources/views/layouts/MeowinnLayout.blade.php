@@ -55,8 +55,6 @@
                     <button onclick="handleClose()"
                         class="text-white hover:cursor-pointer sm:hidden text-xl font-bold">×</button>
                 </li>
-
-                <!-- Dashboard -->
                 <li class="group">
                     <a href="{{ route('dashboard') }}"
                         class="flex items-center p-3 rounded-lg transition-all duration-200
@@ -75,8 +73,6 @@
                         @endif
                     </a>
                 </li>
-
-                <!-- Pet House -->
                 <li class="group">
                     <button type="button"
                         onclick="handleOpenAndClose('#dropdown-Pet-House','#icon-dropdown-Pet-House','#button-dropdown-Pet-House')"
@@ -129,7 +125,6 @@
                         </li>
                     </ul>
                 </li>
-
                 <li class="group">
                     <a href="{{ route('meowinn.layanan.index') }}"
                         class="flex items-center p-3 rounded-lg transition-all duration-200
@@ -148,8 +143,6 @@
                         @endif
                     </a>
                 </li>
-
-                <!-- Reports -->
                 <li class="group">
                     <a href="{{ route('meowinn.reports.index') }}"
                         class="flex items-center p-3 rounded-lg transition-all duration-200
@@ -168,9 +161,6 @@
                         @endif
                     </a>
                 </li>
-
-
-                <!-- Profile -->
                 <li class="group lg:hidden">
                     <button type="button"
                         onclick="handleOpenAndClose('#dropdown-Profile','#icon-dropdown-Profile','#button-dropdown-Profile')"
@@ -221,9 +211,7 @@
             </ul>
         </div>
     </aside>
-
     <div class="sm:ml-64 min-h-screen relative">
-        <!-- Mobile header -->
         <div
             class="sticky top-0 bg-gradient-to-r from-[#F69246] to-[#EB6F6F] shadow-md p-3 sm:hidden z-30 flex items-center">
             <button onclick="handleOpen()" type="button"
@@ -237,13 +225,10 @@
             </button>
             <h1 class="text-white font-semibold text-lg ml-2">{{ $header }}</h1>
         </div>
-
-        <!-- Desktop header -->
         <div class="sticky top-0 z-40 bg-gradient-to-r from-[#F69246] to-[#EB6F6F] p-4 hidden sm:block shadow-md">
             <div class="flex justify-between items-center">
                 <h1 class="text-white font-semibold text-xl">{{ $header }}</h1>
                 <div class="flex items-center space-x-4">
-                    <!-- User profile -->
                     <div class="relative">
                         <button
                             onclick="handleOpenAndClose('#user-dropdown','#user-dropdown-icon','#user-dropdown-button')"

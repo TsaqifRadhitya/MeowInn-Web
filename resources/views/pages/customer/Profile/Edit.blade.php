@@ -2,7 +2,6 @@
 @section('main')
     <div
         class="mx-auto bg-gradient-to-br rounded-xl md:rounded-2xl shadow-lg md:shadow-xl p-0 flex flex-col md:flex-row gap-0 overflow-hidden border border-[#FF8855]/30">
-        <!-- Left Side - Profile Picture -->
         <div class="flex flex-col items-center justify-center md:w-2/5 w-full bg-[#ffe3d0] py-8 md:py-12 px-4 md:px-6">
             <label for="profilePicture"
                 class="cursor-pointer w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-44 lg:h-44 rounded-full overflow-hidden bg-[#FF8855] mb-3 sm:mb-4 flex items-center justify-center border-4 sm:border-6 md:border-8 border-white shadow-lg group relative">
@@ -22,15 +21,12 @@
                 <div class="text-gray-500 text-xs sm:text-sm">{{ $user->email }}</div>
             </div>
         </div>
-
-        <!-- Right Side - Form -->
         <div class="flex-1 bg-white py-6 md:py-10 px-4 md:px-6 lg:px-12">
             <form method="POST" action="{{ route('customer.profile.update') }}" enctype="multipart/form-data"
                 class="space-y-4 sm:space-y-6 md:space-y-7">
                 @csrf
                 @method('patch')
                 <h2 class="text-xl sm:text-2xl font-bold text-[#FF8855] mb-4 sm:mb-6 tracking-tight">Edit Profil</h2>
-
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                         <label for="name" class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1">Nama</label>
@@ -51,7 +47,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div>
                     <label for="email" class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1">Email</label>
                     <input id="email" name="email" type="email" value="{{ old('email', $user->email) }}"
@@ -61,10 +56,8 @@
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-
                 <input id="profilePicture" name="profilePicture" type="file" accept="image/*" class="hidden"
                     onchange="previewProfilePicture(event)">
-
                 <div class="pt-2">
                     <h2
                         class="text-base sm:text-lg font-semibold text-[#FF8855] border-b border-[#FF8855]/30 pb-2 mb-3 sm:mb-4">

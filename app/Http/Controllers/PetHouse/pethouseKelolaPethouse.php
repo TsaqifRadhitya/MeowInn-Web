@@ -14,7 +14,7 @@ class pethouseKelolaPethouse extends Controller
     use HasCloudinary;
     public function index()
     {
-        $petHouse = PetHouse::with(['user.village.district.city.province', 'pethouseLayanans.layanan'])->where('userId', Auth::user()->id)->first();
+        $petHouse = PetHouse::with(['user.village.district.city.province', 'pethouseLayanansActive.layanan'])->where('userId', Auth::user()->id)->first();
         return view('pages.petHouse.petHouseSetting.Index', compact('petHouse'));
     }
 

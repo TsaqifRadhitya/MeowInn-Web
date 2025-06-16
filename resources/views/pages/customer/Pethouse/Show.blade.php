@@ -55,15 +55,31 @@
             <div class="mt-8 sm:mt-10">
                 <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Layanan Tambahan</h3>
                 <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4">
-                    @forelse($petHouse->pethouseLayanans as $layanan)
-                        <div
-                            class="flex items-center bg-[#FF8855] text-white font-semibold rounded-full px-4 sm:px-6 py-1 sm:py-2 shadow gap-2 sm:gap-3 text-sm sm:text-base">
-                            <span>{{ $layanan->layanan->name }}</span>
-                            <span
-                                class="text-white font-bold">Rp{{ number_format($layanan->price ?? 0, 0, ',', '.') }}</span>
+                    @forelse ($petHouse->pethouseLayanansActive as $layanan)
+                        <div class="p-4 hover:bg-gray-50 transition-colors shadow rounded-lg w-full">
+                            <div class="flex flex-col md:flex-row gap-4">
+                                <div class="w-full md:w-48 h-40 flex-shrink-0 rounded-lg overflow-hidden">
+                                    <img src="{{ $layanan->pethouselayanans?->photos ?? $layanan->layanan->photos }}"
+                                        alt="{{ $layanan->name }}" class="w-full h-full object-cover">
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="flex flex-col h-full">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+
+                                                <h3 class="text-lg font-semibold text-gray-800 mt-1">
+                                                    {{ $layanan->layanan->name }}</h3>
+                                            </div>
+                                            <span
+                                                class="text-lg font-bold text-[#F69246]">Rp{{ number_format($layanan?->price, 0, ',', '.') }}</span>
+                                        </div>
+                                        <p class="text-gray-600 mt-2 line-clamp-2 break-words">{!! nl2br($layanan->description ?? $layanan->pethouselayanans?->description) !!}</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     @empty
-                        <div class="text-gray-400 italic text-sm sm:text-base">Belum ada layanan tersedia.</div>
+                        <h1 class="font-bold text-2xl text-center my-auto">Belum Tersedia Layanan Tambahan Lainnya</h1>
                     @endforelse
                 </div>
             </div>
@@ -81,11 +97,9 @@
         </div>
     </body>
 
-    <!-- Modal Laporkan -->
     <div id="laporkan-modal" class="fixed inset-0 bg-black/30 items-center justify-center z-50 hidden p-4">
         <div
             class="relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-2xl shadow-black/30 w-full max-w-4xl flex flex-col md:flex-row items-stretch overflow-hidden">
-            <!-- Left - Hidden on mobile -->
             <div class="hidden md:flex flex-col justify-center items-center pl-6 md:pl-10 pr-0 py-6 md:py-10 relative"
                 style="background:transparent;">
                 <span
@@ -93,8 +107,6 @@
                 <img src="{{ asset('asset/kucing5.png') }}" alt="Kucing"
                     class="w-48 md:w-64 lg:w-72 h-56 md:h-64 lg:h-80 object-contain z-10" style="margin-left:10px;" />
             </div>
-
-            <!-- Right -->
             <div class="flex-1 flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-10 py-6 md:py-8 lg:py-10">
                 <button onclick="closeLaporkanModal()"
                     class="absolute top-2 right-3 sm:top-3 sm:right-4 text-gray-400 hover:text-gray-700 text-2xl sm:text-3xl font-bold z-10">&times;</button>

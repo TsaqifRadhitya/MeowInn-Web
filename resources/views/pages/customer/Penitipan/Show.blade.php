@@ -75,13 +75,11 @@
                         @foreach ($penitipan->hewans as $i => $cat)
                             <div class="cat-form mb-4 sm:mb-6">
                                 <div class="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8">
-                                    <!-- Cat Data -->
                                     <div
                                         class="flex-1 bg-white rounded-xl sm:rounded-2xl shadow p-4 sm:p-6 md:p-8 border border-gray-200">
                                         <div class="font-bold text-blue-700 mb-3 sm:mb-4 text-base sm:text-lg">
                                             Data Kucing <span class="cat-number">{{ $i + 1 }}</span>
                                         </div>
-
                                         <div class="mb-3 sm:mb-4">
                                             <label class="block text-gray-700 mb-1 font-semibold text-sm sm:text-base">Nama
                                                 Kucing</label>
@@ -90,7 +88,6 @@
                                                 {{ $cat->name }}
                                             </div>
                                         </div>
-
                                         <div class="mb-3 sm:mb-4">
                                             <label class="block text-gray-700 mb-1 font-semibold text-sm sm:text-base">Jenis
                                                 Kucing</label>
@@ -99,7 +96,6 @@
                                                 {{ $cat->description }}
                                             </div>
                                         </div>
-
                                         <div class="mb-3 sm:mb-4">
                                             <label class="block text-gray-700 mb-1 font-semibold text-sm sm:text-base">Foto
                                                 Kucing</label>
@@ -108,8 +104,6 @@
                                                 alt="Foto Kucing">
                                         </div>
                                     </div>
-
-                                    <!-- Services -->
                                     <div class="w-full md:w-[300px] lg:w-[370px] flex flex-col items-center">
                                         <div
                                             class="bg-[#FF8855] rounded-xl sm:rounded-2xl shadow p-4 sm:p-6 md:p-8 w-full border border-gray-200">
@@ -135,7 +129,6 @@
                         @endforeach
                     </div>
                 </div>
-
                 <div class="mt-2.5 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 items-start relative">
                     <div class="flex-1 w-full">
                         <div
@@ -176,7 +169,6 @@
                     </div>
                 </div>
                 <div>
-                    <!-- Payment Summary -->
                     <div class="mt-6 sm:mt-8 flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 items-start relative">
                         <div class="flex-1 w-full">
                             <div
@@ -243,7 +235,6 @@
     <div id="laporkan-modal" class="fixed inset-0 bg-black/30 items-center justify-center z-50 hidden p-4">
         <div
             class="relative bg-white rounded-xl sm:rounded-2xl shadow-lg sm:shadow-2xl shadow-black/30 w-full max-w-4xl flex flex-col md:flex-row items-stretch overflow-hidden">
-            <!-- Left - Hidden on mobile -->
             <div class="hidden md:flex flex-col justify-center items-center pl-6 md:pl-10 pr-0 py-6 md:py-10 relative"
                 style="background:transparent;">
                 <span
@@ -251,8 +242,6 @@
                 <img src="{{ asset('asset/kucing5.png') }}" alt="Kucing"
                     class="w-48 md:w-64 lg:w-72 h-56 md:h-64 lg:h-80 object-contain z-10" style="margin-left:10px;" />
             </div>
-
-            <!-- Right -->
             <div class="flex-1 flex flex-col justify-center px-4 sm:px-6 md:px-8 lg:px-10 py-6 md:py-8 lg:py-10">
                 <button onclick="closeLaporkanModal()"
                     class="absolute top-2 right-3 sm:top-3 sm:right-4 text-gray-400 hover:text-gray-700 text-2xl sm:text-3xl font-bold z-10">&times;</button>
@@ -301,7 +290,6 @@
                     });
                 };
             }
-
             const btn = document.getElementById('btn-laporkan');
             const modal = document.getElementById('laporkan-modal');
             if (btn && modal) {
@@ -312,7 +300,6 @@
                 });
             }
         });
-
         function closeLaporkanModal() {
             const modal = document.getElementById('laporkan-modal');
             modal.classList.add('hidden');

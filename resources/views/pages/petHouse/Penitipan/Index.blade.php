@@ -36,7 +36,6 @@
         <a href="{{ route('pethouse.penitipan.show', $penitipan->id) }}">
             <div
                 class="mb-6 p-5 border border-gray-100 rounded-xl shadow-sm bg-white hover:shadow-md transition-shadow duration-200">
-                <!-- Status and Price Header -->
                 <div class="flex justify-between items-center mb-4 pb-4 border-b border-gray-100">
                     <span class="px-3 py-1 rounded-full text-sm font-medium"
                         style="background-color: rgba(246, 146, 70, 0.1); color: #F69246;">
@@ -47,8 +46,6 @@
                         {{ number_format($penitipan->duration * $penitipan->petCareCosts * $penitipan->hewans->count() + $penitipan->hewans->sum(fn($hewan) => $hewan->penitipanLayanans->sum('price')), 0, ',', '.') }}
                     </div>
                 </div>
-
-                <!-- Details Section -->
                 <div class="mb-5 grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="space-y-3">
                         <div class="flex items-start">
@@ -105,8 +102,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Customer Info -->
                 <div class="pt-4 border-t border-gray-100">
                     <h4 class="text-sm font-medium text-gray-500 mb-3 flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" style="color: #F69246;"

@@ -45,12 +45,11 @@ class meowinnKelolaLayanan extends Controller
                 'string',
                 'max:300'
             ],
-            'photos' => ['nullable', 'array'],
-            'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
+            'photos' => ['nullable', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
 
         if ($request->hasFile('photos')) {
-            $validated['photos'] = json_encode($this->cloudinaryBatchUpload($request->file('photos'), 'layanan'));
+            $validated['photos'] = $this->cloudinarySingleUpload($request->file('photos'), 'layanan');
         }
 
         Layanan::whereId($id)->update($validated);
@@ -67,12 +66,11 @@ class meowinnKelolaLayanan extends Controller
                 'string',
                 'max:300'
             ],
-            'photos' => ['required', 'array'],
-            'photos.*' => ['file', 'mimes:jpg,jpeg,png', 'max:2048']
+            'photos' => ['required', 'file', 'mimes:jpg,jpeg,png', 'max:2048'],
         ]);
 
         if ($request->hasFile('photos')) {
-            $validated['photos'] = json_encode($this->cloudinaryBatchUpload($request->file('photos'), 'layanan'));
+            $validated['photos'] = $this->cloudinarySingleUpload($request->file('photos'), 'layanan');
         }
 
         $dataLayanan = Layanan::create($validated);

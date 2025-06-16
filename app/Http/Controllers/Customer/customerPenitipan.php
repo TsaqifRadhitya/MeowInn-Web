@@ -131,19 +131,4 @@ class customerPenitipan extends Controller
         }
         return redirect()->route('customer.penitipan.show', $penitipan->id)->with('success', 'Penitipan berhasil disimpan!');
     }
-
-    public function destroy($id)
-    {
-        $penitipan = Penitipan::find($id);
-        if ($penitipan) {
-            if ($penitipan->status === "menunggu pembayaran") {
-                Penitipan::destroy($id);
-                return back()->with("success", "Berhasil Membatalkan Penitipan");
-            }
-
-            return back()->with("error", "Tidak Dapat Membatalkan Penitipan");
-        }
-
-        abort(404);
-    }
 }
