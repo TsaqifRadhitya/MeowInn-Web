@@ -17,7 +17,7 @@
                 </p>
                 <p class="text-xs text-gray-500 mt-1">Format PNG, JPG, JPEG (maks. 5MB)</p>
             </div>
-            <div id="preview-area" class="mt-4 hidden cursor-pointer">
+            <div id="preview-area" class="mt-4 max-w-xl mx-auto hidden cursor-pointer">
                 <div class="relative group w-full">
                     <img id="photo-preview" src="" alt="Preview"
                         class="w-full aspect-video object-cover rounded-lg border border-gray-200">

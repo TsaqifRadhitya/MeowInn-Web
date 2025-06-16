@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('laporan_penitipans', function (Blueprint $table) {
             $table->ulid('id')->primary();
             $table->string('caption');
-            $table->json('photos');
+            $table->string('photos');
             $table->foreignUlid('penitipanId')->constrained('penitipans')->onDelete('cascade');
             $table->timestamps();
         });
