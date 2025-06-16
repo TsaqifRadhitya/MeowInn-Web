@@ -73,8 +73,15 @@ class customerPenitipan extends Controller
         ]);
 
         $user = Auth::user();
-        $validated['status'] = $request->isPickUp ? 'menunggu penjemputan' : 'menunggu pembayaran';
-        $validated['isCash'] = $request->isPickUp ? true : false;
+        $validated['status'] = $request->isPickUp && $request->isCash ? 'menunggu penjemputan' : 'menunggu pembayaran';
+        if ($request->isPickUp && $request->isCash) {
+            $validated['status'] = 'menunggu penjemputan';
+        } else if ($request->isCash) {
+            $validated['status'] = 'menunggu diantar ke pethouse';
+        } else {
+            $validated['status'] = 'menunggu pembayaran';
+        }
+        $validated['isCash'] = $request->isCash ? true : false;
         $validated['address'] = $user->address;
         $validated['villageId'] = $user->villageId;
         $validated['userId'] = $user->id;
